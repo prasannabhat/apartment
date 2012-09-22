@@ -32,6 +32,8 @@
 |
 */
 
+Asset::add('jquery', 'js/jquery-1.8.2.js');
+Asset::add('style', 'css/apartment.css');
 
 
 Route::get(array('/','login'), function()
