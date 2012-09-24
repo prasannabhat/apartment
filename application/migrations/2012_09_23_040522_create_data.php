@@ -1,6 +1,6 @@
 <?php
 
-class Add_Data {
+class Create_Data {
 
 	/**
 	 * Make changes to the database.
@@ -9,10 +9,15 @@ class Add_Data {
 	 */
 	public function up()
 	{
-		DB::table('users')->insert(array(
-		'name' => 'Prasanna Bhat',
-		'email' => 'prasanna.yoga@gmail.com',
-		'password' => Hash::make('asdf')
+		$id = DB::table('users')->insert_get_id(array(
+			'name' => 'Prasanna Bhat',
+			'email' => 'prasanna.yoga@gmail.com',
+			'password' => Hash::make('asdf')
+		));
+
+		DB::table('phones')->insert(array(
+			'phone_no' => '9880362090',
+			'user_id' => $id
 		));
 	}
 

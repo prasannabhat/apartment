@@ -9,9 +9,15 @@
 
     <body>
         <h1>Welcome to apartment management system {{ Auth::user()->name }}</h1>
-        <ul class="app-navbar">
-            <li><a href="members">members</a></li>
-            <li><a href="flats">flats</a></li>
-            <li><a href="logout">logout</a></li>
-        </ul>
+        <div class="navbar">
+            <ul class="app-navbar">
+                <li>{{HTML::link('home/members', 'Members');}}</li>
+                <li>{{HTML::link('home/flats', 'Flats');}}</li>
+                <li>{{HTML::link('home/logout', 'Logout');}}</li>
+            </ul>
+        </div><!-- .navbar -->
+        <div class="main-container">
+            @yield('content')
+        </div><!-- .main-container -->
+
 </html>

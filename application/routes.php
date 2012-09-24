@@ -32,23 +32,13 @@
 |
 */
 
-Asset::add('jquery', 'js/jquery-1.8.2.js');
-Asset::add('style', 'css/apartment.css');
+Route::controller('home');
 
 
 Route::get(array('/','login'), function()
 {
 	return View::make('home.login');
 }); 
-
-Route::get('home', array('before' => 'auth', 'do' => function() {
-	return View::make('home.home');
-}));
-
-Route::get('logout', function() {
-	Auth::logout();
-	return Redirect::to('login');
-});
 
 Route::post('login', function(){
 	$userdata = array(
