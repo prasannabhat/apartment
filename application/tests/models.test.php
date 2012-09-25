@@ -7,6 +7,7 @@ class TestModels extends PHPUnit_Framework_TestCase {
 	 *
 	 * @return void
 	 */
+	const NO_USER_ENTRIES = 100; 
 
 
 	public function testDeleteUsers()
@@ -14,7 +15,14 @@ class TestModels extends PHPUnit_Framework_TestCase {
 		$users = User::all();
 		foreach ($users as $user)
 		{
-		     echo print_r($user);
+			if($user->email == "prasanna.yoga@gmail.com")
+			{
+				echo "Found Prasanna\n";
+			}
+			else
+			{
+				$user->delete();
+			}
 		}
 		$this->assertTrue(true);
 	}
@@ -24,8 +32,32 @@ class TestModels extends PHPUnit_Framework_TestCase {
 		$phones = Phone::all();
 		foreach ($phones as $phone)
 		{
-			echo print_r($phone);
+			if($phone->user->email == "prasanna.yoga@gmail.com")
+			{
+				echo "Found prasanna's phone\n";
+			}
+			else
+			{
+				$phone->delete();
+			}
 		}
+	}
+
+	/**
+     * @depends testDeleteUsers
+     */
+	public function testAddUsers()
+	{
+		//Add specified no of users
+		for ($i = 0; $i < self::NO_USER_ENTRIES ; $i++)
+		{
+			$user = new User;
+			$user->email = "amruta.pune@gmail.com" . $i;
+			$user->name = "Amruta Prasanna" . $i;
+			$user->save();
+		}
+		$this->assertTrue((self::NO_USER_ENTRIES + 1) == User::count());
+
 	}
 
 }
