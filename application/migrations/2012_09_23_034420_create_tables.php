@@ -48,24 +48,24 @@ class Create_Tables {
 			$table->engine = 'InnoDB';
 		});
 
-		// Schema::create('house_user', function($table) {
-		// 	// auto incremental id (PK)
-		// 	$table->increments('id');
+		Schema::create('house_user', function($table) {
+			// auto incremental id (PK)
+			$table->increments('id');
 
-		// 	$table->integer('user_id')->unsigned();
-		// 	$table->integer('house_id')->unsigned();
+			$table->integer('user_id')->unsigned();
+			$table->integer('house_id')->unsigned();
 
-		// 	$table->integer('owner_type')->unsigned()->default(0);
-		// 	$table->integer('resident_type')->unsigned()->default(0);
+			$table->integer('owner_type')->unsigned()->default(0);
+			$table->integer('resident_type')->unsigned()->default(0);
 
-		// 	// created_at | updated_at DATETIME
-		// 	$table->timestamps();
+			// created_at | updated_at DATETIME
+			$table->timestamps();
 
-		// 	$table->foreign('user_id')->references('id')->on('users')->on_update('cascade')->on_delete('cascade');
-		// 	$table->foreign('house_id')->references('id')->on('houses')->on_update('cascade')->on_delete('cascade');
+			$table->foreign('user_id')->references('id')->on('users')->on_update('cascade')->on_delete('cascade');
+			$table->foreign('house_id')->references('id')->on('houses')->on_update('cascade')->on_delete('cascade');
 
-		// 	$table->engine = 'InnoDB';
-		// });
+			$table->engine = 'InnoDB';
+		});
 	}
 
 	/**
