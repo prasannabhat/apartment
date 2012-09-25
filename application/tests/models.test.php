@@ -8,7 +8,7 @@ class TestModels extends PHPUnit_Framework_TestCase {
 	 * @return void
 	 */
 	const NO_USER_ENTRIES = 100; 
-
+	//some update in the test comment
 
 	public function testDeleteUsers()
 	{
