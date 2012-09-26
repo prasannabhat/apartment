@@ -10,8 +10,6 @@ class TestModels extends PHPUnit_Framework_TestCase {
 	const NO_USER_ENTRIES = 100; 
 	const TEST_USER = "Test User";
 	const TEST_PHONE_NUMBER = "1234567890";
-	private static $prev_user_count;
-	private static $prev_phone_count;
 	private static $pattern;
 	//some update in the test comment
 
@@ -20,7 +18,8 @@ class TestModels extends PHPUnit_Framework_TestCase {
 		self::$pattern = '/^' . self::TEST_USER . '/';
 
 	}
-	public function testDeleteUsers()
+
+	private function delete_test_users()
 	{
 		$users = User::all();
 		foreach ($users as $user)
@@ -31,32 +30,12 @@ class TestModels extends PHPUnit_Framework_TestCase {
 				$user->delete();
 			}
 		}
-		// Store the original no of entries
-		self::$prev_user_count = User::count();
 	}
 
-	public function testDeletePhones()
-	{
-		$phones = Phone::all();
-		foreach ($phones as $phone)
-		{
-			// Delete all the test entries
-			if(preg_match(self::$pattern, $phone->user->name))
-			{
-				$phone->delete();
-			}
-			// Store the original no of entries
-			self::$prev_phone_count = Phone::count();			
-		}
-	}
-
-	/**
-     * @depends testDeleteUsers
-     */
-	public function testAddUsers()
+	private function add_test_users($count = self::NO_USER_ENTRIES)
 	{
 		//Add specified no of users
-		for ($i = 0; $i < self::NO_USER_ENTRIES ; $i++)
+		for ($i = 0; $i < $count; $i++)
 		{
 			$user = new User;
 			$user->name = self::TEST_USER . $i;
@@ -64,14 +43,45 @@ class TestModels extends PHPUnit_Framework_TestCase {
 			$user->password = "asdf";
 			$user->save();
 		}
-		$this->assertTrue((self::$prev_user_count + self::NO_USER_ENTRIES) == User::count());
+
+	}
+
+	private function delete_test_phones()
+	{
+		$phones = Phone::all();
+		foreach ($phones as $phone)
+		{
+			// Delete all the test phone entries
+			if(preg_match(self::$pattern, $phone->user->name))
+			{
+				$phone->delete();
+			}
+		}
+
+	}
+
+	public function testAddUsers()
+	{
+		//Delete any test data, if it exists
+		$this->delete_test_users();
+		$user_count = User::count();
+		// Add some users
+		$this->add_test_users();
+		$this->assertTrue(($user_count + self::NO_USER_ENTRIES) == User::count());
+
 	}
 
 	/**
-     * @depends testDeletePhones
+     * @depends testAddUsers
      */
+	//Assumes that test users are added 
 	public function testAddPhones()
 	{
+		// Delete test phone data
+		$this->delete_test_phones();
+		$phone_count = Phone::count();
+		$test_user_count = 0;
+
 		$users = User::all();
 		foreach($users as $user)
 		{
@@ -84,19 +94,26 @@ class TestModels extends PHPUnit_Framework_TestCase {
 				    array('phone_no' => self::TEST_PHONE_NUMBER + 1),
 				);
 				$user->phones()->save($phones);
+				$test_user_count++;
 
 			}
 		}
-		$this->assertTrue((self::$prev_phone_count + (2 * self::NO_USER_ENTRIES)) == Phone::count());
+		$this->assertTrue(($phone_count+ (2 * $test_user_count)) == Phone::count());
+		return (2 * $test_user_count);
 	}
+
 
 	/**
-     * @depends testAddUsers
      * @depends testAddPhones
      */
-	public function testDeleteUsersCascade()
+	//Assumes that test users & test phones are added 
+	public function testPhoneCascadeDelete($testPhoneCount)
 	{
-
+		$total_phone_count = Phone::count();
+		// Delete all the test users..This should automatically delete the phones due to cascade
+		$this->delete_test_users();
+		$this->assertTrue(($total_phone_count - $testPhoneCount) == Phone::count());
 	}
+
 
 }
