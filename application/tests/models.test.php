@@ -9,6 +9,7 @@ class TestModels extends PHPUnit_Framework_TestCase {
 	 */
 	const NO_USER_ENTRIES = 100; 
 	const TEST_USER = "Test User";
+	const TEST_HOUSE = "Test House";
 	const TEST_PHONE_NUMBER = "1234567890";
 	private static $pattern;
 	//some update in the test comment
@@ -57,7 +58,31 @@ class TestModels extends PHPUnit_Framework_TestCase {
 				$phone->delete();
 			}
 		}
+	}
+	
+	private function add_test_houses($count = self::NO_USER_ENTRIES)
+	{
+		//Add specified no of houses
+		for ($i = 0; $i < $count; $i++)
+		{
+			$house = new House;
+			$house->house_no = self::TEST_HOUSE . $i;
+			$house->save();
+		}
 
+	}	
+	
+	private function delete_test_houses()
+	{
+		$houses = House::all();
+		foreach ($houses as $house)
+		{
+			// Delete all the test phone entries
+			//if(preg_match(self::$pattern, $phone->user->name))
+			{
+				$house->delete();
+			}
+		}
 	}
 
 	public function testAddUsers()
@@ -113,6 +138,34 @@ class TestModels extends PHPUnit_Framework_TestCase {
 		// Delete all the test users..This should automatically delete the phones due to cascade
 		$this->delete_test_users();
 		$this->assertTrue(($total_phone_count - $testPhoneCount) == Phone::count());
+	}
+	
+	public function testAddHouses()
+	{
+		$this->delete_test_houses();
+		$house_count = self::NO_USER_ENTRIES;
+		$this->add_test_houses($house_count);
+		$this->assertTrue($house_count == House::count());
+	}
+	
+	/**
+     * @depends testAddHouses
+     */
+	 //Assumes that the test house entries are already created
+	public function testUserHouseRelation()
+	{
+		//Add some test users
+		$this->add_test_users();
+		$test_houses = House::where('house_no', 'like' , self::HOUSE . '%')->get();
+		$test_users = User::where('name', 'like', self::TEST_USER . '%')->get();
+		$test_house_size = count($test_houses);
+		$index = 0;
+		foreach($test_users as $user)
+		{
+			$user->houses()->attach($test_houses[$index]->id);
+			$index++;
+		}
+		echo count($test_houses);
 	}
 
 

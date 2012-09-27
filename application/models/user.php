@@ -8,6 +8,11 @@ class User extends Eloquent {
      {
           return $this->has_many('Phone');
      }
+	 
+	 public function houses()
+	 {
+		return $this->has_many_and_belongs_to('House');
+	 }
 
      public function set_password($password)
      {
