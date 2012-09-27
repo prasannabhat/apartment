@@ -75,6 +75,7 @@ class Create_Tables {
 	 */
 	public function down()
 	{
+		Schema::drop('house_user');
 		Schema::drop('phones');
 		Schema::drop('houses');
 		Schema::drop('users');

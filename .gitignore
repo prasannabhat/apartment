@@ -1,0 +1,12 @@
+#List of files to ignore
+/object.lcf
+/.includepath
+
+
+#Ignore the folders
+/_log/
+
+
+#Ignore all files with pyc extension
+*.pyc
+.project
