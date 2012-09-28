@@ -9,7 +9,7 @@ class Base_Controller extends Controller {
 		//Filters
         $class = get_called_class();
         switch($class) {
-            case 'Home_Controller':
+            case 'Members_Controller':
             	$this->filter('before', 'auth');
                 break;
             
@@ -29,5 +29,5 @@ class Base_Controller extends Controller {
 	{
 		return Response::error('404');
 	}
-
+	
 }

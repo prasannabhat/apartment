@@ -11,9 +11,9 @@
         <h1>Welcome to apartment management system {{ Auth::user()->name }}</h1>
         <div class="navbar">
             <ul class="app-navbar">
-                <li>{{HTML::link('home/members', 'Members');}}</li>
-                <li>{{HTML::link('home/flats', 'Flats');}}</li>
-                <li>{{HTML::link('home/logout', 'Logout');}}</li>
+                <li>{{HTML::link('members', 'Members');}}</li>
+                <li>{{HTML::link('flats', 'Flats');}}</li>
+                <li>{{HTML::link('logout', 'Logout');}}</li>
             </ul>
         </div><!-- .navbar -->
         <div class="main-container">

@@ -1,6 +1,6 @@
 <?php
 
-class Flat_Controller extends Base_Controller {
+class Members_Controller extends Base_Controller {
 
 	/*
 	|--------------------------------------------------------------------------
@@ -31,34 +31,7 @@ class Flat_Controller extends Base_Controller {
 	*/
 	public function action_index()
 	{
-		return View::make('home.home');
-	}
-
-	public function action_logout()
-	{
-		Auth::logout();
-		return Redirect::to('login');
-	}
-
-	public function action_members()
-	{
 		return View::make('home.members');
 	}
-
-	public function action_flats()
-	{
-		return View::make('home.flats');
-	}
-
-	public function action_test()
-	{
-		Phone::all();
-		$users = User::all();
-		foreach ($users as $user)
-		{
-			Log::write('debug', print_r($user));
-		}
-		return "test";
-	}
-
+	
 }

@@ -14,11 +14,24 @@ class Create_Data {
 			'email' => 'prasanna.yoga@gmail.com',
 			'password' => Hash::make('asdf')
 		));
-
+		
 		DB::table('phones')->insert(array(
 			'phone_no' => '9880362090',
 			'user_id' => $id
 		));
+		
+		$id = DB::table('users')->insert_get_id(array(
+			'name' => 'Amruta Prasanna',
+			'email' => 'amruta.pune@gmail.com',
+			'password' => Hash::make('asdf')
+		));
+		
+		DB::table('phones')->insert(array(
+			'phone_no' => '9972010366',
+			'user_id' => $id
+		));		
+
+
 	}
 
 	/**

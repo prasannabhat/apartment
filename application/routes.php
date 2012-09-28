@@ -32,11 +32,13 @@
 |
 */
 
-Route::get('home',array('before' => 'auth',function(){
-	return View::make('home.home');
-}));
-// Route::controller('home');
+Route::controller('members');
+Route::controller('flats');
 
+Route::get('logout',function(){
+	Auth::logout();
+	return Redirect::to('login');
+});
 
 Route::get(array('/','login'), function()
 {
@@ -47,7 +49,7 @@ Route::get(array('/','login'), function()
 	else
 	{
 		// we are now logged in, go to home
-		return Redirect::to('home');
+		return Redirect::to('members');
 
 	}
 	
@@ -64,7 +66,7 @@ Route::post('login', function(){
 	if ( Auth::attempt($userdata) )
 	{
 		// we are now logged in, go to home
-		return Redirect::to('home');
+		return Redirect::to('members');
 	}
 	else
 	{
