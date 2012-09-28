@@ -156,16 +156,39 @@ class TestModels extends PHPUnit_Framework_TestCase {
 	{
 		//Add some test users
 		$this->add_test_users();
-		$test_houses = House::where('house_no', 'like' , self::HOUSE . '%')->get();
+		$test_houses = House::where('house_no', 'like' , self::TEST_HOUSE . '%')->get();
 		$test_users = User::where('name', 'like', self::TEST_USER . '%')->get();
 		$test_house_size = count($test_houses);
+		$rel_table_size_before = DB::table('house_user')->count();
 		$index = 0;
 		foreach($test_users as $user)
 		{
-			$user->houses()->attach($test_houses[$index]->id);
+			$house_index = $index % $test_house_size;
+			$user->houses()->attach($test_houses[$house_index]->id);
+			$house_index = ($house_index + 1) % $test_house_size;
+			$user->houses()->attach($test_houses[$house_index]->id);
 			$index++;
 		}
-		echo count($test_houses);
+		$rel_table_size_after = DB::table('house_user')->count();
+		$this->assertTrue(($rel_table_size_after == 2 * self::NO_USER_ENTRIES));
+
+		echo "House user count is " . HouseUser::count() . "\n";
+		$this->delete_test_houses();
+		$this->delete_test_users();
+		// $test_house = House::where('house_no' , '=', self::TEST_HOUSE.'0')->first();
+
+		// $del_id;
+		// foreach ($test_house->users as $user)
+		// {
+		// 	echo $user->name . "\n";
+		// 	$del_id = $user->id;
+		// }
+		// $test_house->users()->detach($del_id);
+		// foreach ($test_house->users as $user)
+		// {
+		// 	echo $user->name . "\n";
+		// 	$del_id = $user->id;
+		// }
 	}
 
 

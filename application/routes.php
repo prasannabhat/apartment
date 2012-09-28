@@ -32,12 +32,25 @@
 |
 */
 
-Route::controller('home');
+Route::get('home',array('before' => 'auth',function(){
+	return View::make('home.home');
+}));
+// Route::controller('home');
 
 
 Route::get(array('/','login'), function()
 {
-	return View::make('home.login');
+	if(Auth::guest())
+	{
+		return View::make('home.login');
+	}
+	else
+	{
+		// we are now logged in, go to home
+		return Redirect::to('home');
+
+	}
+	
 }); 
 
 Route::post('login', function(){
