@@ -15,7 +15,7 @@ class Create_Data {
 		$user->password = 'asdf';
 		$user->save();
 
-		$house = new House(array('house_no' => 'D-11'));
+		$house = new House(array('house_no' => '11','floor' => 'D'));
 		$house->save();
 		$user->houses()->attach($house->id);
 
@@ -25,7 +25,7 @@ class Create_Data {
 		$user = User::create(array(
 			'name' => 'Amruta Prasanna',
 			'email' => 'amruta.pune@gmail.com',
-			'password' => Hash::make('asdf')
+			'password' => 'asdf'
 		));
 		$phone = new Phone(array('phone_no' => '9880362090'));
 		$user->phones()->insert($phone);

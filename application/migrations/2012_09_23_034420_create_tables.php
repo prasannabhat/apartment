@@ -41,6 +41,8 @@ class Create_Tables {
 			$table->increments('id');
 			// varchar 32
 			$table->string('house_no', 20)->unique();
+			$table->string('floor', 20);
+			$table->string('block', 20);
 
 			// created_at | updated_at DATETIME
 			$table->timestamps();
