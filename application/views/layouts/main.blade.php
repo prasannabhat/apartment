@@ -5,6 +5,8 @@
         <title>Apartment Management Portal</title>
         {{ Asset::styles() }}
         {{ Asset::scripts() }}
+        {{ Asset::container('bootstrapper')->styles() }}
+        {{ Asset::container('bootstrapper')->scripts() }}
     </head>
 
     <body>

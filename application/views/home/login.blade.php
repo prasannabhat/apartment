@@ -1,6 +1,11 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<title>Apartment management system</title>
+    {{ Asset::styles() }}
+    {{ Asset::scripts() }}
+    {{ Asset::container('bootstrapper')->styles() }}
+    {{ Asset::container('bootstrapper')->scripts() }}
 </head>
 <body>
 	<h1>Welcome to apartment management system</h1>

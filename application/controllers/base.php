@@ -3,7 +3,7 @@
 class Base_Controller extends Controller {
 
 	public function __construct(){
-		Asset::add('jquery', 'js/jquery-1.8.2.js');
+		// Asset::add('jquery', 'js/jquery-1.8.2.js');
 		Asset::add('style', 'css/apartment.css');
 
 		//Filters
