@@ -40,7 +40,7 @@ class Create_Tables {
 			// auto incremental id (PK)
 			$table->increments('id');
 			// varchar 32
-			$table->string('house_no', 20);
+			$table->string('house_no', 20)->unique();
 
 			// created_at | updated_at DATETIME
 			$table->timestamps();

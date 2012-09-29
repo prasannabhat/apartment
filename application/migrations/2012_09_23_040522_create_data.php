@@ -9,29 +9,27 @@ class Create_Data {
 	 */
 	public function up()
 	{
-		$id = DB::table('users')->insert_get_id(array(
-			'name' => 'Prasanna Bhat',
-			'email' => 'prasanna.yoga@gmail.com',
-			'password' => Hash::make('asdf')
-		));
+		$user = new User;
+		$user->name = 'Prasanna Bhat';
+		$user->email = 'prasanna.yoga@gmail.com';
+		$user->password = 'asdf';
+		$user->save();
+
+		$house = new House(array('house_no' => 'D-11'));
+		$house->save();
+		$user->houses()->attach($house->id);
+
+		$phone = new Phone(array('phone_no' => '9972010366'));
+		$user->phones()->insert($phone);
 		
-		DB::table('phones')->insert(array(
-			'phone_no' => '9880362090',
-			'user_id' => $id
-		));
-		
-		$id = DB::table('users')->insert_get_id(array(
+		$user = User::create(array(
 			'name' => 'Amruta Prasanna',
 			'email' => 'amruta.pune@gmail.com',
 			'password' => Hash::make('asdf')
 		));
-		
-		DB::table('phones')->insert(array(
-			'phone_no' => '9972010366',
-			'user_id' => $id
-		));		
-
-
+		$phone = new Phone(array('phone_no' => '9880362090'));
+		$user->phones()->insert($phone);
+		$user->houses()->attach($house->id);
 	}
 
 	/**
@@ -41,7 +39,15 @@ class Create_Data {
 	 */
 	public function down()
 	{
-		DB::table('users')->where('email', '=', 'prasanna.yoga@gmail.com')->delete();
+		$user = User::where('email', '=', 'prasanna.yoga@gmail.com')->first();
+		$houses = $user->houses;
+		foreach($houses as $house)
+		{
+			$house->delete();
+		}
+		$user->delete();
+		$user = User::where('email', '=', 'amruta.pune@gmail.com')->first();
+		$user->delete();
 	}
 
 }
