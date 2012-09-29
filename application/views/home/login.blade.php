@@ -8,23 +8,23 @@
     {{ Asset::container('bootstrapper')->scripts() }}
 </head>
 <body>
-	<h1>Welcome to apartment management system</h1>
-	<div id="content">
-		 <!-- check for login errors flash var -->
-		@if (Session::has('login_errors'))
-		<span class="error">Username or password incorrect.</span>
-		@endif
-		<form id="" action="login" method="post">
-			<label for="email">Email</label>
-            <input type="email" placeholder="Your Email Address" name="email" id="email" />
-            <br/>
-            <label for="password">Password</label>
-            <input type="password" placeholder="Your Password" name="password" id="password" />
-            <br />
-            <button type="submit">Login</button>			
-		</form>
+	 <div class="container">
+
+    <h1>Welcome to apartment management system</h1>
+	{{ Form::horizontal_open('login') }}
+	@if (Session::has('login_errors'))
+	{{Form::control_group(Form::label('email', ''),	Form::xlarge_text('email', null, array('class' => 'focused' , 'placeholder' => 'Email')),'error',Form::block_help('Username or password incorrect'))}}
+	@else
+	{{Form::control_group(Form::label('email', ''),Form::xlarge_text('email', null, array('class' => 'focused' , 'placeholder' => 'Email')))}}
+	@endif
+	{{Form::control_group(Form::label('password', ''),Form::xlarge_password('password', array('class' => 'focused', 'placeholder' => 'Password')))}}	
 		
-	</div>
+
+	{{Form::actions(array(Bootstrapper\Buttons::primary_submit('Login')));}}
+	{{Form::close();}}
+
+    </div> <!-- /container -->
+	
 
 </body>
 </html>
