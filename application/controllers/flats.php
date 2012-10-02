@@ -2,6 +2,8 @@
 
 class Flats_Controller extends Base_Controller {
 
+	public $restful = true;
+
 	/*
 	|--------------------------------------------------------------------------
 	| The Default Controller
@@ -29,9 +31,38 @@ class Flats_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-	public function action_index()
+	public function get_index()
 	{
 		return View::make('home.flats');
+	}
+
+	public function get_flat($flat_id = -1)
+	{
+		return View::make('home.flat',array('flat_id' => $flat_id));			
+	}
+
+	public function post_flat()
+	{
+		$input = Input::get();
+		$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor']));
+		return Redirect::to('flats');
+	}
+
+	public function put_flat($flat_id)
+	{
+		$house = House::find($flat_id);
+		$input = Input::get();
+		$house->house_no = $input['house_no'];
+		$house->floor = $input['floor'];
+		$house->save();
+		return Redirect::to('flats');
+	}
+
+	public function delete_flat($flat_id)
+	{
+		$house = House::find($flat_id);
+		$house->delete();
+		return Redirect::to('flats');
 	}
 	
 }
