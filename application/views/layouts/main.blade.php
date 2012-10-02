@@ -56,7 +56,7 @@
       <hr>
 
       <footer>
-        <p>&copy; Prasanna 2012</p>
+        <p class="navbar-fixed-bottom">&copy; Prasanna 2012</p>
       </footer>
 
     </div><!--/.fluid-container-->

@@ -15,9 +15,18 @@ class Create_Data {
 		$user->password = 'asdf';
 		$user->save();
 
-		$house = new House(array('house_no' => '11','floor' => 'D'));
+		$house = new House(array('house_no' => 'D11','floor' => 'D'));
 		$house->save();
 		$user->houses()->attach($house->id);
+
+		$house = new House(array('house_no' => 'D8','floor' => 'D'));
+		$house->save();
+
+		$house = new House(array('house_no' => 'C10','floor' => 'C'));
+		$house->save();		
+
+		$house = new House(array('house_no' => 'A10','floor' => 'A'));
+		$house->save();				
 
 		$phone = new Phone(array('phone_no' => '9972010366'));
 		$user->phones()->insert($phone);
