@@ -44,8 +44,21 @@ class Flats_Controller extends Base_Controller {
 	public function post_flat()
 	{
 		$input = Input::get();
-		$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor']));
-		return Redirect::to('flats');
+		
+		// Get the relevant rules for validation
+		$rules = IoC::resolve('validator');
+		$validation = Validator::make($input, $rules);
+		if ($validation->fails())
+		{
+		    $route = Apartment\Constants::ROUTE_FLAT;
+		    return "$route\n";
+		}
+		else
+		{
+			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor']));
+			return Redirect::to('flats');
+		}
+		
 	}
 
 	public function put_flat($flat_id)

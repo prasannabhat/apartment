@@ -171,3 +171,10 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 {
 	Session::load();
 }
+
+//Register some IoC containers
+IoC::singleton('validator', function()
+{
+    $rules =Utilities::get_validations();
+    return $rules;
+});
