@@ -38,7 +38,15 @@ class Flats_Controller extends Base_Controller {
 
 	public function get_flat($flat_id = -1)
 	{
-		return View::make('home.flat',array('flat_id' => $flat_id));			
+		//Default array for creating a new form
+		$flat = array ( 'house_no' => '', 'floor' => '', 'block' => '' );
+		if($flat_id != -1)
+		{
+			$flat = House::find($flat_id);
+			$flat = $flat->to_array();
+		}
+		
+		return View::make('home.flat',$flat);			
 	}
 
 	public function post_flat()
