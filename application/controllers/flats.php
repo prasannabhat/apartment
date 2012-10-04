@@ -58,8 +58,8 @@ class Flats_Controller extends Base_Controller {
 		$validation = Validator::make($input, $rules);
 		if ($validation->fails())
 		{
-		    $route = Apartment\Constants::ROUTE_FLAT;
-		    return "$route\n";
+		    return Redirect::back()->with_input()->with_errors($validation);
+			//$route = Apartment\Constants::ROUTE_FLAT;
 		}
 		else
 		{
