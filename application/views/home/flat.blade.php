@@ -3,13 +3,13 @@
 @section('content')
 <div class="row-fluid">
 <div class="span8">
-  @if ($house_no)
-    <h2>Details for  {{$house_no}}</h2>
+  @if ($flat_id != -1)
+    <h2>Details for  {{House::find($flat_id)->house_no}}</h2>
   @else
     <h2>Add new flat</h2>
   @endif
-{{-- For new object creation . use POST method, for updation use PUT method --}}
-  <?php $method = ($house_no) ? 'PUT' : 'POST' ?>
+{{-- For new object creation . use POST method($flat_id not set to integer), for updation use PUT method --}}
+  <?php $method = ($flat_id == -1) ? 'POST' : 'PUT' ?>
 
   {{ Form::horizontal_open(URL::current(),$method,array('id' => 'flat_edit_form')) }}
 

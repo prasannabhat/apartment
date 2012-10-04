@@ -1,4 +1,6 @@
 $(document).ready(function(){
+	var BASE_URL = 'http://localhost/apartment/public';
+	var ROUTE_FLATS = '/flats';
 	$("#flats_table").on("click", "tr", function(event){
 		if ($(this).hasClass('flat_entry')) {
 			var params = {type: "GET",async : false};
@@ -11,7 +13,7 @@ $(document).ready(function(){
 	});
 
 	$("#flat_cancel").on('click', function(event) {
-		window.history.back();
+		window.location = BASE_URL + ROUTE_FLATS;
 	});
 
 	$("#flat_delete").on('click', function(event) {

@@ -173,8 +173,9 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 }
 
 //Register some IoC containers
-IoC::singleton('validator', function()
+IoC::register('validator', function($id = -1)
 {
-    $rules =Utilities::get_validations();
+    Log::info(print_r($id));
+    $rules = Apartment\Utilities::get_validations($id);
     return $rules;
 });

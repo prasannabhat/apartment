@@ -39,13 +39,22 @@ class Flats_Controller extends Base_Controller {
 	public function get_flat($flat_id = -1)
 	{
 		//Default array for creating a new form
-		$flat = array ( 'house_no' => '', 'floor' => '', 'block' => '' );
-		if($flat_id != -1)
+		$flat = array ( 'house_no' => '', 'floor' => '', 'block' => '');
+		// If the session has data because of redirect, use that data
+		if(count(Input::old()) != 0)
 		{
-			$flat = House::find($flat_id);
-			$flat = $flat->to_array();
+			$flat = Input::old();
 		}
-		
+		else
+		{
+			// Get data from the database
+			if($flat_id != -1)
+			{
+				$flat = House::find($flat_id);
+				$flat = $flat->to_array();
+			}
+		}
+		$flat['flat_id'] = $flat_id;
 		return View::make('home.flat',$flat);			
 	}
 
@@ -59,7 +68,6 @@ class Flats_Controller extends Base_Controller {
 		if ($validation->fails())
 		{
 		    return Redirect::back()->with_input()->with_errors($validation);
-			//$route = Apartment\Constants::ROUTE_FLAT;
 		}
 		else
 		{
@@ -73,10 +81,24 @@ class Flats_Controller extends Base_Controller {
 	{
 		$house = House::find($flat_id);
 		$input = Input::get();
-		$house->house_no = $input['house_no'];
-		$house->floor = $input['floor'];
-		$house->save();
-		return Redirect::to('flats');
+
+		// Get the relevant rules for validation
+		$rules = IoC::resolve('validator',array('id' => $flat_id));
+		$validation = Validator::make($input, $rules);
+
+		if ($validation->fails())
+		{
+		    return Redirect::back()->with_input()->with_errors($validation);
+		}
+		else
+		{
+			$house->house_no = $input['house_no'];
+			$house->floor = $input['floor'];
+			$house->save();
+			return Redirect::to('flats');
+		}
+
+
 	}
 
 	public function delete_flat($flat_id)
