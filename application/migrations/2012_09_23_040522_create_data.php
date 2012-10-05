@@ -36,7 +36,10 @@ class Create_Data {
 			'email' => 'amruta.pune@gmail.com',
 			'password' => 'asdf'
 		));
-		$phone = new Phone(array('phone_no' => '9880362090'));
+		
+		$role_admin = Role::create(array(
+		))
+		$phone = new Phone(array('phone_no' => '9880362090'));;
 		$user->phones()->insert($phone);
 		$user->houses()->attach($house->id);
 	}
