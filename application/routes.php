@@ -145,7 +145,11 @@ Route::filter('csrf', function()
 	if (Request::forged()) return Response::error('500');
 });
 
-Route::filter('auth', function()
+Route::filter('admin', function()
 {
-	if (Auth::guest()) return Redirect::to('login');
+	if(!(Auth::user()->is_admin()))
+	{
+		return View::make('error.custom_error',array('error' => "Only admin has access to this page"));		
+	}
+
 });

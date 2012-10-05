@@ -9,9 +9,15 @@ class Base_Controller extends Controller {
 		//Filters
         $class = get_called_class();
         switch($class) {
+            case 'Flats_Controller':
+            	$this->filter('before', 'auth');
+            	$this->filter('before', 'admin');
+                break;
+
             case 'Members_Controller':
             	$this->filter('before', 'auth');
-                break;
+            	$this->filter('before', 'admin');
+                break;                
             
             default:
                 $this->filter('before', 'auth');

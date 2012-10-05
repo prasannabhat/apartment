@@ -15,6 +15,22 @@ class Create_Data {
 		$user->password = 'asdf';
 		$user->save();
 
+		$role_admin = Role::create(array(
+			'role' => 'admin'
+		));
+		$role_user = Role::create(array(
+			'role' => 'user'
+		));
+		$role_guest = Role::create(array(
+			'role' => 'guest'
+		));
+		$role_super = Role::create(array(
+			'role' => 'super'
+		));
+
+		$user->roles()->attach($role_admin->id);
+		$user->roles()->attach($role_super->id);
+
 		$house = new House(array('house_no' => 'D11','floor' => 'D'));
 		$house->save();
 		$user->houses()->attach($house->id);
@@ -36,12 +52,36 @@ class Create_Data {
 			'email' => 'amruta.pune@gmail.com',
 			'password' => 'asdf'
 		));
-		
-		$role_admin = Role::create(array(
-		))
+		$user->roles()->attach($role_admin->id);
+
 		$phone = new Phone(array('phone_no' => '9880362090'));;
 		$user->phones()->insert($phone);
 		$user->houses()->attach($house->id);
+
+		$user = User::create(array(
+			'name' => 'Krishnamurthy',
+			'email' => 'krish@gmail.com',
+			'password' => 'asdf'
+		));
+		$user->roles()->attach($role_user->id);
+
+		$phone = new Phone(array('phone_no' => '9888886323'));;
+		$user->phones()->insert($phone);
+		$user->houses()->attach($house->id);		
+
+		$house = new House(array('house_no' => 'D5','floor' => 'D'));
+		$house->save();	
+
+		$user = User::create(array(
+			'name' => 'Gautam',
+			'email' => 'gautam@gmail.com',
+			'password' => 'asdf'
+		));
+		$user->roles()->attach($role_guest->id);
+
+		$phone = new Phone(array('phone_no' => '9888886523'));;
+		$user->phones()->insert($phone);
+		$user->houses()->attach($house->id);	
 	}
 
 	/**
