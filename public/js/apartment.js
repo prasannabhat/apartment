@@ -1,19 +1,18 @@
 $(document).ready(function(){
-	var BASE_URL = 'http://localhost/apartment/public';
 	var ROUTE_FLATS = '/flats';
+	var ROUTE_FLAT = '/flat';
+	
 	$("#flats_table").on("click", "tr", function(event){
 		if ($(this).hasClass('flat_entry')) {
-			var params = {type: "GET",async : false};
-			var id = $(this).attr('id')
-			params.url = "flats/flat/" + id;
+			var id = $(this).attr('id');
 			// Send a normal get request
-			window.location = window.location + "/flat/" + id;
-			// $.ajax(params);
+			window.location = window.location.href + ROUTE_FLAT + "/" + id;
 		} 
 	});
 
 	$("#flat_cancel").on('click', function(event) {
-		window.location = BASE_URL + ROUTE_FLATS;
+		var re = new RegExp(".*?" + ROUTE_FLATS);
+		window.location = re.exec(window.location.href)[0];
 	});
 
 	$("#flat_delete").on('click', function(event) {
@@ -25,7 +24,7 @@ $(document).ready(function(){
 	});
 
 	$("#flat_add").on('click', function(event) {
-		window.location = window.location + "/flat";
+		window.location = window.location + ROUTE_FLAT;
 		// var form = $('<form></form>');
 
 	 //    form.attr("method", "post");
