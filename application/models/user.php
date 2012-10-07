@@ -53,4 +53,9 @@ class User extends Eloquent {
         return $this->check_role("super");
      }          
 
+    public function is_guest()
+     {
+        return true;
+     }               
+
 }

@@ -26,14 +26,9 @@
   <tbody>
   	<?php $count = 0; ?>
   	@foreach (House::all() as $house)
-  	<?php $count++ ?>
-    <tr class="flat_entry" id="{{$house->id}}">
-		<td>{{$count}}</td>
-		<td>{{$house->house_no}}</td>
-    <td>{{$house->floor}}</td>
-		<td>{{$house->block}}</td>
-    </tr>    
-	@endforeach
+    <?php $count++; ?>
+    @render('partials.flat',array( 'house' => $house, 'count' => $count))
+	  @endforeach
   </tbody>
 </table>	
 </div><!-- .span12 -->

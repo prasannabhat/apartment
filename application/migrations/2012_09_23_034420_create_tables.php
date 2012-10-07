@@ -67,8 +67,8 @@ class Create_Tables {
 			$table->integer('user_id')->unsigned();
 			$table->integer('house_id')->unsigned();
 
-			$table->integer('owner_type')->unsigned()->default(0);
-			$table->integer('resident_type')->unsigned()->default(0);
+			$table->string('relation','15');
+			$table->boolean('residing');
 
 			// created_at | updated_at DATETIME
 			$table->timestamps();
