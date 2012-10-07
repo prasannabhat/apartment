@@ -172,6 +172,13 @@ if ( ! Request::cli() and Config::get('session.driver') !== '')
 	Session::load();
 }
 
+//Add assets
+Asset::add('underscore', 'js/library/underscore.js','jquery');
+Asset::add('backbone', 'js/library/backbone.js','underscore');
+Asset::add('apartment', 'js/app/apartment.js','backbone');
+Asset::add('flat', 'js/app/modules/flat.js','apartment');
+Asset::add('style', 'css/apartment.css');
+
 //Register some IoC containers
 IoC::register('validator', function($id = -1)
 {

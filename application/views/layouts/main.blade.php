@@ -38,7 +38,7 @@
             <p class="navbar-text pull-right">
               Logged in as {{Auth::user()->name}}
             </p>
-            <ul class="nav">
+            <ul class="nav" id="app-top-nav">
                 <li>{{HTML::link('members', 'Members');}}</li>
                 <li>{{HTML::link('flats', 'Flats');}}</li>
                 <li>{{HTML::link('logout', 'Logout');}}</li>

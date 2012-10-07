@@ -3,8 +3,6 @@
 class Base_Controller extends Controller {
 
 	public function __construct(){
-		Asset::add('apartment', 'js/apartment.js');
-		Asset::add('style', 'css/apartment.css');
 
 		//Filters
         $class = get_called_class();

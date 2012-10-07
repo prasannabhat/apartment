@@ -15,4 +15,12 @@ class Utilities
 		);
 		return $rules;
     }
+
+	public static function get_member_flat_relations()
+	{
+		$MEMBER_FLAT_RELATION = array("Owner" => "owner","Co Owner" => "co-owner", "Owner's Family" => "owners-family",
+	    		"Tenant" => "tenant", "Tenant's Family" => "tenant-family");
+		return $MEMBER_FLAT_RELATION;
+
+	}    
 }

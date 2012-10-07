@@ -107,5 +107,13 @@ class Flats_Controller extends Base_Controller {
 		$house->delete();
 		return Redirect::to('flats');
 	}
+
+	function get_members($flat_id)
+	{
+		$flat = House::find($flat_id);
+		$flat = $flat->to_array();
+		$flat['flat_id'] = $flat_id;
+		return View::make('home.flatmembers',$flat);
+	}
 	
 }

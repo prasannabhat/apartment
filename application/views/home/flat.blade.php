@@ -46,7 +46,7 @@
 
 
   <?php $buttons =  array(Bootstrapper\Buttons::primary_submit('Save'),Form::button('Cancel',array('id' => 'flat_cancel'))); ?>
-  @if ($house_no)
+  @if ($flat_id != -1)
   <?php  array_push($buttons, Form::button('Delete',array('id' => 'flat_delete'))); ?>
   @endif
   {{Form::actions($buttons);}}
