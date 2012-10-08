@@ -68,10 +68,18 @@ $(document).ready(function(){
 	});
 
 	$("#flat_add_member").on('click',function(event){
+// Store the current URL...use it when the cancel button is pressed
+		sessionStorage.setItem("back-url",window.location.href);
 		var new_location = ROOT_URL + ROUTE_MEMBER; 
 		location.href = new_location;
 		return false;
 
+	});
+	
+
+	$("#member_cancel").on('click', function(event) {
+		location.href = sessionStorage.getItem("back-url");
+		return false;
 	});
 
 	$("#flat_add").on('click', function(event) {

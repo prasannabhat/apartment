@@ -180,9 +180,6 @@ Asset::add('flat', 'js/app/modules/flat.js','apartment');
 Asset::add('style', 'css/apartment.css');
 
 //Register some IoC containers
-IoC::register('validator', function($id = -1)
-{
-    Log::info(print_r($id));
-    $rules = Apartment\Utilities::get_validations($id);
-    return $rules;
-});
+
+// Start the application
+Apartment\Utilities::start_app();

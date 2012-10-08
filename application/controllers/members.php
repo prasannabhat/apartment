@@ -30,7 +30,7 @@ class Members_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-	public function action_index()
+	public function get_index()
 	{
 		return View::make('home.members');
 	}
@@ -38,7 +38,7 @@ class Members_Controller extends Base_Controller {
 	public function get_member($member_id = -1)
 	{
 		//Default array for creating a new member
-		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '','relation' => '', 'residing' => '' , 'house_no' => '');
+		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '','relation' => '', 'residing' => '');
 		// If the session has data because of redirect, use that data
 		if(count(Input::old()) != 0)
 		{
@@ -55,6 +55,23 @@ class Members_Controller extends Base_Controller {
 		}
 		$member['member_id'] = $member_id;
 		return View::make('home.member',$member);			
+	}
+
+	public function post_member()
+	{
+		$input = Input::get();
+		// Get the relevant rules for validation
+		$rules = IoC::resolve('member_validator');
+		$validation = Validator::make($input, $rules);
+		if ($validation->fails())
+		{
+		    return Redirect::back()->with_input()->with_errors($validation);
+		}
+		else
+		{
+			return Redirect::back();
+		}		
+
 	}
 
 	public function post_flat()

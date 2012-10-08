@@ -63,7 +63,7 @@ class Flats_Controller extends Base_Controller {
 		$input = Input::get();
 		
 		// Get the relevant rules for validation
-		$rules = IoC::resolve('validator');
+		$rules = IoC::resolve('flat_validator');
 		$validation = Validator::make($input, $rules);
 		if ($validation->fails())
 		{
@@ -83,7 +83,7 @@ class Flats_Controller extends Base_Controller {
 		$input = Input::get();
 
 		// Get the relevant rules for validation
-		$rules = IoC::resolve('validator',array('id' => $flat_id));
+		$rules = IoC::resolve('flat_validator',array('id' => $flat_id));
 		$validation = Validator::make($input, $rules);
 
 		if ($validation->fails())
@@ -113,6 +113,8 @@ class Flats_Controller extends Base_Controller {
 		$flat = House::find($flat_id);
 		$flat = $flat->to_array();
 		$flat['flat_id'] = $flat_id;
+// Store the current URL, to navigate back to this view from the next view
+		Session::put('back-url', URL::current());
 		return View::make('home.flatmembers',$flat);
 	}
 	

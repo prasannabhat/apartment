@@ -6,7 +6,7 @@
   @if ($member_id != -1)
     <h2>Details for  {{User::find($member_id)->name}}</h2>
   @else
-    <h2>Add new member {{ $house_no ? "for " . $house_no : ""}}</h2>
+    <h2>Add new member </h2>
   @endif
 {{-- For new object creation . use POST method($flat_id not set to integer), for updation use PUT method --}}
   <?php $method = ($member_id == -1) ? 'POST' : 'PUT' ?>
