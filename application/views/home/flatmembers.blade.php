@@ -26,10 +26,12 @@
     </tr>
   </thead>
   <tbody>
-  	<?php $count = 0; ?>
-
+  <?php $count = 0; ?>
+    @foreach (House::find($id)->users()->get() as $user)
     <?php $count++ ?>
-
+    <!-- @render('partials.member',array( 'user' => $user, 'count' => $count)) -->
+    {{print_r(json_encode($user->to_array()))}}
+    @endforeach
   </tbody>
 </table>	
 </div><!-- .span12 -->

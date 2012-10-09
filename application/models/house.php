@@ -6,7 +6,7 @@ class House extends Eloquent {
 	
 	 public function users()
 	 {
-		return $this->has_many_and_belongs_to('User');
+		return $this->has_many_and_belongs_to('User')->with(array('relation','residing'));
 	 }
          
 

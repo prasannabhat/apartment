@@ -11,7 +11,7 @@ class User extends Eloquent {
 	 
 	 public function houses()
 	 {
-		return $this->has_many_and_belongs_to('House');
+		return $this->has_many_and_belongs_to('House')->with(array('relation','residing'));
 	 }
 
     public function roles()
@@ -22,6 +22,11 @@ class User extends Eloquent {
      public function set_password($password)
      {
         $this->set_attribute('password', Hash::make($password));
+     }
+
+     public function get_phone()
+     {
+        return $this->phones()->first()->phone_no;
      }
 
      private function check_role($user_role)

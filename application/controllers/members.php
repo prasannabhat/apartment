@@ -69,7 +69,16 @@ class Members_Controller extends Base_Controller {
 		}
 		else
 		{
-			return Redirect::back();
+			if(Session::has('back-url'))
+			{
+				$url = Session::get('back-url');
+				Session::forget('back-url');
+				return Redirect::to($url);
+			}
+			else
+			{
+				return Redirect::to('members');
+			}
 		}		
 
 	}

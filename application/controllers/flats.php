@@ -113,7 +113,7 @@ class Flats_Controller extends Base_Controller {
 		$flat = House::find($flat_id);
 		$flat = $flat->to_array();
 		$flat['flat_id'] = $flat_id;
-// Store the current URL, to navigate back to this view from the next view
+		// Store the current URL, to navigate back to this view from the next view
 		Session::put('back-url', URL::current());
 		return View::make('home.flatmembers',$flat);
 	}
