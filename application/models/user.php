@@ -3,6 +3,7 @@
 class User extends Eloquent {
 
      public static $timestamps = true;
+	 public static $hidden = array('password');
 
      public function phones()
      {
@@ -26,8 +27,31 @@ class User extends Eloquent {
 
      public function get_phone()
      {
-        return $this->phones()->first()->phone_no;
+		$phone = $this->phones()->first();
+		if($phone)
+		{
+			return $phone->phone_no;
+		}
      }
+	 
+	 public function get_flat_relation()
+	 {
+		if($this->pivot)
+		{
+			//Get the readable string of the relationship
+			$relation_map = Apartment\Utilities::get_member_flat_relations();
+			$key = array_search($this->pivot->relation, $relation_map); 
+			return $key;
+		}
+	 }
+	 
+	 public function get_residing()
+	 {
+		if($this->pivot)
+		{
+			return ($this->pivot->residing) ? "Yes" : "No";
+		}
+	 }
 
      private function check_role($user_role)
      {

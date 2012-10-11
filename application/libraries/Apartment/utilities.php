@@ -50,4 +50,5 @@ class Utilities
 		return $MEMBER_FLAT_RELATION;
 
 	}    
+
 }

@@ -33,6 +33,18 @@ class Create_Data {
 
 		$house = new House(array('house_no' => 'D11','floor' => 'D'));
 		$house->save();
+		$user->houses()->attach($house->id,array('relation' => 'owner'));
+		$user = User::create(array(
+			'name' => 'Amruta Prasanna',
+			'email' => 'amruta.pune@gmail.com',
+			'password' => 'asdf'
+		));
+		$user->roles()->attach($role_admin->id);
+		$user->houses()->attach($house->id, array('relation' => 'co-owner'));
+		
+
+		$phone = new Phone(array('phone_no' => '9880362090'));;
+		$user->phones()->insert($phone);
 		$user->houses()->attach($house->id);
 
 		$house = new House(array('house_no' => 'D8','floor' => 'D'));
@@ -47,16 +59,7 @@ class Create_Data {
 		$phone = new Phone(array('phone_no' => '9972010366'));
 		$user->phones()->insert($phone);
 		
-		$user = User::create(array(
-			'name' => 'Amruta Prasanna',
-			'email' => 'amruta.pune@gmail.com',
-			'password' => 'asdf'
-		));
-		$user->roles()->attach($role_admin->id);
-
-		$phone = new Phone(array('phone_no' => '9880362090'));;
-		$user->phones()->insert($phone);
-		$user->houses()->attach($house->id);
+		
 
 		$user = User::create(array(
 			'name' => 'Krishnamurthy',

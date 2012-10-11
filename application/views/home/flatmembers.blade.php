@@ -23,14 +23,14 @@
       <th>Email</th>
       <th>Flat Relation</th>
       <th>Residing</th>
+	  <th>Action</th>
     </tr>
   </thead>
   <tbody>
   <?php $count = 0; ?>
     @foreach (House::find($id)->users()->get() as $user)
     <?php $count++ ?>
-    <!-- @render('partials.member',array( 'user' => $user, 'count' => $count)) -->
-    {{print_r(json_encode($user->to_array()))}}
+	@render('partials.member',array( 'user' => $user, 'count' => $count))
     @endforeach
   </tbody>
 </table>	
