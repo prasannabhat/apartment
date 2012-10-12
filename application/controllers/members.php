@@ -49,6 +49,11 @@ class Members_Controller extends Base_Controller {
 			// Get data from the database
 			if($member_id != -1)
 			{
+				$user = User::find($member_id);
+				$member['name'] = $user->name;
+				$member['email'] = $user->email;
+				$member['phone_no'] = $user->phone;
+				$member['relation'] = $user->pivot()->relation;
 				// $flat = House::find($flat_id);
 				// $flat = $flat->to_array();
 			}

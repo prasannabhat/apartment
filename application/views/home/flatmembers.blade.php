@@ -14,7 +14,7 @@
 <div class="row-fluid">
 <div class="span8">
   <h2>Member list for {{$house_no}}</h2>
-<table class="table " id="flats_table">
+<table class="table " id="flat_members_table">
   <thead>
     <tr>
       <th>#</th>

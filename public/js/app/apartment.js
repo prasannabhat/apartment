@@ -51,9 +51,18 @@ $(document).ready(function(){
 		}
 
 		if($(this).hasClass("app-edit-flat-members")){
-			window.location = ROOT_URL + ROUTE_FLAT_MEMBERS + "/" + id;
+			var new_location = ROOT_URL + ROUTE_FLAT_MEMBERS + "/" + id;
+			sessionStorage.setItem("back-url",new_location);
+			window.location = new_location;
 		}		
 	});
+	
+	$("#flat_members_table").on("click", "button", function(event){
+		var id = $(this).closest("tr").attr('id');
+		if($(this).hasClass("app-edit-member")){
+			window.location = ROOT_URL + ROUTE_MEMBER + "/" + id;
+		}
+	});	
 
 	$("#flat_cancel").on('click', function(event) {
 		window.location = ROOT_URL + ROUTE_FLATS;
@@ -69,7 +78,6 @@ $(document).ready(function(){
 
 	$("#flat_add_member").on('click',function(event){
 // Store the current URL...use it when the cancel button is pressed
-		sessionStorage.setItem("back-url",window.location.href);
 		var new_location = ROOT_URL + ROUTE_MEMBER; 
 		location.href = new_location;
 		return false;

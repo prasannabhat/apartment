@@ -7,7 +7,7 @@
 <td>{{$user->residing}}</td>
 <td>
 <div class="btn-group">
-  <button class="btn-mini "><i class="icon-edit"></i> Edit</button>
+  <button class="btn-mini app-edit-member"><i class="icon-edit"></i> Edit</button>
 </div>
 </td>
 </tr>    
