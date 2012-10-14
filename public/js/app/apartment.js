@@ -59,8 +59,9 @@ $(document).ready(function(){
 	
 	$("#flat_members_table").on("click", "button", function(event){
 		var id = $(this).closest("tr").attr('id');
+		var flat_id = location.href.split(/\//).pop();
 		if($(this).hasClass("app-edit-member")){
-			window.location = ROOT_URL + ROUTE_MEMBER + "/" + id;
+			window.location = ROOT_URL + ROUTE_MEMBER + "/" + id + '?flat_id=' + flat_id;
 		}
 	});	
 
@@ -78,7 +79,9 @@ $(document).ready(function(){
 
 	$("#flat_add_member").on('click',function(event){
 // Store the current URL...use it when the cancel button is pressed
-		var new_location = ROOT_URL + ROUTE_MEMBER; 
+		// var flat_id = location.href.split(/\//)[-1];
+		var flat_id = location.href.split(/\//).pop();
+		var new_location = ROOT_URL + ROUTE_MEMBER + '?' + 'flat_id=' + flat_id; 
 		location.href = new_location;
 		return false;
 

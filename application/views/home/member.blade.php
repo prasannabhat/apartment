@@ -4,7 +4,7 @@
 <div class="row-fluid">
 <div class="span8">
   @if ($member_id != -1)
-    <h2>Details for  {{User::find($member_id)->name}}</h2>
+    <h2>Details for  {{$name}}</h2>
   @else
     <h2>Add new member </h2>
   @endif
@@ -13,6 +13,7 @@
 
   {{ Form::horizontal_open(URL::current(),$method,array('id' => 'member_edit_form')) }}
 
+  <input type="hidden" name="flat_id" value="{{$flat_id}}">
   <div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
     <label class="control-label" for="name">Name</label>
     <div class="controls">

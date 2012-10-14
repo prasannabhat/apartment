@@ -39,6 +39,7 @@ class Members_Controller extends Base_Controller {
 	{
 		//Default array for creating a new member
 		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '','relation' => '', 'residing' => '');
+		$flat_id = Input::get('flat_id');
 		// If the session has data because of redirect, use that data
 		if(count(Input::old()) != 0)
 		{
@@ -49,22 +50,36 @@ class Members_Controller extends Base_Controller {
 			// Get data from the database
 			if($member_id != -1)
 			{
-				$user = User::find($member_id);
+				$user = User::with(array('phones'))->find($member_id);
 				$member['name'] = $user->name;
 				$member['email'] = $user->email;
 				$member['phone_no'] = $user->phone;
-				$member['relation'] = $user->pivot()->relation;
+				if($flat_id)
+				{
+					foreach($user->houses()->pivot()->get() as $row)
+					{
+						if ($row->house_id == $flat_id)
+						{
+							$member['relation'] = $row->relation;
+							$member['residing'] = $row->residing;
+							break;
+						}
+					}
+				}
+
 				// $flat = House::find($flat_id);
 				// $flat = $flat->to_array();
 			}
 		}
 		$member['member_id'] = $member_id;
+		$member['flat_id'] = $flat_id;
 		return View::make('home.member',$member);			
 	}
 
 	public function post_member()
 	{
 		$input = Input::get();
+		$residing = Input::get('residing') ? 1 : 0;
 		// Get the relevant rules for validation
 		$rules = IoC::resolve('member_validator');
 		$validation = Validator::make($input, $rules);
@@ -74,6 +89,16 @@ class Members_Controller extends Base_Controller {
 		}
 		else
 		{
+			$member = new User();
+			$member->name = Input::get('name');
+			$member->email = Input::get('email');
+			$member->save();
+			
+			$phone = new Phone(array('phone_no' => Input::get('phone_no')));
+			
+			$member->phones()->insert($phone);
+			$member->houses()->attach(Input::get('flat_id'),array('relation' => Input::get('relation'),'residing' => $residing));			
+			
 			if(Session::has('back-url'))
 			{
 				$url = Session::get('back-url');

@@ -18,11 +18,12 @@ class Utilities
 
 	public static function get_member_validations($id) {
 		\Log::info('member id is ' . $id);
-		$house_rule = sprintf('required|match:"/^[ABCDE]\d{1,2}/"|unique:houses,house_no,%s', $id);
+		$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|unique:users,name,%s',$id);
+		$email_rule = sprintf('email|unique:users,email,%s',$id);
 		$rules = array(
-			'name' => 'required|match:"/^\w[\w\s]+/"|between:5,50',
+			'name' => $name_rule,
 			'phone_no' => 'required|match:"/^\d{10}\s*$/"',
-			'email' => 'email',
+			'email' => $email_rule,
 			'relation' => 'required'
 		);
 		return $rules;
