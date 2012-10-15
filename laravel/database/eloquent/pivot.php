@@ -15,6 +15,8 @@ class Pivot extends Model {
 	 * @var bool
 	 */
 	public static $timestamps = true;
+	
+	public static $connection;
 
 	/**
 	 * Create a new pivot table instance.

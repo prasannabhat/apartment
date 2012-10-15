@@ -112,6 +112,61 @@ class Members_Controller extends Base_Controller {
 		}		
 
 	}
+	
+	public function put_member($member_id)
+	{
+		$input = Input::get();
+		$residing = Input::get('residing') ? 1 : 0;
+		//Get the hidden flat id, if it exists
+		$flat_id = Input::get('flat_id');
+		// Get the relevant rules for validation
+		$rules = IoC::resolve('member_validator',array('id' => $member_id));
+		$validation = Validator::make($input, $rules);
+		if ($validation->fails())
+		{
+		    return Redirect::back()->with_input()->with_errors($validation);
+		}
+		else
+		{
+			//Update the new information
+			$member = User::with(array('phones'))->find($member_id);
+			$member->name = Input::get('name');
+			$member->email = Input::get('email');
+			$member->save();
+			
+			$phone = $member->phones()->first();
+			$phone->phone_no = Input::get('phone_no');
+			$phone->save();
+			
+			if($flat_id)
+			{
+				//todo : prasanna : can be improved
+				foreach($member->houses()->pivot()->get() as $row)
+				{
+					if ($row->house_id == $flat_id)
+					{
+						$row->relation = Input::get('relation');
+						$row->residing = $residing;
+						//$row->save();
+						$row->save();
+						break;
+					}
+				}
+			}
+			
+			if(Session::has('back-url'))
+			{
+				$url = Session::get('back-url');
+				Session::forget('back-url');
+				return Redirect::to($url);
+			}
+			else
+			{
+				return Redirect::to('members');
+			}
+		}		
+
+	}	
 
 	public function post_flat()
 	{
