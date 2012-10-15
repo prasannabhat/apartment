@@ -140,17 +140,13 @@ class Members_Controller extends Base_Controller {
 			
 			if($flat_id)
 			{
-				//todo : prasanna : can be improved
-				foreach($member->houses()->pivot()->get() as $row)
+				$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+				if($pivot)
 				{
-					if ($row->house_id == $flat_id)
-					{
-						$row->relation = Input::get('relation');
-						$row->residing = $residing;
-						//$row->save();
-						$row->save();
-						break;
-					}
+					// To overcome laravel bug, manually work with intermediate tables
+					$pivot->relation = Input::get('relation');
+					$pivot->residing = $residing;
+					$pivot->save();
 				}
 			}
 			
