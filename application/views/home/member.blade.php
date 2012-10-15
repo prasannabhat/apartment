@@ -44,6 +44,8 @@
     </div>
   </div>  
 
+{{-- Render relation, only if one is supplied  --}}
+@if ($relation)
   <div class="control-group {{ $errors->has('relation') ? 'error' : '' }}">
     <label class="control-label" for="relation">Flat Relation</label>
     <div class="controls">
@@ -57,7 +59,8 @@
     <p  class="help-block">{{ $message }}</p>
   @endforeach
     </div>
-  </div>    
+  </div>  
+@endif  
 
   <div class="control-group">
     <label class="control-label" for="residing">Residing?</label>
