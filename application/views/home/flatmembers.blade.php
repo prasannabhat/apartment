@@ -29,7 +29,7 @@
   <?php $count = 0; ?>
     @foreach (House::find($id)->users()->get() as $user)
     <?php $count++ ?>
-	@render('partials.member',array( 'user' => $user, 'count' => $count))
+	@render('partials.flat-member',array( 'user' => $user, 'count' => $count))
     @endforeach
   </tbody>
 </table>	

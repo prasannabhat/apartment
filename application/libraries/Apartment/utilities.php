@@ -23,8 +23,8 @@ class Utilities
 		$rules = array(
 			'name' => $name_rule,
 			'phone_no' => 'required|match:"/^\d{10}\s*$/"',
-			'email' => $email_rule,
-			'relation' => 'required'
+			'email' => $email_rule
+			// 'relation' => 'required'
 		);
 		return $rules;
     }    

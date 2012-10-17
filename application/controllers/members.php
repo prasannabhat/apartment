@@ -32,13 +32,15 @@ class Members_Controller extends Base_Controller {
 	*/
 	public function get_index()
 	{
-		return View::make('home.members');
+		$members = User::order_by('name','asc')->get();
+		Session::put('back-url', URL::current());
+		return View::make('home.members',array('members' => $members));
 	}
 
 	public function get_member($member_id = -1)
 	{
 		//Default array for creating a new member
-		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '','relation' => '', 'residing' => '');
+		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '');
 		$flat_id = Input::get('flat_id');
 		// If the session has data because of redirect, use that data
 		if(count(Input::old()) != 0)
@@ -79,6 +81,8 @@ class Members_Controller extends Base_Controller {
 	public function post_member()
 	{
 		$input = Input::get();
+		//Get the hidden flat id, if it exists
+		$flat_id = Input::get('flat_id');
 		$residing = Input::get('residing') ? 1 : 0;
 		// Get the relevant rules for validation
 		$rules = IoC::resolve('member_validator');
@@ -97,7 +101,11 @@ class Members_Controller extends Base_Controller {
 			$phone = new Phone(array('phone_no' => Input::get('phone_no')));
 			
 			$member->phones()->insert($phone);
-			$member->houses()->attach(Input::get('flat_id'),array('relation' => Input::get('relation'),'residing' => $residing));			
+			// Update flat relationship, only if it is supplied
+			if($flat_id)
+			{
+				$member->houses()->attach(Input::get('flat_id'),array('relation' => Input::get('relation'),'residing' => $residing));
+			}
 			
 			if(Session::has('back-url'))
 			{
@@ -164,54 +172,11 @@ class Members_Controller extends Base_Controller {
 
 	}	
 
-	public function post_flat()
+	public function delete_member($member_id)
 	{
-		$input = Input::get();
-		
-		// Get the relevant rules for validation
-		$rules = IoC::resolve('validator');
-		$validation = Validator::make($input, $rules);
-		if ($validation->fails())
-		{
-		    return Redirect::back()->with_input()->with_errors($validation);
-		}
-		else
-		{
-			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor']));
-			return Redirect::to('flats');
-		}
-		
-	}
-
-	public function put_flat($flat_id)
-	{
-		$house = House::find($flat_id);
-		$input = Input::get();
-
-		// Get the relevant rules for validation
-		$rules = IoC::resolve('validator',array('id' => $flat_id));
-		$validation = Validator::make($input, $rules);
-
-		if ($validation->fails())
-		{
-		    return Redirect::back()->with_input()->with_errors($validation);
-		}
-		else
-		{
-			$house->house_no = $input['house_no'];
-			$house->floor = $input['floor'];
-			$house->save();
-			return Redirect::to('flats');
-		}
-
-
-	}
-
-	public function delete_flat($flat_id)
-	{
-		$house = House::find($flat_id);
-		$house->delete();
-		return Redirect::to('flats');
+		$user = User::find($member_id);
+		$user->delete();
+		return Redirect::to('members');
 	}
 
 }

@@ -45,6 +45,7 @@
   </div>  
 
 {{-- Render relation, only if one is supplied  --}}
+@if (isset($flat_id))
   <div class="control-group {{ $errors->has('relation') ? 'error' : '' }}">
     <label class="control-label" for="relation">Flat Relation</label>
     <div class="controls">
@@ -58,8 +59,10 @@
     <p  class="help-block">{{ $message }}</p>
   @endforeach
     </div>
-  </div>  
+  </div>
+@endif
 
+@if (isset($flat_id))
   <div class="control-group">
     <label class="control-label" for="residing">Residing?</label>
     <div class="controls">
@@ -67,7 +70,8 @@
         <input type="checkbox" name="residing" id="residing" value="1"> User residing in flat?
       </label>          
     </div>
-  </div>   
+  </div>
+@endif  
             
   <?php $buttons =  array(Bootstrapper\Buttons::primary_submit('Save'),Form::button('Cancel',array('id' => 'member_cancel'))); ?>
   @if ($member_id != -1)

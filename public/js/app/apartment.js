@@ -29,6 +29,7 @@ Backbone.View.prototype.close = function () {
 $(document).ready(function(){
 	var ROUTE_FLATS = '/flats';
 	var ROUTE_FLAT = '/flats/flat';
+	var ROUTE_MEMBERS = '/members';
 	var ROUTE_MEMBER = '/members/member';
 	var ROUTE_FLAT_MEMBERS = '/flats/members';
 	var ROOT_URL = get_root_url();
@@ -37,6 +38,7 @@ $(document).ready(function(){
 		var value = $(this).text();
 		switch(value){
 			case "Members":
+				sessionStorage.setItem("back-url",ROOT_URL + ROUTE_MEMBERS);
 			break;
 
 			case "Flats":
@@ -60,10 +62,17 @@ $(document).ready(function(){
 	$("#flat_members_table").on("click", "button", function(event){
 		var member_id = $(this).closest("tr").attr('id');
 		var flat_id = location.href.split(/\//).pop();
-		if($(this).hasClass("app-edit-member")){
+		if($(this).hasClass("app-edit-flat-member")){
 			window.location = ROOT_URL + ROUTE_FLAT_MEMBERS + "/" + flat_id + '?action=edit&member=' + member_id;
 		}
 	});	
+
+	$("#members_table").on("click", "button", function(event){
+		var member_id = $(this).closest("tr").attr('id');
+		if($(this).hasClass("app-edit-member")){
+			window.location = ROOT_URL + ROUTE_MEMBER + "/" + member_id;
+		}
+	});
 
 	$("#flat_cancel").on('click', function(event) {
 		window.location = ROOT_URL + ROUTE_FLATS;
@@ -76,6 +85,15 @@ $(document).ready(function(){
 			$("#flat_edit_form").submit();
 		}
 	});
+
+	$("#member_delete").on('click', function(event) {
+		if (confirm("Are you sure to delete?"))
+		{
+			$('[name=_method]').val('DELETE');
+			$("#member_edit_form").submit();
+		}
+	});
+
 
 	$("#flat_add_member").on('click',function(event){
 // Store the current URL...use it when the cancel button is pressed
@@ -130,6 +148,11 @@ $(document).ready(function(){
 	    // $(document.body).append(form);
 	    // form.submit();
 	    // form.remove();		
+		return false;
+	});
+
+	$("#member_add").on('click', function(event) {
+		window.location = ROOT_URL + ROUTE_MEMBER;
 		return false;
 	});
 
