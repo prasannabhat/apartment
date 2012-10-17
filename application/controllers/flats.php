@@ -110,12 +110,67 @@ class Flats_Controller extends Base_Controller {
 
 	function get_members($flat_id)
 	{
-		$flat = House::find($flat_id);
-		$flat = $flat->to_array();
-		$flat['flat_id'] = $flat_id;
-		// Store the current URL, to navigate back to this view from the next view
-		Session::put('back-url', URL::current());
-		return View::make('home.flatmembers',$flat);
+		$action = Input::get('action');
+		
+		switch ($action) {
+			case 'edit':
+				$member_id = Input::get('member');
+				$user = User::find($member_id);
+
+				$flat_relation['name'] = $user->name;
+				$flat_relation['member_id'] = $member_id;
+				// Default values
+				$flat_relation['relation'] = '';
+				$flat_relation['residing'] = 0;
+
+				$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+				if($pivot)
+				{
+					$flat_relation['relation'] = $pivot->relation;
+					if($pivot->residing)
+					{
+						$flat_relation['residing'] = 1;
+					}
+					// To overcome laravel bug, manually work with intermediate tables
+				}
+
+				return View::make('home.flatmemberrel',$flat_relation);
+				# code...
+				break;
+			
+			default:
+				$flat = House::find($flat_id);
+				$flat = $flat->to_array();
+				$flat['flat_id'] = $flat_id;
+				// Store the current URL, to navigate back to this view from the next view
+				Session::put('back-url', URL::current());
+				return View::make('home.flatmembers',$flat);
+				break;
+		}
+	}
+
+	function put_members($flat_id)
+	{
+		$action = Input::get('action');
+		if($action == 'edit')
+		{
+			$member_id = Input::get('member');
+			$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+			$pivot->relation = Input::get('relation');
+			$pivot->residing = Input::get('residing') ? 1 : 0;
+			$pivot->save();
+			$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
+			return Redirect::to($url);
+		}
+	}
+
+	function delete_members($flat_id)
+	{
+		$member_id = Input::get('member');
+		$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+		$pivot->delete();
+		$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
+		return Redirect::to($url);
 	}
 	
 }

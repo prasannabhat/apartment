@@ -4,8 +4,7 @@
   <div class="sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
       <li class="nav-header">Options</li>
-      <li class="active"><a href="flats">View</a></li>
-      <li><a href="" id="flat_add_member">Add Member</a></li>
+      <li><a href="" id="flat_add_member">Add New Member</a></li>
     </ul>
   </div><!--/.well -->
 @endsection

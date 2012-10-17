@@ -4,16 +4,100 @@
 		"selected_items":
 		[
 			[
+				"mem",
+				"member_id"
+			],
+			[
+				"hou",
+				"house"
+			],
+			[
+				"js",
+				"json_encode"
+			],
+			[
+				"pri",
+				"print_r"
+			],
+			[
+				"ema",
+				"email_rule"
+			],
+			[
+				"fl",
+				"flat_id"
+			],
+			[
+				"res",
+				"residing"
+			],
+			[
+				"req",
+				"required"
+			],
+			[
+				"se",
+				"setItem"
+			],
+			[
+				"new",
+				"new_location"
+			],
+			[
+				"RO",
+				"ROOT_URL"
+			],
+			[
+				"ho",
+				"house"
+			],
+			[
+				"has",
+				"hasClass"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"arg",
+				"arguments"
+			],
+			[
+				"house",
+				"house_no"
+			],
+			[
+				"ROUTE",
+				"ROUTE_ADD_FLAT"
+			],
+			[
+				"flat",
+				"flat_id"
+			],
+			[
+				"but",
+				"buttons"
+			],
+			[
+				"fla",
+				"flat_id"
+			],
+			[
+				"inp",
+				"input"
+			],
+			[
+				"func",
+				"create_function"
+			],
+			[
 				"for",
 				"for	for (…) {…}"
 			],
 			[
 				"if",
 				"ife	if … else"
-			],
-			[
-				"hou",
-				"house"
 			],
 			[
 				"delete_",
@@ -124,16 +208,8 @@
 				"validations"
 			],
 			[
-				"val",
-				"validations"
-			],
-			[
 				"es",
 				"escape_html"
-			],
-			[
-				"ema",
-				"email"
 			],
 			[
 				"pa",
@@ -166,10 +242,6 @@
 			[
 				"giv",
 				"given_string"
-			],
-			[
-				"res",
-				"response"
 			],
 			[
 				"sel",
@@ -236,10 +308,6 @@
 				"logger"
 			],
 			[
-				"but",
-				"button"
-			],
-			[
 				"ex",
 				"extend"
 			],
@@ -294,10 +362,6 @@
 			[
 				"my",
 				"my_method"
-			],
-			[
-				"func",
-				"function"
 			],
 			[
 				"write",
@@ -388,45 +452,67 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+			"file": "application/views/home/flatmembers.blade.php",
 			"settings":
 			{
-				"buffer_size": 257,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/README.rst",
-			"settings":
-			{
-				"buffer_size": 782,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "/E/Working/web/sample/jquery.js",
-			"settings":
-			{
-				"buffer_size": 93433,
+				"buffer_size": 929,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Package Control Messages\n========================",
+			"file": "application/controllers/members.php",
 			"settings":
 			{
-				"buffer_size": 49,
-				"line_ending": "Windows",
-				"name": "Package Control Messages",
-				"scratch": true
+				"buffer_size": 4112,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/Gist/Gist.sublime-settings",
+			"file": "public/js/app/apartment.js",
 			"settings":
 			{
-				"buffer_size": 438,
-				"line_ending": "Unix"
+				"buffer_size": 3495,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/libraries/Apartment/utilities.php",
+			"settings":
+			{
+				"buffer_size": 1411,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/controllers/flats.php",
+			"settings":
+			{
+				"buffer_size": 2926,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/migrations/2012_09_23_034420_create_tables.php",
+			"settings":
+			{
+				"buffer_size": 2920,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/views/home/member.blade.php",
+			"settings":
+			{
+				"buffer_size": 2998,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "application/models/user.php",
+			"settings":
+			{
+				"buffer_size": 1724,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -437,15 +523,31 @@
 		"selected_items":
 		[
 			[
+				"git dif",
+				"Git: Diff All"
+			],
+			[
+				"git",
+				"Git: Commit Selected Hunk"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"gist",
+				"Gist: Open Gist"
+			],
+			[
+				"synta ht",
+				"Set Syntax: HTML"
+			],
+			[
 				"ins",
 				"Package Control: Install Package"
 			],
 			[
 				"insta",
-				"Package Control: Install Package"
-			],
-			[
-				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -517,10 +619,6 @@
 				"Preferences: Alignment File Settings – Default"
 			],
 			[
-				"git",
-				"Set Syntax: Git Commit Message"
-			],
-			[
 				"borde",
 				"Snippet: border-width: size"
 			],
@@ -558,41 +656,80 @@
 	},
 	"file_history":
 	[
-		"/E/xampp/htdocs/apartment/application/controllers/flat.php",
+		"/E/xampp/htdocs/instapics/application/models/User.php",
+		"/E/xampp/htdocs/apartment/application/models/user.php",
+		"/E/xampp/htdocs/apartment/application/views/partials/member.blade.php",
+		"/E/xampp/htdocs/apartment/application/models/house.php",
+		"/E/xampp/htdocs/apartment/application/views/home/flats.blade.php",
+		"/E/xampp/htdocs/apartment/application/views/home/member.blade.php",
+		"/E/xampp/htdocs/apartment/application/migrations/2012_09_23_034420_create_tables.php",
+		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/SideBarEnhancements/Open With/Side Bar.sublime-menu",
+		"/E/xampp/htdocs/apartment/application/libraries/Apartment/constants.php",
+		"/E/xampp/htdocs/apartment/application/controllers/flats.php",
+		"/E/xampp/htdocs/apartment/application/start.php",
 		"/E/xampp/htdocs/apartment/application/routes.php",
+		"/E/xampp/htdocs/apartment/application/views/home/flat.blade.php",
+		"/E/xampp/htdocs/apartment/bundles/bootstrapper/public/js/jquery-1.8.1.js",
+		"/E/xampp/htdocs/apartment/application/views/home/members.blade.php",
+		"/E/xampp/htdocs/apartment/application/views/layouts/main.blade.php",
+		"/E/xampp/htdocs/apartment/public/js/app/modules/flat.js",
+		"/E/xampp/htdocs/apartment/public/js/app/apartment.js",
+		"/E/xampp/htdocs/apartment/application/controllers/base.php",
+		"/E/xampp/htdocs/apartment/application/views/partials/flat.blade.php",
+		"/E/xampp/htdocs/apartment/public/js/apartment.js",
+		"/E/Working/Javascript/backbone/library/backbone/backbone.js",
+		"/E/xampp/htdocs/apartment/application/libraries/Apartment/utilities.php",
+		"/E/xampp/htdocs/instapics/public/js/bootstrap.js",
+		"/E/xampp/htdocs/apartment/public/css/apartment.css",
+		"/E/xampp/htdocs/instapics/application/views/layouts/main.blade.php",
+		"/E/xampp/htdocs/apartment/storage/views/ba314efc3feac5a173b001a40ef5984d",
+		"/E/xampp/htdocs/apartment/application/views/error/custom_error.blade.php",
+		"/E/xampp/htdocs/apartment/application/controllers/members.php",
+		"/E/xampp/htdocs/apartment/application/tasks/check.php",
+		"/E/xampp/htdocs/apartment/application/config/auth.php",
+		"/E/xampp/htdocs/instapics/application/config/auth.php",
+		"/E/xampp/htdocs/apartment/laravel/auth.php",
+		"/E/xampp/htdocs/apartment/application/views/error/admin_error.blade.php",
+		"/E/xampp/htdocs/apartment/application/views/error/flats.blade.php",
+		"/E/xampp/htdocs/apartment/application/tasks/notify.php",
+		"/E/xampp/htdocs/apartment/application/tasks/notify_task.php",
+		"/E/xampp/htdocs/apartment/application/migrations/2012_09_23_040522_create_data.php",
+		"/E/xampp/htdocs/apartment/application/models/roleuser.php",
+		"/E/Working/web/bootstrap/examples/samples/fluid.html",
+		"/E/xampp/htdocs/instapics/application/start.php",
+		"/E/xampp/htdocs/apartment/application/config/application.php",
+		"/E/xampp/htdocs/apartment/application/libraries/utilities.php",
+		"/E/xampp/htdocs/apartment/application/libraries/constants.php",
+		"/E/xampp/htdocs/apartment/application/config/session.php",
+		"/E/xampp/htdocs/apartment/laravel/session.php",
+		"/E/xampp/htdocs/apartment/application/controllers/home.php",
+		"/E/xampp/htdocs/apartment/application/views/home/login.blade.php",
+		"/E/Working/web/sample/jquery.js",
+		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/Gist/Gist.sublime-settings",
+		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/README.rst",
+		"/E/xampp/htdocs/apartment/application/controllers/flat.php",
+		"/E/Working/web/sample/index.html",
+		"/E/xampp/htdocs/instapics/index.html",
+		"/E/xampp/htdocs/instapics/",
 		"/E/xampp/htdocs/apartment/application/tests/models.test.php",
 		"/E/xampp/htdocs/test/index.html",
-		"/E/xampp/htdocs/apartment/application/models/house.php",
-		"/E/xampp/htdocs/apartment/application/views/layouts/main.blade.php",
 		"/E/Working/web/bootstrap/examples/samples/test.html",
-		"/E/xampp/htdocs/apartment/application/views/home/flats.blade.php",
-		"/E/xampp/htdocs/apartment/application/config/application.php",
 		"/E/temp/index.html",
 		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/javascript/hello.sublime-snippet",
 		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/javascript/hello.sublime-snippet.sql",
-		"/E/xampp/htdocs/apartment/application/migrations/2012_09_23_040522_create_data.php",
-		"/E/xampp/htdocs/apartment/application/migrations/2012_09_23_034420_create_tables.php",
 		"/E/xampp/htdocs/instapics/application/controllers/dashboard.php",
 		"/E/xampp/htdocs/instapics/application/views/dashboard/index.blade.php",
-		"/E/xampp/htdocs/apartment/application/controllers/flats.php",
-		"/E/xampp/htdocs/apartment/application/controllers/home.php",
 		"/E/xampp/htdocs/apartment/laravel/auth/drivers/eloquent.php",
 		"/E/Working/web/bootstrap/docs/examples/fluid.html",
-		"/E/xampp/htdocs/apartment/application/views/home/login.blade.php",
 		"/E/xampp/htdocs/apartment/laravel/auth/drivers/driver.php",
 		"/E/xampp/htdocs/apartment/laravel/auth/drivers/fluent.php",
-		"/E/xampp/htdocs/apartment/application/config/auth.php",
-		"/E/xampp/htdocs/apartment/laravel/auth.php",
 		"/E/xampp/htdocs/apartment/application/bundles.php",
-		"/E/xampp/htdocs/apartment/application/controllers/base.php",
 		"/E/xampp/htdocs/instapics/application/controllers/home.php",
 		"/E/xampp/htdocs/apartment/application/models/houseuser.php",
 		"/E/xampp/htdocs/instapics/application/models/relationship.php",
 		"/E/xampp/htdocs/apartment/application/models/phone.php",
-		"/E/xampp/htdocs/apartment/application/models/user.php",
-		"/E/xampp/htdocs/apartment/application/tasks/notify_task.php",
 		"/E/xampp/htdocs/instapics/artisan",
-		"/E/xampp/htdocs/instapics/application/models/User.php",
 		"/E/xampp/htdocs/instapics/application/models/photo.php",
 		"/E/xampp/htdocs/apartment/laravel/database/eloquent/model.php",
 		"/E/xampp/htdocs/apartment/laravel/database/eloquent/relationships/has_many.php",
@@ -602,24 +739,19 @@
 		"/E/xampp/htdocs/apartment/application/tasks/.gitignore",
 		"/E/xampp/htdocs/instapics/application/tests/example.test.php",
 		"/E/xampp/htdocs/instapics/application/models/userprofile.php",
-		"/E/xampp/htdocs/apartment/application/views/home/members.blade.php",
 		"/E/xampp/htdocs/apartment/application/views/home/home.blade.php",
 		"/E/xampp/htdocs/apartment/application/tests/example.test.php",
 		"/E/xampp/htdocs/instapics/application/controllers/photo.php",
 		"/E/xampp/htdocs/instapics/application/controllers/user.php",
 		"/E/xampp/htdocs/instapics/application/views/home/about.blade.php",
-		"/E/xampp/htdocs/instapics/application/views/layouts/main.blade.php",
 		"/E/xampp/htdocs/instapics/application/views/home/index.blade.php",
 		"/E/xampp/htdocs/apartment/application/migrations/create_all_tables.php",
 		"/E/xampp/htdocs/apartment/application/migrations/2012_09_22_172855_add_data.php",
-		"/E/xampp/htdocs/apartment/application/start.php",
-		"/E/xampp/htdocs/apartment/public/css/apartment.css",
 		"/E/xampp/htdocs/instapics/laravel/asset.php",
 		"/E/xampp/htdocs/instapics/application/views/plugins/status.blade.php",
 		"/E/xampp/htdocs/apartment/paths.php",
 		"/E/xampp/htdocs/apartment/application/config/database.php",
 		"/E/xampp/htdocs/apartment/application/views/home/login.php",
-		"/E/xampp/htdocs/apartment/application/config/session.php",
 		"/E/xampp/htdocs/apartment/laravel/fluent.php",
 		"/E/Working/web/laravel/laravel/application/routes.php",
 		"/E/Working/web/laravel/laravel/paths.php",
@@ -651,41 +783,7 @@
 		"/E/xampp/htdocs/instapics/laravel/database.php",
 		"/E/xampp/apache/conf/httpd.conf",
 		"/C/Users/prasanna/Desktop/hosts",
-		"/E/xampp/htdocs/instapics/application/routes.php",
-		"/E/xampp/htdocs/instapics/application/controllers/login.php",
-		"/C/WINDOWS/System32/drivers/etc/hosts",
-		"/E/xampp/htdocs/instapics/public/js/New Text Document.js",
-		"/E/Working/web/wap/examples/unit4/samples/hash.py",
-		"/E/Working/web/wap/examples/unit3/steve_blog/blog.py",
-		"/E/Working/web/wap/examples/utilities/test.py",
-		"/E/Working/web/wap/examples/unit2/rot13/helloworld.py",
-		"/E/Working/web/wap/examples/unit2/rot13/utilities.py",
-		"/E/Working/web/wap/examples/unit2/steve_solution/blog.py",
-		"/E/Working/web/wap/examples/unit3/my_blog/blog.py",
-		"/E/Working/web/wap/examples/unit2/rot13/app.yaml",
-		"/E/Working/web/wap/examples/unit3/py_db.py",
-		"/E/Working/web/wap/examples/unit2/user_validation/utilities.py",
-		"/E/Working/web/wap/examples/unit2/user_validation/user_validate.py",
-		"/E/gitrepos/expensetracker/BuddyExpenseTracker/assets/www/scripts/stdlib/underscore.js",
-		"/E/Working/web/wap/examples/hello/helloworld.py",
-		"/E/Working/web/wap/examples/utilities/utilities.py",
-		"/E/Working/web/wap/examples/utilities/validation_utilities.py",
-		"/E/Working/web/wap/examples/hello/utilities.py",
-		"/E/Working/web/wap/examples/unit2/user_validation/app.yaml",
-		"/E/Working/web/wap/examples/utilities/string_test.py",
-		"/E/Working/web/wap/examples/utilities/python_import.py",
-		"/E/Working/web/wap/examples/.gitignore",
-		"/E/Working/web/wap/examples/utilities/string.py",
-		"/E/Working/web/wap/examples/unit2/index.html",
-		"/E/Working/web/wap/examples/unit2/escape.html",
-		"/E/Working/web/wap/examples/hello/app.yaml",
-		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Base File.sublime-settings",
-		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Python.sublime-settings",
-		"/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/E/gitrepos/expensetracker/BuddyExpenseTracker/assets/www/index.html",
-		"/E/gitrepos/expensetracker/BuddyExpenseTracker/assets/www/css/jquery.mobile.css",
-		"/E/gitrepos/work/BuddyExpenseTracker/assets/www/index.html",
-		"/E/gitrepos/expensetracker/BuddyExpenseTracker/.gitignore"
+		"/E/xampp/htdocs/instapics/application/routes.php"
 	],
 	"find":
 	{
@@ -701,9 +799,49 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"app-edit-member",
+			"flat_id",
+			"resolve",
+			"get_member_validations",
+			"		\n",
+			"house",
+			"flat_entry",
+			"back",
+			"url",
+			"house_no",
+			"flat_validator\nflat_validator",
+			"validator",
+			"get_validations",
+			"member_cancel",
+			"set",
+			"flats",
+			"Constants",
+			"phone_no",
+			"Email",
+			"email",
+			"Email",
+			"email",
+			"Name",
+			"name",
+			"Name",
+			"name",
+			"isSimple",
+			".match",
+			"house",
+			"House",
+			"house",
+			"chat",
+			"flat_add",
+			"Ioc",
+			"IoC::register",
+			"method",
+			"floor",
+			"->\n",
+			"floor",
+			"house_no",
 			"user",
 			"User",
 			"user",
@@ -791,47 +929,7 @@
 			"console.log",
 			"apiid",
 			"createTables",
-			"db",
-			"WebSQLStore",
-			"var buddyExpTrack",
-			"stringify",
-			"logger",
-			"activity-list-item-template",
-			"#activity-list-item-template",
-			"viewContainer",
-			"serializeObject",
-			"formParams",
-			"serializeObject",
-			" <LocationMatch>",
-			" <LocationMatch> ",
-			"requested",
-			"requested dir",
-			"ketch",
-			"clearLabels",
-			"function clearForm",
-			"buddy_button",
-			".find",
-			"AddBuddyObj",
-			"navigate",
-			".log",
-			"showView",
-			"showView: function",
-			"Backbone.View.prototype.close",
-			"close",
-			"toJSON",
-			"function toJSON",
-			"jquery-1.6.2",
-			"replace",
-			"writeToDoc",
-			"def command",
-			"bare",
-			"remote",
-			"dem my_mt",
-			"@lib",
-			"def to_s",
-			"@lib",
-			"^repo",
-			"Base"
+			"db"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -852,23 +950,23 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/User/Fetch.sublime-settings",
+					"file": "application/views/home/flatmembers.blade.php",
 					"settings":
 					{
-						"buffer_size": 257,
+						"buffer_size": 929,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								148,
-								148
+								863,
+								880
 							]
 						],
 						"settings":
@@ -960,28 +1058,30 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/Laravel-Blade/Blade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 108.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/AdvancedNewFile/README.rst",
+					"file": "application/controllers/members.php",
 					"settings":
 					{
-						"buffer_size": 782,
+						"buffer_size": 4112,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								508,
-								508
+								1526,
+								1530
 							]
 						],
 						"settings":
@@ -1073,7 +1173,579 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/RestructuredText/reStructuredText.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 761.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/js/app/apartment.js",
+					"settings":
+					{
+						"buffer_size": 3495,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1698,
+								1698
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 609.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "application/libraries/Apartment/utilities.php",
+					"settings":
+					{
+						"buffer_size": 1411,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								713,
+								713
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 162.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "application/controllers/flats.php",
+					"settings":
+					{
+						"buffer_size": 2926,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2158,
+								2181
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1239.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "application/migrations/2012_09_23_034420_create_tables.php",
+					"settings":
+					{
+						"buffer_size": 2920,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1712,
+								1720
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1005.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "application/views/home/member.blade.php",
+					"settings":
+					{
+						"buffer_size": 2998,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								142,
+								142
+							]
+						],
+						"settings":
+						{
+							"annotations":
+							[
+								"TODO",
+								"README",
+								"FIXME"
+							],
+							"csslint_options":
+							{
+								"adjoining-classes": "warning",
+								"box-model": true,
+								"box-sizing": "warning",
+								"compatible-vendor-prefixes": "warning",
+								"display-property-grouping": true,
+								"duplicate-background-images": "warning",
+								"duplicate-properties": true,
+								"empty-rules": true,
+								"errors": true,
+								"fallback-colors": "warning",
+								"floats": "warning",
+								"font-faces": "warning",
+								"font-sizes": "warning",
+								"gradients": "warning",
+								"ids": "warning",
+								"import": "warning",
+								"important": "warning",
+								"known-properties": true,
+								"outline-none": "warning",
+								"overqualified-elements": "warning",
+								"qualified-headings": "warning",
+								"regex-selectors": "warning",
+								"rules-count": "warning",
+								"shorthand": "warning",
+								"star-property-hack": "warning",
+								"text-indent": "warning",
+								"underscore-property-hack": "warning",
+								"unique-headings": "warning",
+								"universal-selector": "warning",
+								"vendor-prefix": true,
+								"zero-units": "warning"
+							},
+							"gjslint_ignore":
+							[
+								110
+							],
+							"gjslint_options":
+							[
+							],
+							"javascript_linter": "jshint",
+							"jshint_options":
+							{
+								"browser": true,
+								"evil": true,
+								"regexdash": true,
+								"sub": true,
+								"trailing": true,
+								"wsh": true
+							},
+							"pep8": true,
+							"pep8_ignore":
+							[
+								"E501"
+							],
+							"perl_linter": "perlcritic",
+							"pyflakes_ignore":
+							[
+							],
+							"pyflakes_ignore_import_*": true,
+							"sublimelinter": true,
+							"sublimelinter_delay": 2,
+							"sublimelinter_disable":
+							[
+							],
+							"sublimelinter_executable_map":
+							{
+							},
+							"sublimelinter_fill_outlines": false,
+							"sublimelinter_gutter_marks": false,
+							"sublimelinter_mark_style": "outline",
+							"sublimelinter_notes": false,
+							"sublimelinter_objj_check_ascii": false,
+							"sublimelinter_popup_errors_on_save": false,
+							"sublimelinter_syntax_map":
+							{
+								"Python Django": "python",
+								"Ruby on Rails": "ruby"
+							},
+							"sublimelinter_wrap_find": true,
+							"syntax": "Packages/Laravel-Blade/Blade.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -1082,11 +1754,11 @@
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "/E/Working/web/sample/jquery.js",
+					"buffer": 7,
+					"file": "application/models/user.php",
 					"settings":
 					{
-						"buffer_size": 93433,
+						"buffer_size": 1724,
 						"regions":
 						{
 						},
@@ -1094,7 +1766,7 @@
 						[
 							[
 								0,
-								93433
+								0
 							]
 						],
 						"settings":
@@ -1186,237 +1858,12 @@
 								"Ruby on Rails": "ruby"
 							},
 							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/PHP/PHP.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"settings":
-					{
-						"buffer_size": 49,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								49,
-								49
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"word_wrap": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/C/Users/prasanna/AppData/Roaming/Sublime Text 2/Packages/Gist/Gist.sublime-settings",
-					"settings":
-					{
-						"buffer_size": 438,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								113,
-								113
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"star-property-hack": "warning",
-								"text-indent": "warning",
-								"underscore-property-hack": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8": true,
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 2,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_mark_style": "outline",
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"Python Django": "python",
-								"Ruby on Rails": "ruby"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 54.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1466,24 +1913,168 @@
 		"selected_items":
 		[
 			[
-				"app",
-				"apartment/application/config/application.php"
+				"user",
+				"apartment/application/models/user.php"
+			],
+			[
+				"models",
+				"instapics/application/models/User.php"
+			],
+			[
+				"hou",
+				"apartment/application/models/house.php"
+			],
+			[
+				"hous",
+				"apartment/application/models/house.php"
+			],
+			[
+				"creaa",
+				"apartment/application/migrations/2012_09_23_034420_create_tables.php"
+			],
+			[
+				"use",
+				"apartment/application/models/user.php"
+			],
+			[
+				"flat",
+				"apartment/application/controllers/flats.php"
 			],
 			[
 				"create",
 				"apartment/application/migrations/2012_09_23_034420_create_tables.php"
 			],
 			[
-				"creat",
-				"apartment/application/migrations/2012_09_23_040522_create_data.php"
+				"utili",
+				"apartment/application/libraries/Apartment/utilities.php"
 			],
 			[
-				"auth",
-				"apartment/laravel/auth.php"
+				"start",
+				"apartment/application/start.php"
+			],
+			[
+				"route",
+				"apartment/application/routes.php"
+			],
+			[
+				"flats",
+				"apartment/application/controllers/flats.php"
+			],
+			[
+				"const",
+				"apartment/application/libraries/Apartment/constants.php"
+			],
+			[
+				"uti",
+				"apartment/application/libraries/Apartment/utilities.php"
+			],
+			[
+				"apart",
+				"apartment/public/js/app/apartment.js"
+			],
+			[
+				"apa",
+				"apartment/public/js/app/apartment.js"
+			],
+			[
+				"flatblade",
+				"apartment/application/views/partials/flat.blade.php"
+			],
+			[
+				"main",
+				"apartment/application/views/layouts/main.blade.php"
+			],
+			[
+				"apartmentjs",
+				"apartment/public/js/app/apartment.js"
 			],
 			[
 				"base",
 				"apartment/application/controllers/base.php"
+			],
+			[
+				"flatsblade",
+				"apartment/application/views/home/flats.blade.php"
+			],
+			[
+				"flatsbla",
+				"apartment/application/views/home/flats.blade.php"
+			],
+			[
+				"boot",
+				"instapics/public/js/bootstrap.js"
+			],
+			[
+				"rout",
+				"apartment/application/routes.php"
+			],
+			[
+				"auth",
+				"apartment/application/config/auth.php"
+			],
+			[
+				"mainbla",
+				"apartment/application/views/layouts/main.blade.php"
+			],
+			[
+				"modelroles",
+				"apartment/application/models/roleuser.php"
+			],
+			[
+				"modelshou",
+				"apartment/application/models/house.php"
+			],
+			[
+				"createdat",
+				"apartment/application/migrations/2012_09_23_040522_create_data.php"
+			],
+			[
+				"creat",
+				"apartment/application/migrations/2012_09_23_034420_create_tables.php"
+			],
+			[
+				"star",
+				"instapics/application/start.php"
+			],
+			[
+				"flatbla",
+				"apartment/application/views/home/flat.blade.php"
+			],
+			[
+				"appli",
+				"apartment/application/config/application.php"
+			],
+			[
+				"confisession",
+				"apartment/application/config/session.php"
+			],
+			[
+				"session",
+				"apartment/laravel/session.php"
+			],
+			[
+				"crea",
+				"apartment/application/migrations/2012_09_23_040522_create_data.php"
+			],
+			[
+				"layou",
+				"apartment/application/views/layouts/main.blade.php"
+			],
+			[
+				"house",
+				"apartment/application/models/house.php"
+			],
+			[
+				"loginblade",
+				"apartment/application/views/home/login.blade.php"
+			],
+			[
+				"apa.js",
+				"apartment/public/js/apartment.js"
+			],
+			[
+				"app",
+				"apartment/application/config/application.php"
 			],
 			[
 				"applica",
@@ -1492,10 +2083,6 @@
 			[
 				"bundle",
 				"apartment/application/bundles.php"
-			],
-			[
-				"hou",
-				"apartment/application/models/house.php"
 			],
 			[
 				"arti",
@@ -1522,14 +2109,6 @@
 				"apartment/application/routes.php"
 			],
 			[
-				"rout",
-				"apartment/application/routes.php"
-			],
-			[
-				"start",
-				"apartment/application/start.php"
-			],
-			[
 				"main.bl",
 				"instapics/application/views/layouts/main.blade.php"
 			],
@@ -1554,23 +2133,11 @@
 				"apartment/laravel/database.php"
 			],
 			[
-				"appli",
-				"instapics/application/config/application.php"
-			],
-			[
 				"home.",
 				"instapics/application/controllers/home.php"
 			],
 			[
-				"route",
-				"instapics/application/routes.php"
-			],
-			[
 				"",
-				"www/scripts/stdlib/underscore.js"
-			],
-			[
-				"use",
 				"www/scripts/stdlib/underscore.js"
 			],
 			[

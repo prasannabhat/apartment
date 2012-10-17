@@ -58,10 +58,10 @@ $(document).ready(function(){
 	});
 	
 	$("#flat_members_table").on("click", "button", function(event){
-		var id = $(this).closest("tr").attr('id');
+		var member_id = $(this).closest("tr").attr('id');
 		var flat_id = location.href.split(/\//).pop();
 		if($(this).hasClass("app-edit-member")){
-			window.location = ROOT_URL + ROUTE_MEMBER + "/" + id + '?flat_id=' + flat_id;
+			window.location = ROOT_URL + ROUTE_FLAT_MEMBERS + "/" + flat_id + '?action=edit&member=' + member_id;
 		}
 	});	
 
@@ -92,6 +92,21 @@ $(document).ready(function(){
 		location.href = sessionStorage.getItem("back-url");
 		return false;
 	});
+
+	$("#flat_relation_cancel").on('click', function(event) {
+		location.href = sessionStorage.getItem("back-url");
+		return false;
+	});
+
+	$("#flat_relation_delete").on('click', function(event) {
+		if (confirm("Are you sure to delete this relationship?"))
+		{
+			// Change the form method to DELETE
+			$('[name=_method]').val('DELETE');
+			$("#flat_relation_form").submit();
+		}
+	});
+
 
 	$("#flat_add").on('click', function(event) {
 		window.location = ROOT_URL + ROUTE_FLAT;
