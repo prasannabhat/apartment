@@ -105,6 +105,14 @@ $(document).ready(function(){
 
 	});
 	
+	$("#flat_add_existing_member").on('click',function(event){
+		var flat_id = location.href.split(/\//).pop();
+		var new_location = ROOT_URL + ROUTE_FLAT_MEMBERS + "/" + flat_id + '?action=add';
+		location.href = new_location;
+		return false;
+
+	});	
+	
 
 	$("#member_cancel").on('click', function(event) {
 		location.href = sessionStorage.getItem("back-url");

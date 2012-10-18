@@ -137,6 +137,12 @@ class Flats_Controller extends Base_Controller {
 				return View::make('home.flatmemberrel',$flat_relation);
 				# code...
 				break;
+				
+			case 'add':
+				$flat_relation = array();
+				return View::make('home.flatmemberrel',$flat_relation);
+				
+				break;
 			
 			default:
 				$flat = House::find($flat_id);
