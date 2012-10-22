@@ -142,14 +142,12 @@ class Flats_Controller extends Base_Controller {
 				$flat_relation = array();
 				$members = User::all();
 				function get_members($result, $member){
-					// $result = $result . sprintf("'%s'",$member->name ). ",";
-					$result = $result . sprintf("\"%s\"",$member->name ). ",";
+					$result = $result . sprintf("'%s'",$member->name ). ",";
 					return $result;
 				}
 				$members_array = array_reduce($members, "get_members");
 				$members_array = rtrim($members_array,",");
-				// $members_array = "'[" . $members_array . "]'"; 
-				$members_array = '\'['. $members_array . ']\'';
+				$members_array = '['. $members_array . ']';
 				$flat_relation['members_array'] = $members_array;
 				return View::make('home.flatmemberrel',$flat_relation);
 				

@@ -21,7 +21,7 @@
     <label class="control-label" for="name">Member Name</label>
     <div class="controls">
     <input class="focused input-xlarge member_typeahead" placeholder="Existing Member" type="text" name="name" id="name" 
-    	data-provide="typeahead" data-source={{$members_array}}>
+    	>
   @foreach ($errors->get('name') as $message)
     <p  class="help-block">{{ $message }}</p>
   @endforeach
@@ -67,7 +67,10 @@
   {{Form::close();}}
 </div><!-- .span8 -->
 </div>
+@if ($method == 'POST')
 <script>
-var array = {{$members_array;}}
+var source = {{$members_array}};
+$(".member_typeahead").typeahead({source: source});
 </script>	
+@endif
 @endsection
