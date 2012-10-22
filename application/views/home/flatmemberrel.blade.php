@@ -20,7 +20,8 @@
     <div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
     <label class="control-label" for="name">Member Name</label>
     <div class="controls">
-    <input class="focused input-xlarge member_typeahead" placeholder="Existing Member" type="text" name="name" id="name">
+    <input class="focused input-xlarge member_typeahead" placeholder="Existing Member" type="text" name="name" id="name" 
+    	data-provide="typeahead" data-source={{$members_array}}>
   @foreach ($errors->get('name') as $message)
     <p  class="help-block">{{ $message }}</p>
   @endforeach
@@ -64,10 +65,9 @@
 
   {{Form::actions($buttons);}}
   {{Form::close();}}
-
-
-  
-
 </div><!-- .span8 -->
 </div>
+<script>
+var array = {{$members_array;}}
+</script>	
 @endsection
