@@ -29,8 +29,7 @@ class Utilities
 		return $rules;
     }
 	
-	public static function get_flat_relation_validations($id) {
-		\Log::info('flat id is ' . $id);
+	public static function get_flat_relation_validations($id, $action) {
 		\Validator::register('flat_relation', function($attribute, $value, $parameters)
 		{
 			$flat_id = $parameters[0];
@@ -59,7 +58,18 @@ class Utilities
 			}
 			return $is_valid; 
 		});
-		$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_relation:%s',$id);
+		if($action == 'add') {
+			//The detailed rule is applicable only if we are adding a new member
+			$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_relation:%s',$id);
+		}
+		elseif ($action == 'edit') {
+			$name_rule = 'required';
+				
+		}
+		else {
+			
+		}
+		
 		$rules = array(
 			'name' => $name_rule,
 			'relation' => 'required'
@@ -80,8 +90,9 @@ class Utilities
 		    return $rules;
 		});		
 		
-		\IoC::register('flat_relation_validator', function($id = -1){
-		    $rules = Utilities::get_flat_relation_validations($id);
+		\IoC::register('flat_relation_validator', function($id = -1,$action){
+			\Log::info('Resolve flat_relation_validator : flat id is ' . $id . $action);
+		    $rules = Utilities::get_flat_relation_validations($id,$action);
 		    return $rules;
 		});		
 	}

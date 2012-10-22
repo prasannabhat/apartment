@@ -26,7 +26,10 @@
     <p  class="help-block">{{ $message }}</p>
   @endforeach
     </div>
-  </div>  
+  </div>
+  @else
+  {{-- If existing member relationship is edited, then make the name a hidden field --}}  
+  <input type="hidden" name="name" value="{{$name}}">
   @endif
 
   

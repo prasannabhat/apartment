@@ -170,13 +170,25 @@ class Flats_Controller extends Base_Controller {
 		$action = Input::get('action');
 		if($action == 'edit')
 		{
-			$member_id = Input::get('member');
-			$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
-			$pivot->relation = Input::get('relation');
-			$pivot->residing = Input::get('residing') ? 1 : 0;
-			$pivot->save();
-			$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
-			return Redirect::to($url);
+			$input = Input::get();
+			// Get the relevant rules for validation
+			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
+			
+			$validation = Validator::make($input, $rules);
+			if ($validation->fails())
+			{
+			    return Redirect::back()->with_input()->with_errors($validation);
+			}
+			else
+			{
+				$member_id = Input::get('member');
+				$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+				$pivot->relation = Input::get('relation');
+				$pivot->residing = Input::get('residing') ? 1 : 0;
+				$pivot->save();
+				$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
+				return Redirect::to($url);
+			}
 		}
 	}
 	
@@ -188,7 +200,7 @@ class Flats_Controller extends Base_Controller {
 		{
 			$input = Input::get();
 			// Get the relevant rules for validation
-			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id));
+			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
 			$messages = array(
 			    'flat_relation' => 'The member is already related to flat',
 			);
