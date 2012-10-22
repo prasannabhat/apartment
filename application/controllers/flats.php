@@ -195,10 +195,10 @@ class Flats_Controller extends Base_Controller {
 	function post_members($flat_id)
 	{
 		$action = Input::get('action');
+		$input = Input::get();
 		//We are adding a new member to flat
 		if($action == 'add')
 		{
-			$input = Input::get();
 			// Get the relevant rules for validation
 			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
 			$messages = array(
@@ -211,6 +211,12 @@ class Flats_Controller extends Base_Controller {
 			}
 			else
 			{
+				$flat_relation['relation'] = Input::get('relation');
+				$flat_relation['residing'] = Input::get('residing') ? 1 : 0;
+				
+				$member = User::where('name', '=', Input::get('name'))->first();
+				$member->houses()->attach($flat_id,$flat_relation);
+
 				$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
 				return Redirect::to($url);
 			}
