@@ -11,7 +11,7 @@
 		<h2>Add existing member</h2>
 	@endif
 
-  {{ Form::horizontal_open(URL::current(),$method,array('id' => 'flat_relation_form')) }}
+  {{ Form::horizontal_open(URL::current(),$method,array('id' => 'flat_relation_form','autocomplete' => 'off')) }}
 
   <input type="hidden" name="action" value= {{ ($method == 'PUT') ? "edit" : "add"}}>
   <input type="hidden" name="member" value="{{isset($member_id) ? $member_id : '' }}">
