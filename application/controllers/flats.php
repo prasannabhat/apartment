@@ -140,7 +140,8 @@ class Flats_Controller extends Base_Controller {
 				
 			case 'add':
 				$flat_relation = array();
-				$members = User::all();
+				
+				$members = User::order_by('name','asc')->get();
 				function get_members($result, $member){
 					$result = $result . sprintf("'%s'",$member->name ). ",";
 					return $result;
@@ -176,6 +177,32 @@ class Flats_Controller extends Base_Controller {
 			$pivot->save();
 			$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
 			return Redirect::to($url);
+		}
+	}
+	
+	function post_members($flat_id)
+	{
+		$action = Input::get('action');
+		//We are adding a new member to flat
+		if($action == 'add')
+		{
+			$input = Input::get();
+			// Get the relevant rules for validation
+			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id));
+			$messages = array(
+			    'flat_relation' => 'The member is already related to flat',
+			);
+			$validation = Validator::make($input, $rules,$messages);
+			if ($validation->fails())
+			{
+			    return Redirect::back()->with_input()->with_errors($validation);
+			}
+			else
+			{
+				$url = Apartment\Constants::ROUTE_FLAT_MEMBERS . $flat_id;
+				return Redirect::to($url);
+			}
+
 		}
 	}
 
