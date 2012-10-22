@@ -127,7 +127,7 @@ class Flats_Controller extends Base_Controller {
 				if($pivot)
 				{
 					$flat_relation['relation'] = $pivot->relation;
-					if($pivot->residing)
+					if($pivot->residing == 1)
 					{
 						$flat_relation['residing'] = 1;
 					}

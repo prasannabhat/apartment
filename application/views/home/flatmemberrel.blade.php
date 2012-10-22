@@ -55,7 +55,7 @@
     <label class="control-label" for="residing">Residing?</label>
     <div class="controls">
       <label class="checkbox">
-        <input type="checkbox" name="residing" id="residing" value="1" {{ isset($residing) ? 'checked="checked"' : ''}}> User residing in flat?
+        <input type="checkbox" name="residing" id="residing" value="1" {{ (isset($residing) && $residing == 1) ? 'checked="checked"' : ''}}> User residing in flat?
       </label>          
     </div>
   </div>   
