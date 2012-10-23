@@ -30,10 +30,7 @@ class Utilities
     }
 	
 	public static function get_flat_relation_validations(Array $params) {
-		
-		$action = $params['action'];
-		$flat_id = $params['flat_id'];
-		\Validator::register('flat_relation', function($attribute, $value, $parameters)
+		\Validator::register('flat_unique_members', function($attribute, $value, $parameters)
 		{
 			$flat_id = $parameters[0];
 			$is_valid = true;
@@ -62,27 +59,37 @@ class Utilities
 			return $is_valid; 
 		});
 		
-		\Validator::register('flat_relation_owner', function($attribute, $value, $parameters)
+		\Validator::register('flat_member_relation', function($attribute, $value, $parameters)
 		{
 			$flat_id = $parameters[0];
-			$member_id = $parameters[1];
+			$member_name = $parameters[1];
 			$is_valid = true;
 					
 			switch ($attribute) {
 				case 'relation':
 					$flat = \House::find($flat_id);
-					$member_name = $value;
-					// The member name supplied should not be already existing for the given flat
-					foreach($flat->users()->get() as $user)
-					{
-						if($member_name == $user->name)
-						{
-							$is_valid = false;
-							break;
+					//There can be only one owner for the flat
+					$owner = NULL;
+					$tenant = NULL;
+					
+					foreach ($flat->users as $member){
+						//Set the owner , only if not set already
+						if(($owner == NULL) && ($member->pivot->relation == 'owner')){
+							$owner = $member;
+						}
+						//Set the tenant , only if not set already
+						if(($tenant == NULL) && ($member->pivot->relation == 'tenant')){
+							$tenant = $member;
 						}
 					}
-					
-					
+					//If the owner already exists, then he should be the current member himself, as two owners are not allowed for a flat
+					if(($value == 'owner') && ($owner != NULL) && ($owner->name != $member_name)){
+						return false;
+					}
+					//If the tenant already exists, then he should be the current member himself, as two tenants are not allowed for a flat
+					if(($value == 'tenant') && ($tenant != NULL) && ($tenant->name != $member_name)){
+						return false;
+					}									
 					break;
 				
 				default:
@@ -91,10 +98,14 @@ class Utilities
 			}
 			return $is_valid; 
 		});
+		
+		$action = $params['action'];
+		$flat_id = $params['flat_id'];
+		$name = $params['name'];
 				
 		if($action == 'add') {
 			//The detailed rule is applicable only if we are adding a new member
-			$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_relation:%s',$flat_id);
+			$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_unique_members:%s',$flat_id);
 		}
 		elseif ($action == 'edit') {
 			$name_rule = 'required';
@@ -105,11 +116,11 @@ class Utilities
 		}
 		
 		//The detailed rule is applicable only if we are adding a new member
-		$owner_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_relation:%s',$flat_id);
+		$owner_rule = sprintf('required|flat_member_relation:%s,%s',$flat_id,$name);
 		
 		$rules = array(
 			'name' => $name_rule,
-			'relation' => 'required'
+			'relation' => $owner_rule
 		);
 		return $rules;
     }    
