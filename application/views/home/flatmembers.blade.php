@@ -4,7 +4,7 @@
   <div class="sidebar-nav">
     <ul class="nav nav-pills nav-stacked">
       <li class="nav-header">Options</li>
-      <li><a href="" id="flat_add_member">Add New Member</a></li>
+      {{-- <li><a href="" id="flat_add_member">Add New Member</a></li> --}}
 	  <li><a href="" id="flat_add_existing_member">Add Existing Member</a></li>
     </ul>
   </div><!--/.well -->
