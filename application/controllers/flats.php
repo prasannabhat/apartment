@@ -172,7 +172,10 @@ class Flats_Controller extends Base_Controller {
 		{
 			$input = Input::get();
 			// Get the relevant rules for validation
-			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
+			$params['flat_id'] = $flat_id;
+			$params['action'] = $action;
+			$params['name'] = Input::get('name');
+			$rules = IoC::resolve('flat_relation_validator',array('params' => $params));
 			
 			$validation = Validator::make($input, $rules);
 			if ($validation->fails())
@@ -200,7 +203,10 @@ class Flats_Controller extends Base_Controller {
 		if($action == 'add')
 		{
 			// Get the relevant rules for validation
-			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
+			$params['flat_id'] = $flat_id;
+			$params['action'] = $action;
+			$params['name'] = Input::get('name');
+			$rules = IoC::resolve('flat_relation_validator',array('params' => $params));
 			$validation = Validator::make($input, $rules);
 			if ($validation->fails())
 			{
