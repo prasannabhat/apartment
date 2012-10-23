@@ -83,6 +83,7 @@ return array(
 	*/
 
 	'custom' => array(),
+	'flat_relation' => "The member is already related to flat",
 
 	/*
 	|--------------------------------------------------------------------------

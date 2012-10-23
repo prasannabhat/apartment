@@ -201,10 +201,7 @@ class Flats_Controller extends Base_Controller {
 		{
 			// Get the relevant rules for validation
 			$rules = IoC::resolve('flat_relation_validator',array('id' => $flat_id, 'action' => $action));
-			$messages = array(
-			    'flat_relation' => 'The member is already related to flat',
-			);
-			$validation = Validator::make($input, $rules,$messages);
+			$validation = Validator::make($input, $rules);
 			if ($validation->fails())
 			{
 			    return Redirect::back()->with_input()->with_errors($validation);
