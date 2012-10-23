@@ -116,22 +116,31 @@ class Flats_Controller extends Base_Controller {
 			case 'edit':
 				$member_id = Input::get('member');
 				$user = User::find($member_id);
-
+				
+				$flat_relation['action'] = $action;
 				$flat_relation['name'] = $user->name;
 				$flat_relation['member_id'] = $member_id;
+				
 				// Default values
 				$flat_relation['relation'] = '';
 				$flat_relation['residing'] = 0;
-
-				$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
-				if($pivot)
-				{
-					$flat_relation['relation'] = $pivot->relation;
-					if($pivot->residing == 1)
+				
+				// If the session has data because of redirect, use that data
+				if(count(Input::old()) != 0){
+					$flat_relation['relation'] = Input::old('relation');
+					$flat_relation['residing'] = Input::old('residing');						
+				}
+				else{
+					$pivot = HouseUser::where('user_id', '=' , $member_id)->where('house_id' , '=', $flat_id)->first();
+					if($pivot)
 					{
-						$flat_relation['residing'] = 1;
+						$flat_relation['relation'] = $pivot->relation;
+						if($pivot->residing == 1)
+						{
+							$flat_relation['residing'] = 1;
+						}
+						// To overcome laravel bug, manually work with intermediate tables
 					}
-					// To overcome laravel bug, manually work with intermediate tables
 				}
 
 				return View::make('home.flatmemberrel',$flat_relation);
@@ -139,8 +148,15 @@ class Flats_Controller extends Base_Controller {
 				break;
 				
 			case 'add':
-				$flat_relation = array();
-				
+				// If the session has data because of redirect, use that data
+				if(count(Input::old()) != 0){
+					$flat_relation = Input::old();
+				}
+				else{
+					$flat_relation = array();					
+				}
+				$flat_relation['action'] = $action;
+
 				$members = User::order_by('name','asc')->get();
 				function get_members($result, $member){
 					$result = $result . sprintf("'%s'",$member->name ). ",";

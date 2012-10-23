@@ -4,7 +4,7 @@
 <div class="row-fluid">
 <div class="span8">
 	{{-- For new object creation . use POST method($flat_id not set to integer), for updation use PUT method --}}
-	<?php $method = isset($name) ? 'PUT' : 'POST' ?>
+	<?php $method = ($action == 'edit') ? 'PUT' : 'POST' ?>
 	@if ($method == 'PUT')
 		<h2>Flat relationship for  {{$name}}</h2>
 	@else
@@ -18,9 +18,9 @@
   
   @if ($method == 'POST')
     <div class="control-group {{ $errors->has('name') ? 'error' : '' }}">
-    <label class="control-label" for="name">Member Name</label>
+    <label class="control-label" for="name" >Member Name</label>
     <div class="controls">
-    <input class="focused input-xlarge member_typeahead" placeholder="Existing Member" type="text" name="name" id="name" 
+    <input class="focused input-xlarge member_typeahead" placeholder="Existing Member" type="text" name="name" id="name"
     	>
   @foreach ($errors->get('name') as $message)
     <p  class="help-block">{{ $message }}</p>
