@@ -16,11 +16,59 @@ Comm.MainView = Backbone.View.extend({
 	}
 });
 
+Comm.FlatsView = Backbone.View.extend({
+
+	tagName: "div",
+
+	className: "tab-pane active",
+
+	id	: "flats",
+
+	initialize:function () {
+        this.template = _.template(tpl.get('comm_flats'));
+    },
+
+	render: function() {
+		$(this.el).html(this.template());
+        return this;
+	}
+});
+
+Comm.UsersView = Backbone.View.extend({
+
+	tagName: "div",
+
+	className: "tab-pane",
+
+	id	: "users",	
+
+	className: "tab-pane",	
+
+	initialize:function () {
+        this.template = _.template(tpl.get('comm_users'));
+    },
+
+	render: function() {
+		$(this.el).html(this.template());
+        return this;
+	}
+});
+
 Comm.Router = Backbone.Router.extend({
 
     initialize:function () {
-        var mainView;
+        var mainView,flatsView,usersView;
 		mainView = new Comm.MainView({el : $("#comm_content")}).render();
+		
+		flatsView = new Comm.FlatsView().render();
+		mainView.$el.find(".tab-content").append(flatsView.el);
+		
+		usersView = new Comm.UsersView().render();
+		mainView.$el.find(".tab-content").append(usersView.el);
+
+		this.mainView = mainView;
+		this.flatsView = flatsView;
+		this.usersView = usersView;
     },
 
     routes:{
@@ -29,11 +77,11 @@ Comm.Router = Backbone.Router.extend({
     },
 
     users : function (){
-
+    	this.mainView.$el.find('a[href="#users"]').tab('show');
     },
 
     flats : function(){
-
+    	this.mainView.$el.find('a[href="#flats"]').tab('show');
     }
 
 });
@@ -41,7 +89,7 @@ Comm.Router = Backbone.Router.extend({
 // Function will be called after document load
 Comm.start = function(){
 	var that = this;
-	tpl.loadTemplates(['communication'], function() {
+	tpl.loadTemplates(['communication','comm_flats','comm_users'], function() {
 		app = new Comm.Router();
     	Backbone.history.start();
 		
