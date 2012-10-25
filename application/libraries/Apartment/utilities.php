@@ -18,7 +18,8 @@ class Utilities
 
 	public static function get_member_validations($id) {
 		\Log::info('member id is ' . $id);
-		$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|unique:users,name,%s',$id);
+		$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:4,50|unique:users,name,%s',$id);
+		// $email_rule = sprintf('email|custom_email');
 		$email_rule = sprintf('email|unique:users,email,%s',$id);
 		$rules = array(
 			'name' => $name_rule,
@@ -105,7 +106,7 @@ class Utilities
 				
 		if($action == 'add') {
 			//The detailed rule is applicable only if we are adding a new member
-			$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:5,50|exists:users|flat_unique_members:%s',$flat_id);
+			$name_rule = sprintf('required|match:"/^\w[\w\s]+/"|between:4,50|exists:users|flat_unique_members:%s',$flat_id);
 		}
 		elseif ($action == 'edit') {
 			$name_rule = 'required';
@@ -143,6 +144,7 @@ class Utilities
 		    $rules = Utilities::get_flat_relation_validations($params);
 		    return $rules;
 		});		
+
 	}
 	
 

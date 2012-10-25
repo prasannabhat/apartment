@@ -14,7 +14,7 @@ class Create_Tables {
 			$table->increments('id');
 			// varchar 32
 			$table->string('name', 100)->unique();
-			$table->string('email', 320)->unique();
+			$table->string('email', 320);
 			$table->string('password', 64)->nullable();
 			$table->text('notes');
 			// created_at | updated_at DATETIME

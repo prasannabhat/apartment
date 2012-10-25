@@ -65,7 +65,7 @@ CREATE TABLE `houses` (
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `houses_house_no_unique` (`house_no`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -74,7 +74,7 @@ CREATE TABLE `houses` (
 
 LOCK TABLES `houses` WRITE;
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
-INSERT INTO `houses` VALUES (1,'D11','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'D8','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'C10','C','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'A10','A','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'D5','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05');
+INSERT INTO `houses` VALUES (1,'D11','D','','This flat develops software','2012-10-11 11:30:05','2012-10-25 12:04:10'),(2,'D8','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'C10','C','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'A10','A','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'D5','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(6,'A5','A','','On ground floor','2012-10-25 12:04:33','2012-10-25 12:04:33');
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -120,7 +120,7 @@ CREATE TABLE `phones` (
   PRIMARY KEY (`id`),
   KEY `phones_user_id_foreign` (`user_id`),
   CONSTRAINT `phones_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `phones` (
 
 LOCK TABLES `phones` WRITE;
 /*!40000 ALTER TABLE `phones` DISABLE KEYS */;
-INSERT INTO `phones` VALUES (1,'9880362090',0,2,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'9972010366',0,2,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'9888886323',0,3,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'9888886523',0,4,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'1234567890',0,5,'2012-10-15 08:37:37','2012-10-15 09:06:20'),(6,'1234567890',0,6,'2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'9880362090',0,7,'2012-10-23 11:30:23','2012-10-23 11:30:23');
+INSERT INTO `phones` VALUES (1,'9880362090',0,2,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'9972010366',0,2,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'9888886323',0,3,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'9888886523',0,4,'2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'1234567890',0,5,'2012-10-15 08:37:37','2012-10-15 09:06:20'),(6,'1234567890',0,6,'2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'1234567890',0,7,'2012-10-23 11:30:23','2012-10-25 12:12:27'),(8,'9880362090',0,1,'0000-00-00 00:00:00','0000-00-00 00:00:00');
 /*!40000 ALTER TABLE `phones` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -207,9 +207,8 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_name_unique` (`name`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=latin1;
+  UNIQUE KEY `users_name_unique` (`name`)
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -218,7 +217,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Prasanna Bhat','prasanna.yoga@gmail.com','$2a$08$Q1RhWTVUYnJIMGpXVHRMeOCjGsKJM/oeqFBClvFg9OzfGBqG/FLhm','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'Amruta Prasanna','amruta.pune@gmail.com','$2a$08$UmFCcGNIYXlRZFN2VGxVaOuYAGqgW/Hcu0dkwTx.kBrT.snUlnSEi','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'Krishnamurthy','krish@gmail.com','$2a$08$TkdCazZhaElIeW1jMmp3aOq8.Zqafe7P9r206hvF.Nc24QlG2P1vq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'Gautam','gautam@gmail.com','$2a$08$dENxTkdzZTB4eEZpeTFFTO2X2OXz39vom9o67JPWFZWlMHFgm7NGq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'gautam Chakraborthy','gautam.d8@gmail.org',NULL,'','2012-10-15 08:37:37','2012-10-15 10:15:23'),(6,'Sriram S N','sriram@gmail.com',NULL,'','2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'Arup Mukherjee','',NULL,'','2012-10-23 11:30:23','2012-10-23 11:30:23');
+INSERT INTO `users` VALUES (1,'Prasanna Bhat','prasanna.yoga@gmail.com','$2a$08$Q1RhWTVUYnJIMGpXVHRMeOCjGsKJM/oeqFBClvFg9OzfGBqG/FLhm','He develops software','2012-10-11 11:30:05','2012-10-25 12:11:29'),(2,'Amruta Prasanna','amruta.pune@gmail.com','$2a$08$UmFCcGNIYXlRZFN2VGxVaOuYAGqgW/Hcu0dkwTx.kBrT.snUlnSEi','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'Krishnamurthy','krish@gmail.com','$2a$08$TkdCazZhaElIeW1jMmp3aOq8.Zqafe7P9r206hvF.Nc24QlG2P1vq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'Gautam','gautam@gmail.com','$2a$08$dENxTkdzZTB4eEZpeTFFTO2X2OXz39vom9o67JPWFZWlMHFgm7NGq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'gautam Chakraborthy','gautam.d8@gmail.org',NULL,'','2012-10-15 08:37:37','2012-10-15 10:15:23'),(6,'Sriram S N','sriram@gmail.com',NULL,'','2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'Arup Mukherjee','',NULL,'he is owners friend','2012-10-23 11:30:23','2012-10-25 12:41:23');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -231,4 +230,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-25 17:33:26
+-- Dump completed on 2012-10-25 18:16:10

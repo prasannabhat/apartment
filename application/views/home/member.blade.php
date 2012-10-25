@@ -44,6 +44,13 @@
     </div>
   </div>  
 
+  <div class="control-group">
+      <label class="control-label" for="notes">Notes</label>
+      <div class="controls">
+        <textarea rows="3" placeholder="Any additional information" name="notes" id="notes">{{isset($notes) ? $notes : ''}}</textarea>
+      </div>
+    </div>                
+
 {{-- Render relation, only if one is supplied  --}}
 @if (isset($flat_id))
   <div class="control-group {{ $errors->has('relation') ? 'error' : '' }}">

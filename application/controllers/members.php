@@ -40,7 +40,7 @@ class Members_Controller extends Base_Controller {
 	public function get_member($member_id = -1)
 	{
 		//Default array for creating a new member
-		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '');
+		$member = array ( 'name' => '', 'email' => '', 'phone_no' => '', 'notes' => '');
 		$flat_id = Input::get('flat_id');
 		// If the session has data because of redirect, use that data
 		if(count(Input::old()) != 0)
@@ -56,6 +56,7 @@ class Members_Controller extends Base_Controller {
 				$member['name'] = $user->name;
 				$member['email'] = $user->email;
 				$member['phone_no'] = $user->phone;
+				$member['notes'] = $user->notes;
 				if($flat_id)
 				{
 					foreach($user->houses()->pivot()->get() as $row)
@@ -96,6 +97,7 @@ class Members_Controller extends Base_Controller {
 			$member = new User();
 			$member->name = Input::get('name');
 			$member->email = Input::get('email');
+			$member->notes = Input::get('notes');
 			$member->save();
 			
 			$phone = new Phone(array('phone_no' => Input::get('phone_no')));
@@ -140,6 +142,7 @@ class Members_Controller extends Base_Controller {
 			$member = User::with(array('phones'))->find($member_id);
 			$member->name = Input::get('name');
 			$member->email = Input::get('email');
+			$member->notes = Input::get('notes');
 			$member->save();
 			
 			$phone = $member->phones()->first();
