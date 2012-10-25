@@ -16,6 +16,11 @@ class Base_Controller extends Controller {
             	$this->filter('before', 'auth');
             	$this->filter('before', 'admin');
                 break;                
+
+            case 'Communications_Controller':
+            	$this->filter('before', 'auth');
+            	$this->filter('before', 'admin');
+                break;                                
             
             default:
                 $this->filter('before', 'auth');

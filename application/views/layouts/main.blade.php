@@ -41,6 +41,7 @@
             <ul class="nav" id="app-top-nav">
                 <li>{{HTML::link('members', 'Members');}}</li>
                 <li>{{HTML::link('flats', 'Flats');}}</li>
+                <li>{{HTML::link('communication', 'Communication');}}</li>
                 <li>{{HTML::link('logout', 'Logout');}}</li>
             </ul>
           </div><!--/.nav-collapse -->

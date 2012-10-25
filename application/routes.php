@@ -34,6 +34,7 @@
 
 Route::controller('members');
 Route::controller('flats');
+Route::controller('communication');
 
 Route::get('logout',function(){
 	Auth::logout();
