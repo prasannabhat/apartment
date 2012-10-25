@@ -1,3 +1,43 @@
   <div >
-    <h2>flats</h2>
+    <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8">
+		<div class="control-group">
+			<label class="control-label" for="floor">Select Floor</label>
+			<div class="controls">
+			  <select name="floor" id="floor">
+			  		<option value="All">All Floors</option>
+			  		<option value="A">A Floor</option>
+			  		<option value="B">B Floor</option>
+			  		<option value="C">C Floor</option>
+			  		<option value="D">D Floor</option>
+			  		<option value="E">E Floor</option>
+			  </select>
+			</div>
+		</div>  
+
+		<div class="control-group">
+			<label class="control-label" for="group">Select User Group</label>
+			<div class="controls">
+			  <select name="group" id="group">
+			  	<option value="owner">Primary Owner</option>
+			  	<option value="owners">Owner + Family</option>
+			  	<option value="tenant">Primary Tenant</option>
+			  	<option value="tenants">Tenant + Family</option>
+			  	<option value="resident">Primary Resident</option>
+			  	<option value="residents">Resident + Family</option>
+			  </select>
+			</div>
+		</div>  		
+
+		<div class="control-group">
+		  <label class="control-label" for="message">Message</label>
+		  <div class="controls">
+		    <textarea rows="3" placeholder="Message to send" name="message" id="message"></textarea>
+		  </div>
+		</div>                
+
+		<div class="form-actions">
+			<button class="btn-primary btn" type="submit">Send</button>
+		</div>
+	</form>
+
   </div>

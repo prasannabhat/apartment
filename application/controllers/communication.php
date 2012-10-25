@@ -1,7 +1,7 @@
 <?php
 
 class Communication_Controller extends Base_Controller {
-
+	public $restful = true;
 	/*
 	|--------------------------------------------------------------------------
 	| The Default Controller
@@ -29,8 +29,18 @@ class Communication_Controller extends Base_Controller {
 	|		}
 	|
 	*/
-	public function action_index()
+	public function get_index()
 	{
 		return View::make('home.communication');
+	}
+
+	public function post_index()
+	{
+		$data = Input::json();
+		$response = array(
+	        'status'	=> 'suscess',
+	        'message'	=> 'sent to all people'
+    	);	
+		return Response::json($data);
 	}
 }

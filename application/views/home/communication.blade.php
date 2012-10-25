@@ -5,7 +5,7 @@
  <script>
   $(document).ready(function(){
     var Comm = apartment.module("communication");
-    Comm.start();
+    Comm.start("{{URL::current()}}");
   });
 </script> 
 <div class="row-fluid">

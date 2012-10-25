@@ -24,6 +24,32 @@ Comm.FlatsView = Backbone.View.extend({
 
 	id	: "flats",
 
+	events: {
+	    "submit form":  "sendMessage",
+  	},
+
+  	sendMessage : function (e){
+  		var params = {type: "POST", dataType: 'json'};
+  		var data;
+  		params.url = Comm.BASE;
+  		params.contentType = 'application/json';
+  		// Just the form data
+  		data = $(e.target).serializeObject();
+  		// Target to send the message to
+  		data.target = "flats";
+  		params.data = JSON.stringify(data);
+  		params.success = _.bind(function(data, textStatus, jqXHR){
+  			console.log(data);
+  			console.log(textStatus);
+  		},this);
+  		$.ajax(params);
+
+  		// console.log(JSON.stringify($(e.target).serializeArray()));
+  		// console.log($(e.target).serializeArray());
+  		e.preventDefault();
+
+  	},
+
 	initialize:function () {
         this.template = _.template(tpl.get('comm_flats'));
     },
@@ -87,8 +113,8 @@ Comm.Router = Backbone.Router.extend({
 });
 
 // Function will be called after document load
-Comm.start = function(){
-	var that = this;
+Comm.start = function(base_url){
+	Comm.BASE = base_url;
 	tpl.loadTemplates(['communication','comm_flats','comm_users'], function() {
 		app = new Comm.Router();
     	Backbone.history.start();
