@@ -1,4 +1,4 @@
-<?php
+c<?php
 
 class Create_Tables {
 
@@ -16,6 +16,7 @@ class Create_Tables {
 			$table->string('name', 100)->unique();
 			$table->string('email', 320)->unique();
 			$table->string('password', 64)->nullable();
+			$table->text('notes');
 			// created_at | updated_at DATETIME
 			$table->timestamps();
 			$table->engine = 'InnoDB';
@@ -53,6 +54,7 @@ class Create_Tables {
 			$table->string('house_no', 20)->unique();
 			$table->string('floor', 20);
 			$table->string('block', 20);
+			$table->text('notes');
 
 			// created_at | updated_at DATETIME
 			$table->timestamps();

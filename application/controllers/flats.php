@@ -39,7 +39,7 @@ class Flats_Controller extends Base_Controller {
 	public function get_flat($flat_id = -1)
 	{
 		//Default array for creating a new form
-		$flat = array ( 'house_no' => '', 'floor' => '', 'block' => '');
+		$flat = array ( 'house_no' => '', 'floor' => '', 'block' => '', 'notes' => '');
 		// If the session has data because of redirect, use that data
 		if(count(Input::old()) != 0)
 		{
@@ -71,7 +71,7 @@ class Flats_Controller extends Base_Controller {
 		}
 		else
 		{
-			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor']));
+			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor'], 'notes' => $input['notes']));
 			return Redirect::to('flats');
 		}
 		
@@ -94,6 +94,7 @@ class Flats_Controller extends Base_Controller {
 		{
 			$house->house_no = $input['house_no'];
 			$house->floor = $input['floor'];
+			$house->notes = $input['notes'];
 			$house->save();
 			return Redirect::to('flats');
 		}

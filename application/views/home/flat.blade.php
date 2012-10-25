@@ -38,7 +38,14 @@
         <div class="controls">
           <input class="focused input-xlarge" placeholder="Block(if applicable)" type="text" name="block" id="block" value="{{$block}}">
         </div>
-      </div>        
+      </div>
+  
+    <div class="control-group">
+        <label class="control-label" for="notes">Notes</label>
+        <div class="controls">
+          <textarea rows="3" placeholder="Any additional information" name="notes" id="notes">{{isset($notes) ? $notes : ''}}</textarea>
+        </div>
+      </div>              
 	  
 <!-- {{Form::control_group(Form::label('house_no', 'Flat number'),Form::xlarge_text('house_no', null, array('class' => 'focused' , 'value' => "default house",'placeholder' => 'Flat number')),'warning',Form::block_help('Something went wrong'))}} -->
       

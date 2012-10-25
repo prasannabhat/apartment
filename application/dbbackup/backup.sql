@@ -60,6 +60,7 @@ CREATE TABLE `houses` (
   `house_no` varchar(20) NOT NULL,
   `floor` varchar(20) NOT NULL,
   `block` varchar(20) NOT NULL,
+  `notes` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -73,7 +74,7 @@ CREATE TABLE `houses` (
 
 LOCK TABLES `houses` WRITE;
 /*!40000 ALTER TABLE `houses` DISABLE KEYS */;
-INSERT INTO `houses` VALUES (1,'D11','D','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'D8','D','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'C10','C','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'A10','A','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'D5','D','','2012-10-11 11:30:05','2012-10-11 11:30:05');
+INSERT INTO `houses` VALUES (1,'D11','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'D8','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'C10','C','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'A10','A','','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'D5','D','','','2012-10-11 11:30:05','2012-10-11 11:30:05');
 /*!40000 ALTER TABLE `houses` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -202,6 +203,7 @@ CREATE TABLE `users` (
   `name` varchar(100) NOT NULL,
   `email` varchar(320) NOT NULL,
   `password` varchar(64) DEFAULT NULL,
+  `notes` text NOT NULL,
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`),
@@ -216,7 +218,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Prasanna Bhat','prasanna.yoga@gmail.com','$2a$08$Q1RhWTVUYnJIMGpXVHRMeOCjGsKJM/oeqFBClvFg9OzfGBqG/FLhm','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'Amruta Prasanna','amruta.pune@gmail.com','$2a$08$UmFCcGNIYXlRZFN2VGxVaOuYAGqgW/Hcu0dkwTx.kBrT.snUlnSEi','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'Krishnamurthy','krish@gmail.com','$2a$08$TkdCazZhaElIeW1jMmp3aOq8.Zqafe7P9r206hvF.Nc24QlG2P1vq','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'Gautam','gautam@gmail.com','$2a$08$dENxTkdzZTB4eEZpeTFFTO2X2OXz39vom9o67JPWFZWlMHFgm7NGq','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'gautam Chakraborthy','gautam.d8@gmail.org',NULL,'2012-10-15 08:37:37','2012-10-15 10:15:23'),(6,'Sriram S N','sriram@gmail.com',NULL,'2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'Arup Mukherjee','',NULL,'2012-10-23 11:30:23','2012-10-23 11:30:23');
+INSERT INTO `users` VALUES (1,'Prasanna Bhat','prasanna.yoga@gmail.com','$2a$08$Q1RhWTVUYnJIMGpXVHRMeOCjGsKJM/oeqFBClvFg9OzfGBqG/FLhm','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(2,'Amruta Prasanna','amruta.pune@gmail.com','$2a$08$UmFCcGNIYXlRZFN2VGxVaOuYAGqgW/Hcu0dkwTx.kBrT.snUlnSEi','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(3,'Krishnamurthy','krish@gmail.com','$2a$08$TkdCazZhaElIeW1jMmp3aOq8.Zqafe7P9r206hvF.Nc24QlG2P1vq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(4,'Gautam','gautam@gmail.com','$2a$08$dENxTkdzZTB4eEZpeTFFTO2X2OXz39vom9o67JPWFZWlMHFgm7NGq','','2012-10-11 11:30:05','2012-10-11 11:30:05'),(5,'gautam Chakraborthy','gautam.d8@gmail.org',NULL,'','2012-10-15 08:37:37','2012-10-15 10:15:23'),(6,'Sriram S N','sriram@gmail.com',NULL,'','2012-10-22 10:05:02','2012-10-22 10:05:02'),(7,'Arup Mukherjee','',NULL,'','2012-10-23 11:30:23','2012-10-23 11:30:23');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -229,4 +231,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-10-24 14:02:55
+-- Dump completed on 2012-10-25 17:33:26
