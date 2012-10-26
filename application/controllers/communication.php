@@ -39,8 +39,50 @@ class Communication_Controller extends Base_Controller {
 		$data = Input::json();
 		$response = array(
 	        'status'	=> 'suscess',
-	        'message'	=> 'sent to all people'
+	        'message'	=> 'sent to all people',
+	        'login' => Config::get('application.sms_login')
     	);	
-		return Response::json($data);
+
+		$sms = new Sms\Way2sms();
+		$response['result'] = '';
+		$result = $sms->login(Config::get('application.sms_login'),Config::get('application.password'));
+		if ($result) {
+			$response['result'] .= "Login successful\n";
+
+			$result = $sms->send('9880362090','Hi..testing in progress..!!');
+			if($result)
+			{
+				$response['result'] .= "SMS sent successfully\n";
+			}
+			else
+			{
+				$response['result'] .= "SMS sending failed\n";				
+			}
+
+			$result = $sms->send('9972010366','Hi..testing in progress..!!');
+			if($result)
+			{
+				$response['result'] .= "SMS sent successfully\n";
+			}
+			else
+			{
+				$response['result'] .= "SMS sending failed\n";				
+			}
+
+			$result = $sms->send('8147256460','Hi..testing in progress..!!');
+			if($result)
+			{
+				$response['result'] .= "SMS sent successfully\n";
+			}
+			else
+			{
+				$response['result'] .= "SMS sending failed\n";				
+			}
+
+		} else {
+			$response['result'] .= "Login failed\n";
+		}
+		
+		return Response::json($response);
 	}
 }

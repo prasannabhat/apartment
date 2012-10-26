@@ -195,4 +195,8 @@ return array(
 		'View'       	=> 'Laravel\\View',
 	),
 
+	'sms_login' => '9880362090',
+
+	'password' => 'amrutaprasanna',
+
 );
