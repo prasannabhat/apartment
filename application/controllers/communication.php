@@ -41,9 +41,26 @@ class Communication_Controller extends Base_Controller {
 	        'status'	=> 'suscess',
 	        'message'	=> 'sent to all people',
 	        'login' => Config::get('application.sms_login')
-    	);	
+    	);
 
-		$sms = new Sms\Way2sms();
+    	switch ($data->gateway) {
+    			case 'way2sms':
+    				$sms = new Sms\Way2sms();
+    				break;
+
+				case '160by2':
+    				$sms = new Sms\SixByTwo();
+    				break;    				
+
+				case 'fullonsms':
+    				$sms = new Sms\FullOnSms();
+    				break;    				    				
+    			
+    			default:
+    				$sms = new Sms\Way2sms();
+    				break;
+    		}	
+
 		$response['result'] = '';
 		$result = $sms->login(Config::get('application.sms_login'),Config::get('application.password'));
 		if ($result) {
