@@ -23,7 +23,7 @@ class Utilities
 		$email_rule = sprintf('email|unique:users,email,%s',$id);
 		$rules = array(
 			'name' => $name_rule,
-			'phone_no' => 'required|match:"/^\d{10}\s*$/"',
+			'phone_no' => 'match:"/^\d{10}\s*$/"',
 			'email' => $email_rule
 			// 'relation' => 'required'
 		);

@@ -100,9 +100,12 @@ class Members_Controller extends Base_Controller {
 			$member->notes = Input::get('notes');
 			$member->save();
 			
-			$phone = new Phone(array('phone_no' => Input::get('phone_no')));
-			
-			$member->phones()->insert($phone);
+			// Update the phone, if it is given
+			if(Input::get('phone_no'))
+			{
+				$phone = new Phone(array('phone_no' => Input::get('phone_no')));
+				$member->phones()->insert($phone);				
+			}
 			// Update flat relationship, only if it is supplied
 			if($flat_id)
 			{
@@ -146,8 +149,17 @@ class Members_Controller extends Base_Controller {
 			$member->save();
 			
 			$phone = $member->phones()->first();
-			$phone->phone_no = Input::get('phone_no');
-			$phone->save();
+			// If phone already exists
+			if($phone)
+			{
+				$phone->phone_no = Input::get('phone_no');
+				$phone->save();				
+			}
+			else
+			{
+				$phone = new Phone(array('phone_no' => Input::get('phone_no')));
+				$member->phones()->insert($phone);								
+			}
 			
 			if($flat_id)
 			{
