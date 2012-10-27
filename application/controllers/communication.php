@@ -72,6 +72,14 @@ class Communication_Controller extends Base_Controller {
 	    		}    			
 
     		}
+    		elseif ($data->sms_type == "single") {
+    			$selected_flats = $data->selected_flats;
+    			$selected_flats = explode(",", $selected_flats);
+    			$flats = House::where_in('house_no',$selected_flats)->get();
+    		}
+    		else{
+
+    		}
 
 	    	switch($data->group)
 	    	{
