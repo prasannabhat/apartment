@@ -212,9 +212,19 @@ $(document).ready(function(){
 });
 
 
-jQuery.fn.serializeObject = function() {
-  var arrayData, objectData;
+jQuery.fn.serializeObject = function(options) {
+  var defaults = {include_disabled : false};
+  var opts = $.extend(defaults, options);
+  var arrayData, objectData,disabled;
+  if(opts.include_disabled){
+  	  // Find disabled inputs, and remove the "disabled" attribute
+  	  disabled = this.find(':input:disabled').removeAttr('disabled');
+  }
   arrayData = this.serializeArray();
+  if(opts.include_disabled){
+	// re-disabled the set of inputs that you previously enabled
+	disabled.attr('disabled','disabled');
+  }
   objectData = {};
 
   $.each(arrayData, function() {

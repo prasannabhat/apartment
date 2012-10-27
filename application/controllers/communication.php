@@ -54,63 +54,104 @@ class Communication_Controller extends Base_Controller {
 	        'login' => Config::get('application.sms_login')
     	);
 
-    	switch ($data->gateway) {
-    			case 'way2sms':
-    				$sms = new Sms\Way2sms();
-    				break;
+    	 $users = array();
+    	// Send sms for flats
+    	if($data->target == "flats")
+    	{
+    		$flats = array();
+    		if($data->sms_type == "group")
+    		{
+	    		// Select the flats to send message to
+	    		if($data->floor == "all")
+	    		{
+	    			$flats = House::get();
+	    		}
+	    		else
+	    		{
+	    			$flats = House::where('floor','=',$data->floor)->get();
+	    		}    			
 
-				case '160by2':
-    				$sms = new Sms\SixByTwo();
-    				break;    				
+    		}
 
-				case 'fullonsms':
-    				$sms = new Sms\FullOnSms();
-    				break;    				    				
-    			
-    			default:
-    				$sms = new Sms\Way2sms();
-    				break;
-    		}	
+	    	switch($data->group)
+	    	{
+	    		case "owner":
+		    		foreach($flats as $flat)
+		    		{
+		    			if($flat->owner){
+		    				array_push($users, $flat->owner);
+		    			}
+		    		}
+	    		break;
 
-		$response['result'] = '';
-		$result = $sms->login(Config::get('application.sms_login'),Config::get('application.password'));
-		if ($result) {
-			$response['result'] .= "Login successful\n";
+	    		case "owners":
+		    		foreach($flats as $flat)
+		    		{
+		    			foreach($flat->users as $user){
+					 		$relation = $user->pivot->relation;
+					 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
+							if($select){
+								array_push($users,$user);
+							}
+		    			}
+		    		}
+	    		break;    		
 
-			$result = $sms->send('9880362090','Hi..testing in progress..!!');
-			if($result)
-			{
-				$response['result'] .= "SMS sent successfully\n";
-			}
-			else
-			{
-				$response['result'] .= "SMS sending failed\n";				
-			}
+	    		case "tenant":
+		    		foreach($flats as $flat)
+		    		{
+		    			if($flat->tenant){
+		    				array_push($users, $flat->tenant);
+		    			}
+		    		}
+	    		break;    		
 
-			$result = $sms->send('9972010366','Hi..testing in progress..!!');
-			if($result)
-			{
-				$response['result'] .= "SMS sent successfully\n";
-			}
-			else
-			{
-				$response['result'] .= "SMS sending failed\n";				
-			}
+	    		case "tenants":
+	    			foreach($flats as $flat)
+	    			{
+	   					$users = array_merge($users,$flat->tenants);
+	    			}
+	    		break;
 
-			$result = $sms->send('8147256460','Hi..testing in progress..!!');
-			if($result)
-			{
-				$response['result'] .= "SMS sent successfully\n";
-			}
-			else
-			{
-				$response['result'] .= "SMS sending failed\n";				
-			}
+	    		case "resident":
+		    		foreach($flats as $flat)
+		    		{
+		    			if($flat->resident){
+		    				array_push($users, $flat->resident);
+		    			}
+		    		}
+	    		break;
 
-		} else {
-			$response['result'] .= "Login failed\n";
-		}
-		
-		return Response::json($response);
+	    		case "residents":
+	    			foreach($flats as $flat)
+	    			{
+	   					$users = array_merge($users,$flat->residents);
+	    			}
+	    		break;    		    		
+	    	}    		
+    	}
+
+
+
+
+		// Filter the users with phone numbers
+		$user_with_phones = array_filter($users,function ($user){
+			$select = ($user->phone) ? true : false;
+			return $select;
+    	});    	
+
+		// Get the phone numbers alone
+		$phones = array_map(function ($user){
+    		return $user->phone;
+    	},$user_with_phones);    	    	
+
+		$names= array_map(function ($user){
+    		return $user->name;
+    	},$users);
+
+    	// $response['result'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
+
+		// return Response::json($phones);
+		return Response::json($names);
 	}
 }

@@ -154,6 +154,44 @@ class Utilities
 	    		"Tenant" => "tenant", "Tenant's Family" => "tenant-family");
 		return $MEMBER_FLAT_RELATION;
 
-	}    
+	}
+
+	public static function send_sms($gateway, Array $phones, $message)
+	{
+    	switch ($gateway) {
+			case 'way2sms':
+				$sms = new \Sms\Way2sms();
+				break;
+
+			case '160by2':
+				$sms = new \Sms\SixByTwo();
+				break;    				
+
+			case 'fullonsms':
+				$sms = new \Sms\FullOnSms();
+				break;    				    				
+			
+			default:
+				$sms = new \Sms\Way2sms();
+				break;
+    		}	
+
+		$response['result'] = '';
+		$result = $sms->login(\Config::get('application.sms_login'),\Config::get('application.password'));
+		if ($result) {
+			foreach ($phones as $phone) {
+				$result = $sms->send($phone,$message);			
+				if($result)
+				{
+					$response['result'] .= "SMS sent successfully\n";
+				}				
+			}
+		} else {
+			$response['result'] .= "Login failed\n";
+		}
+
+		return $response['result'];
+
+	}  
 
 }

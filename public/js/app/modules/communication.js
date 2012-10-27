@@ -27,10 +27,38 @@ Comm.FlatsView = Backbone.View.extend({
 	events: {
 	    "submit form":  "sendMessage",
       "change input:radio" : "smsTypeChanged",
-      "click #add_flat" : "addFlat"
+      "click #add_flat" : "addFlat",
+      "click #edit_selected_flats" : "editSelectedFlats",
+      "blur #selected_flats" : function(e){
+        // Back to uneditable, after the element looses focus
+        $(e.target).attr("disabled",true);
+      }
   	},
 
+    editSelectedFlats : function(e){
+      var $selected_flats = this.$el.find('input[name="selected_flats"]');
+      // Make it editable
+      $selected_flats.removeAttr("disabled");
+
+    },
+
     addFlat : function(e){
+      var $current_flat = this.$el.find('input[name="flat"]');
+      var current_flat = $current_flat.val();
+
+      // element holding already selected flats
+      var $selected_flats = this.$el.find('input[name="selected_flats"]'); 
+      var selected_flats = $selected_flats.val();
+      
+      // Dont seperate by comma for the first entry 
+      var delimiter = selected_flats ? "," : "";
+      // Add the currently selected flat
+      selected_flats = selected_flats + delimiter + current_flat;
+      $selected_flats.val(selected_flats);
+
+      // Clear the current flat
+      $current_flat.val("");
+
 
     },
 
@@ -56,7 +84,8 @@ Comm.FlatsView = Backbone.View.extend({
   		params.url = Comm.params.base_url;
   		params.contentType = 'application/json';
   		// Just the form data
-  		data = $(e.target).serializeObject();
+      // data = $(e.target).serializeObject();
+  		data = $(e.target).serializeObject({include_disabled : true});
   		// Target to send the message to
   		data.target = "flats";
   		params.data = JSON.stringify(data);
