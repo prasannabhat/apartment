@@ -31,7 +31,18 @@ class Communication_Controller extends Base_Controller {
 	*/
 	public function get_index()
 	{
-		return View::make('home.communication');
+		$view_params['base_url'] = URL::current();
+
+		$flats = House::order_by('house_no','asc')->get();
+		function get_flats($result, $flat){
+			$result = $result . sprintf("'%s'",$flat->house_no ). ",";
+			return $result;
+		}
+		$flats_array = array_reduce($flats, "get_flats");
+		$flats_array = rtrim($flats_array,",");
+		$flats_array = '['. $flats_array . ']';
+		$view_params['flats_array'] = $flats_array;		
+		return View::make('home.communication',$view_params);
 	}
 
 	public function post_index()

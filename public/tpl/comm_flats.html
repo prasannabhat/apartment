@@ -1,18 +1,43 @@
   <div >
     <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8">
+		
 		<div class="control-group">
+			<label class="control-label" for="sms_type">Send message to </label>
+			<div class="controls ">
+				<label class="radio inline">
+				  <input type="radio" name="sms_type" value="group" checked>
+				  Group of flats
+				</label>
+				<label class="radio inline">
+				  <input type="radio" name="sms_type" value="single">
+				  Single flat
+				</label>		
+			</div>
+		</div>
+
+		<div class="control-group hide_single">
 			<label class="control-label" for="floor">Select Floor</label>
 			<div class="controls">
-			  <select name="floor" id="floor">
-			  		<option value="All">All Floors</option>
-			  		<option value="A">A Floor</option>
-			  		<option value="B">B Floor</option>
-			  		<option value="C">C Floor</option>
-			  		<option value="D">D Floor</option>
-			  		<option value="E">E Floor</option>
-			  </select>
+			<select name="floor" id="floor">
+					<option value="All">All Floors</option>
+					<option value="A">A Floor</option>
+					<option value="B">B Floor</option>
+					<option value="C">C Floor</option>
+					<option value="D">D Floor</option>
+					<option value="E">E Floor</option>
+			</select>
 			</div>
-		</div>  
+		</div>
+
+	<div class="control-group hide_group" style="display:none">
+	    <label class="control-label" for="flat">Flat No</label>
+	    <div class="controls">
+	    	<div class="input-append">
+			    <input class="focused input-large " placeholder="Flat No" type="text" name="flat" id="flat">
+			    <button class="btn" type="button" id="add_flat">Add</button>	    		
+	    	</div>
+	    </div>
+	 </div>
 
 		<div class="control-group">
 			<label class="control-label" for="group">Select User Group</label>

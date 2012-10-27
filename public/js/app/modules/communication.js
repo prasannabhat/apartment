@@ -26,12 +26,34 @@ Comm.FlatsView = Backbone.View.extend({
 
 	events: {
 	    "submit form":  "sendMessage",
+      "change input:radio" : "smsTypeChanged",
+      "click #add_flat" : "addFlat"
   	},
+
+    addFlat : function(e){
+
+    },
+
+    smsTypeChanged : function(e){
+      var checkedValue = $(e.target).val();
+      switch(checkedValue){
+        case 'single':
+          $(".hide_single").hide();
+          $(".hide_group").show();
+        break;
+
+        case 'group':
+          $(".hide_group").hide();
+          $(".hide_single").show();
+        break;
+      }
+
+    },
 
   	sendMessage : function (e){
   		var params = {type: "POST", dataType: 'json'};
   		var data;
-  		params.url = Comm.BASE;
+  		params.url = Comm.params.base_url;
   		params.contentType = 'application/json';
   		// Just the form data
   		data = $(e.target).serializeObject();
@@ -56,7 +78,8 @@ Comm.FlatsView = Backbone.View.extend({
 
 	render: function() {
 		$(this.el).html(this.template());
-        return this;
+    this.$el.find("#flat").typeahead({source:Comm.params.flats_array});
+    return this;
 	}
 });
 
@@ -113,8 +136,8 @@ Comm.Router = Backbone.Router.extend({
 });
 
 // Function will be called after document load
-Comm.start = function(base_url){
-	Comm.BASE = base_url;
+Comm.start = function(params){
+	Comm.params = params;
 	tpl.loadTemplates(['communication','comm_flats','comm_users'], function() {
 		app = new Comm.Router();
     	Backbone.history.start();

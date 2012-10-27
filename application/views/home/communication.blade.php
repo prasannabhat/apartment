@@ -5,7 +5,10 @@
  <script>
   $(document).ready(function(){
     var Comm = apartment.module("communication");
-    Comm.start("{{URL::current()}}");
+    var params = {};
+    params.base_url = "{{$base_url}}";
+    params.flats_array = {{$flats_array}};
+    Comm.start(params);
   });
 </script> 
 <div class="row-fluid">
