@@ -90,9 +90,17 @@ Comm.FlatsView = Backbone.View.extend({
   		data.target = "flats";
   		params.data = JSON.stringify(data);
   		params.success = _.bind(function(data, textStatus, jqXHR){
-  			console.log(data);
+  			this.$spinner.hide();
+        console.log(data);
   			console.log(textStatus);
   		},this);
+      params.error = _.bind(function (jqXHR, textStatus, errorThrown){
+        this.$spinner.hide();
+
+      },this);
+
+      // Start the progress bar
+      this.$spinner.show();
   		$.ajax(params);
 
   		// console.log(JSON.stringify($(e.target).serializeArray()));
@@ -108,6 +116,9 @@ Comm.FlatsView = Backbone.View.extend({
 	render: function() {
 		$(this.el).html(this.template());
     this.$el.find("#flat").typeahead({source:Comm.params.flats_array});
+    //cache the progress bar
+    this.$spinner = this.$el.find(".progress");
+    this.$spinner.hide();
     return this;
 	}
 });
