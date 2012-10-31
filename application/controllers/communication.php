@@ -45,6 +45,92 @@ class Communication_Controller extends Base_Controller {
 		return View::make('home.communication',$view_params);
 	}
 
+	private function get_users($data)
+	{
+		$flats = array();
+		$users = array();
+		if($data->sms_type == "group")
+		{
+			// Select the flats to send message to
+			if($data->floor == "all")
+			{
+				$flats = House::get();
+			}
+			else
+			{
+				$flats = House::where('floor','=',$data->floor)->get();
+			}    			
+
+		}
+		elseif ($data->sms_type == "single") {
+			$selected_flats = $data->selected_flats;
+			$selected_flats = explode(",", $selected_flats);
+			$flats = House::where_in('house_no',$selected_flats)->get();
+		}
+		else{
+
+		}
+
+		switch($data->group)
+		{
+			case "owner":
+	    		foreach($flats as $flat)
+	    		{
+	    			if($flat->owner){
+	    				array_push($users, $flat->owner);
+	    			}
+	    		}
+			break;
+
+			case "owners":
+	    		foreach($flats as $flat)
+	    		{
+	    			foreach($flat->users as $user){
+				 		$relation = $user->pivot->relation;
+				 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
+						if($select){
+							array_push($users,$user);
+						}
+	    			}
+	    		}
+			break;    		
+
+			case "tenant":
+	    		foreach($flats as $flat)
+	    		{
+	    			if($flat->tenant){
+	    				array_push($users, $flat->tenant);
+	    			}
+	    		}
+			break;    		
+
+			case "tenants":
+				foreach($flats as $flat)
+				{
+						$users = array_merge($users,$flat->tenants);
+				}
+			break;
+
+			case "resident":
+	    		foreach($flats as $flat)
+	    		{
+	    			if($flat->resident){
+	    				array_push($users, $flat->resident);
+	    			}
+	    		}
+			break;
+
+			case "residents":
+				foreach($flats as $flat)
+				{
+						$users = array_merge($users,$flat->residents);
+				}
+			break;    		    		
+		}
+		return $users;
+
+	}
+
 	public function post_index()
 	{
 		$data = Input::json();
@@ -54,89 +140,12 @@ class Communication_Controller extends Base_Controller {
 	        'login' => Config::get('application.sms_login')
     	);
 
-    	 $users = array();
+    	$users = array();
     	// Send sms for flats
     	if($data->target == "flats")
     	{
-    		$flats = array();
-    		if($data->sms_type == "group")
-    		{
-	    		// Select the flats to send message to
-	    		if($data->floor == "all")
-	    		{
-	    			$flats = House::get();
-	    		}
-	    		else
-	    		{
-	    			$flats = House::where('floor','=',$data->floor)->get();
-	    		}    			
-
-    		}
-    		elseif ($data->sms_type == "single") {
-    			$selected_flats = $data->selected_flats;
-    			$selected_flats = explode(",", $selected_flats);
-    			$flats = House::where_in('house_no',$selected_flats)->get();
-    		}
-    		else{
-
-    		}
-
-	    	switch($data->group)
-	    	{
-	    		case "owner":
-		    		foreach($flats as $flat)
-		    		{
-		    			if($flat->owner){
-		    				array_push($users, $flat->owner);
-		    			}
-		    		}
-	    		break;
-
-	    		case "owners":
-		    		foreach($flats as $flat)
-		    		{
-		    			foreach($flat->users as $user){
-					 		$relation = $user->pivot->relation;
-					 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
-							if($select){
-								array_push($users,$user);
-							}
-		    			}
-		    		}
-	    		break;    		
-
-	    		case "tenant":
-		    		foreach($flats as $flat)
-		    		{
-		    			if($flat->tenant){
-		    				array_push($users, $flat->tenant);
-		    			}
-		    		}
-	    		break;    		
-
-	    		case "tenants":
-	    			foreach($flats as $flat)
-	    			{
-	   					$users = array_merge($users,$flat->tenants);
-	    			}
-	    		break;
-
-	    		case "resident":
-		    		foreach($flats as $flat)
-		    		{
-		    			if($flat->resident){
-		    				array_push($users, $flat->resident);
-		    			}
-		    		}
-	    		break;
-
-	    		case "residents":
-	    			foreach($flats as $flat)
-	    			{
-	   					$users = array_merge($users,$flat->residents);
-	    			}
-	    		break;    		    		
-	    	}    		
+    		$users = $this->get_users($data);
+    		
     	}
 
 
@@ -159,7 +168,7 @@ class Communication_Controller extends Base_Controller {
 
     	// $response['result'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
 
-		// return Response::json($phones);
+		return Response::json($users);
 		return Response::json($names);
 	}
 }
