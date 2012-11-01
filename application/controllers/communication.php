@@ -45,6 +45,19 @@ class Communication_Controller extends Base_Controller {
 		return View::make('home.communication',$view_params);
 	}
 
+	private function get_user_array($flat, $user)
+	{
+		//Get the readable string of the relationship
+		$relation_map = Apartment\Utilities::get_member_flat_relations();
+		$custom_user = array();
+		$custom_user['name'] = $user->name;
+		$custom_user['phone'] = $user->phone;
+		$custom_user['house_no'] = $flat->house_no;
+		$custom_user['relation'] = array_search($user->pivot->relation, $relation_map);
+		$custom_user['residing'] = $user->pivot->residing ? "yes" : "no";
+		return $custom_user;
+	}
+
 	private function get_users($data)
 	{
 		$flats = array();
@@ -77,7 +90,9 @@ class Communication_Controller extends Base_Controller {
 	    		foreach($flats as $flat)
 	    		{
 	    			if($flat->owner){
-	    				array_push($users, $flat->owner);
+	    				// Get the custom array
+	    				$user = $this->get_user_array($flat,$flat->owner);
+	    				array_push($users, $user);
 	    			}
 	    		}
 			break;
@@ -89,7 +104,9 @@ class Communication_Controller extends Base_Controller {
 				 		$relation = $user->pivot->relation;
 				 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
 						if($select){
-							array_push($users,$user);
+							// Get the custom array
+		    				$user = $this->get_user_array($flat,$user);
+		    				array_push($users, $user);
 						}
 	    			}
 	    		}
@@ -99,7 +116,9 @@ class Communication_Controller extends Base_Controller {
 	    		foreach($flats as $flat)
 	    		{
 	    			if($flat->tenant){
-	    				array_push($users, $flat->tenant);
+	    				// Get the custom array
+	    				$user = $this->get_user_array($flat,$flat->tenant);
+	    				array_push($users, $user);	    				
 	    			}
 	    		}
 			break;    		
@@ -107,7 +126,11 @@ class Communication_Controller extends Base_Controller {
 			case "tenants":
 				foreach($flats as $flat)
 				{
-						$users = array_merge($users,$flat->tenants);
+					foreach ($flat->tenants as $tenant) {
+						// Get the custom array
+	    				$user = $this->get_user_array($flat,$tenant);
+	    				array_push($users, $user);	    				
+					}
 				}
 			break;
 
@@ -115,7 +138,9 @@ class Communication_Controller extends Base_Controller {
 	    		foreach($flats as $flat)
 	    		{
 	    			if($flat->resident){
-	    				array_push($users, $flat->resident);
+	    				// Get the custom array
+	    				$user = $this->get_user_array($flat,$flat->resident);
+	    				array_push($users, $user);	    				
 	    			}
 	    		}
 			break;
@@ -123,13 +148,17 @@ class Communication_Controller extends Base_Controller {
 			case "residents":
 				foreach($flats as $flat)
 				{
-						$users = array_merge($users,$flat->residents);
+					foreach ($flat->residents as $user) {
+						// Get the custom array
+	    				$user = $this->get_user_array($flat,$user);
+	    				array_push($users, $user);	    				
+					}
 				}
 			break;    		    		
 		}
 		return $users;
 
-	}
+	}	
 
 	public function post_index()
 	{
@@ -145,30 +174,32 @@ class Communication_Controller extends Base_Controller {
     	if($data->target == "flats")
     	{
     		$users = $this->get_users($data);
-    		
     	}
 
-
+    	if($data->action == "list_users")
+    	{
+    		return Response::json($users);
+    	}
 
 
 		// Filter the users with phone numbers
 		$user_with_phones = array_filter($users,function ($user){
-			$select = ($user->phone) ? true : false;
+			$select = ($user['phone']) ? true : false;
 			return $select;
     	});    	
 
 		// Get the phone numbers alone
 		$phones = array_map(function ($user){
-    		return $user->phone;
+    		return $user['phone'];
     	},$user_with_phones);    	    	
 
 		$names= array_map(function ($user){
-    		return $user->name;
+    		return $user['name'];
     	},$users);
 
     	// $response['result'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
 
-		return Response::json($users);
-		return Response::json($names);
+		// return Response::json($names);
+		return Response::json($phones);
 	}
 }

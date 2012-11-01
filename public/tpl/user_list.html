@@ -1,0 +1,25 @@
+<table class="table" id="comm_user_list">
+  <caption>List of members to send message to</caption>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Phone</th>
+      <th>Flat</th>
+      <th>Relation</th>
+      <th>Residing</th>
+    </tr>
+    </thead>
+  <tbody>
+    <% _.each(users, function(user,index) { %> 
+    <tr>
+    <td><%= index %></td>
+    <td><%= user.name %></td>
+    <td><%= user.phone %></td>
+    <td><%= user.house_no %></td>
+    <td><%= user.relation %></td>
+    <td><%= user.residing %></td>
+    </tr>
+    <% }); %>
+  </tbody>
+</table>	

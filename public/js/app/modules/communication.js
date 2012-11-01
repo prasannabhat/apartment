@@ -25,15 +25,52 @@ Comm.FlatsView = Backbone.View.extend({
 	id	: "flats",
 
 	events: {
-	    "submit form":  "sendMessage",
       "change input:radio" : "smsTypeChanged",
       "click #add_flat" : "addFlat",
       "click #edit_selected_flats" : "editSelectedFlats",
+      "click button" : "buttonHandler",
       "blur #selected_flats" : function(e){
         // Back to uneditable, after the element looses focus
         $(e.target).attr("disabled",true);
       }
   	},
+
+    buttonHandler : function(e){
+      var action = $(e.target).data("action");
+      var params = {type: "POST", dataType: 'json'};
+      var data_send;
+      params.url = Comm.params.base_url;
+      params.contentType = 'application/json';
+      data_send = this.$el.find("form").serializeObject({include_disabled : true});
+      // Target to send the message to
+      data_send.target = "flats";
+      data_send.action = action;
+      params.data = JSON.stringify(data_send);
+
+      params.success = _.bind(function(data, textStatus, jqXHR){
+        // List the selected users, based on the action
+        if(data_send.action == "list_users"){
+          if(this.user_list_view){
+            this.user_list_view.close();
+
+          }
+          this.user_list_view = new Comm.UserListView({collection: data}).render();
+          this.$el.append(this.user_list_view.el);
+        }
+        this.$spinner.hide();
+        console.log(data);
+        console.log(textStatus);
+      },this);
+      params.error = _.bind(function (jqXHR, textStatus, errorThrown){
+        this.$spinner.hide();
+
+      },this);
+
+      // Start the progress bar
+      this.$spinner.show();
+      $.ajax(params);
+      e.preventDefault();
+    },
 
     editSelectedFlats : function(e){
       var $selected_flats = this.$el.find('input[name="selected_flats"]');
@@ -78,37 +115,6 @@ Comm.FlatsView = Backbone.View.extend({
 
     },
 
-  	sendMessage : function (e){
-  		var params = {type: "POST", dataType: 'json'};
-  		var data;
-  		params.url = Comm.params.base_url;
-  		params.contentType = 'application/json';
-  		// Just the form data
-      // data = $(e.target).serializeObject();
-  		data = $(e.target).serializeObject({include_disabled : true});
-  		// Target to send the message to
-  		data.target = "flats";
-  		params.data = JSON.stringify(data);
-  		params.success = _.bind(function(data, textStatus, jqXHR){
-  			this.$spinner.hide();
-        console.log(data);
-  			console.log(textStatus);
-  		},this);
-      params.error = _.bind(function (jqXHR, textStatus, errorThrown){
-        this.$spinner.hide();
-
-      },this);
-
-      // Start the progress bar
-      this.$spinner.show();
-  		$.ajax(params);
-
-  		// console.log(JSON.stringify($(e.target).serializeArray()));
-  		// console.log($(e.target).serializeArray());
-  		e.preventDefault();
-
-  	},
-
 	initialize:function () {
         this.template = _.template(tpl.get('comm_flats'));
     },
@@ -141,6 +147,21 @@ Comm.UsersView = Backbone.View.extend({
 		$(this.el).html(this.template());
         return this;
 	}
+});
+
+// View to display the list of selected members
+Comm.UserListView = Backbone.View.extend({
+
+  tagName: "div",
+
+  initialize:function () {
+        this.template = _.template(tpl.get('user_list'));
+    },
+
+  render: function() {
+    $(this.el).html(this.template({users : this.collection}));
+        return this;
+  }
 });
 
 Comm.Router = Backbone.Router.extend({
@@ -178,7 +199,7 @@ Comm.Router = Backbone.Router.extend({
 // Function will be called after document load
 Comm.start = function(params){
 	Comm.params = params;
-	tpl.loadTemplates(['communication','comm_flats','comm_users'], function() {
+	tpl.loadTemplates(['communication','comm_flats','comm_users','user_list'], function() {
 		app = new Comm.Router();
     	Backbone.history.start();
 		
