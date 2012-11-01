@@ -156,7 +156,7 @@ class Utilities
 
 	}
 
-	public static function send_sms($gateway, Array $phones, $message)
+	public static function send_sms($gateway, Array $phones, $message, $delay=0)
 	{
     	switch ($gateway) {
 			case 'way2sms':
@@ -184,7 +184,8 @@ class Utilities
 				if($result)
 				{
 					$response['result'] .= "SMS sent successfully\n";
-				}				
+				}
+				sleep($delay);
 			}
 		} else {
 			$response['result'] .= "Login failed\n";

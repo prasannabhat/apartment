@@ -164,9 +164,8 @@ class Communication_Controller extends Base_Controller {
 	{
 		$data = Input::json();
 		$response = array(
-	        'status'	=> 'suscess',
+	        'error' => 0,
 	        'message'	=> 'sent to all people',
-	        'login' => Config::get('application.sms_login')
     	);
 
     	$users = array();
@@ -194,6 +193,18 @@ class Communication_Controller extends Base_Controller {
     	},$user_with_phones);
     	$phones = array_unique($phones);
 
+    	if(strlen(trim($data->message)) == 0)
+    	{
+    		$response['error'] = 1;
+    		$response['message'] = 'No message to send';
+    	}
+    	
+    	if(count($phones) == 0)
+    	{
+    		$response['error'] = 1;
+    		$response['message'] = 'No members to send message!';
+    	}
+
 		// The number used to send message
 		// Delete this number, if it exists and add it at the end
     	$test_phone = Config::get('application.sms_login');
@@ -207,9 +218,13 @@ class Communication_Controller extends Base_Controller {
     	},$users);
     	array_push($phones, $test_phone);
 
-    	// $response['result'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
+    	if(!$response['error'])
+    	{
+    		// $response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
+    	}
 
-		// return Response::json($names);
-		return Response::json($phones);
+		// return Response::json($phones);
+		return Response::json($response);
+
 	}
 }

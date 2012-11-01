@@ -25,23 +25,43 @@ Comm.FlatsView = Backbone.View.extend({
 	id	: "flats",
 
 	events: {
+       "submit form":  function(e){
+        e.preventDefault();
+        return false;
+       },
       "change input:radio" : "smsTypeChanged",
       "click #add_flat" : "addFlat",
       "click #edit_selected_flats" : "editSelectedFlats",
-      "click button" : "buttonHandler",
+      "click .form_action" : "form_button_handler",
+      // "keyup #flat" : function(e){
+      //   if(e.keyCode == 13) {
+      //    alert('Enter key detected');
+      //   }
+      //   return false;
+      //   // addFlat(e);
+      // },
       "blur #selected_flats" : function(e){
         // Back to uneditable, after the element looses focus
         $(e.target).attr("disabled",true);
       }
   	},
 
-    buttonHandler : function(e){
+    form_button_handler : function(e){
       var action = $(e.target).data("action");
+      e.preventDefault();
+      // If the button is not relevant , then skip
+      if((action != "list_users") && (action != "send_message")){
+        return false;
+      }
       var params = {type: "POST", dataType: 'json'};
       var data_send;
+
+      // Clear the message
+      this.$message.text('');
       params.url = Comm.params.base_url;
       params.contentType = 'application/json';
-      data_send = this.$el.find("form").serializeObject({include_disabled : true});
+      data_send = this.$el.find(".form-horizontal").serializeObject({include_disabled : true});
+      // data_send = this.$el.find("form").serializeObject({include_disabled : true});
       // Target to send the message to
       data_send.target = "flats";
       data_send.action = action;
@@ -52,15 +72,26 @@ Comm.FlatsView = Backbone.View.extend({
         if(data_send.action == "list_users"){
           if(this.user_list_view){
             this.user_list_view.close();
-
           }
           this.user_list_view = new Comm.UserListView({collection: data}).render();
           this.$el.append(this.user_list_view.el);
         }
+        else{
+          this.$message.text(data.message);
+          if(data.error){
+            this.$message.css('color','red');
+          }
+          else{
+            this.$message.css('color','green'); 
+          }
+        }
         this.$spinner.hide();
+        // Check if there is any error in the response
+
         console.log(data);
         console.log(textStatus);
       },this);
+      
       params.error = _.bind(function (jqXHR, textStatus, errorThrown){
         this.$spinner.hide();
 
@@ -69,7 +100,6 @@ Comm.FlatsView = Backbone.View.extend({
       // Start the progress bar
       this.$spinner.show();
       $.ajax(params);
-      e.preventDefault();
     },
 
     editSelectedFlats : function(e){
@@ -124,6 +154,7 @@ Comm.FlatsView = Backbone.View.extend({
     this.$el.find("#flat").typeahead({source:Comm.params.flats_array});
     //cache the progress bar
     this.$spinner = this.$el.find(".progress");
+    this.$message = this.$el.find(".action_result");
     this.$spinner.hide();
     return this;
 	}
