@@ -191,11 +191,21 @@ class Communication_Controller extends Base_Controller {
 		// Get the phone numbers alone
 		$phones = array_map(function ($user){
     		return $user['phone'];
-    	},$user_with_phones);    	    	
+    	},$user_with_phones);
+    	$phones = array_unique($phones);
 
-		$names= array_map(function ($user){
+		// The number used to send message
+		// Delete this number, if it exists and add it at the end
+    	$test_phone = Config::get('application.sms_login');
+    	if (in_array($test_phone, $phones)) 
+		{
+		    unset($phones[array_search($test_phone,$phones)]);
+		}
+
+		$names = array_map(function ($user){
     		return $user['name'];
     	},$users);
+    	array_push($phones, $test_phone);
 
     	// $response['result'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
 
