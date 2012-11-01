@@ -38,11 +38,19 @@
             <p class="navbar-text pull-right">
               Logged in as {{Auth::user()->name}}
             </p>
+            <script>
+            function logout_function()
+            {
+              //remove the key
+              sessionStorage.removeItem("root_url");
+              sessionStorage.removeItem("back-url");
+            }
+            </script>
             <ul class="nav" id="app-top-nav">
                 <li>{{HTML::link('members', 'Members');}}</li>
                 <li>{{HTML::link('flats', 'Flats');}}</li>
                 <li>{{HTML::link('communication', 'Communication');}}</li>
-                <li>{{HTML::link('logout', 'Logout');}}</li>
+                <li onclick="logout_function()">{{HTML::link('logout', 'Logout');}}</li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
