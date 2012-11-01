@@ -154,7 +154,18 @@ class Communication_Controller extends Base_Controller {
 	    				array_push($users, $user);	    				
 					}
 				}
-			break;    		    		
+			break;
+
+			case "all":
+				foreach($flats as $flat)
+				{
+					foreach ($flat->users as $user) {
+						// Get the custom array
+	    				$user = $this->get_user_array($flat,$user);
+	    				array_push($users, $user);	    				
+					}
+				}
+			break;    		    					
 		}
 		return $users;
 
