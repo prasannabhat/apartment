@@ -32,12 +32,12 @@ class FullOnSms
 
 	public function login($username,$password)
 	{
-	$post_data = "MobileNoLogin=$username&LoginPassword=$password&x=16&y=14";
+	$post_data = "MobileNoLogin=$username&LoginPassword=$password&x=44&y=9&red=";
 	$url = "http://sms.fullonsms.com/login.php";
 	$ref="http://sms.fullonsms.com/login.php";
 	$content=($this->curl->post($url,$post_data,$ref));
 	
-			if(!stristr($content,"http://sms.fullonsms.com/home.php?show=contacts"))
+			if(!stristr($content,"http://sms.fullonsms.com/action_main.php"))
 			{
 				$this->login=false;
 				return false;							

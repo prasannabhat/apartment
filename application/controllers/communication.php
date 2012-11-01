@@ -198,7 +198,7 @@ class Communication_Controller extends Base_Controller {
     		$response['error'] = 1;
     		$response['message'] = 'No message to send';
     	}
-    	
+
     	if(count($phones) == 0)
     	{
     		$response['error'] = 1;
@@ -220,7 +220,7 @@ class Communication_Controller extends Base_Controller {
 
     	if(!$response['error'])
     	{
-    		// $response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,'Hi..testing app');
+    		$response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);
     	}
 
 		// return Response::json($phones);
