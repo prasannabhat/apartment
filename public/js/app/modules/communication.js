@@ -33,13 +33,12 @@ Comm.FlatsView = Backbone.View.extend({
       "click #add_flat" : "addFlat",
       "click #edit_selected_flats" : "editSelectedFlats",
       "click .form_action" : "form_button_handler",
-      // "keyup #flat" : function(e){
-      //   if(e.keyCode == 13) {
-      //    alert('Enter key detected');
-      //   }
-      //   return false;
-      //   // addFlat(e);
-      // },
+      "keyup #flat" : function(e){
+        if(e.keyCode == 13) {
+          this.addFlat(e);
+        }
+        return false;
+      },
       "blur #selected_flats" : function(e){
         // Back to uneditable, after the element looses focus
         $(e.target).attr("disabled",true);
