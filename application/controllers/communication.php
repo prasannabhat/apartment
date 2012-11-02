@@ -231,6 +231,12 @@ class Communication_Controller extends Base_Controller {
 
     	$response['phones'] = $phones;
 
+    	if($data->action == "list_numbers")
+    	{
+    		$response['message'] = "Listing numbers to send message to";
+    		return Response::json($response);
+    	}
+
     	if(!$response['error'])
     	{
     		$response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);

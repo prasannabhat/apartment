@@ -48,10 +48,6 @@ Comm.FlatsView = Backbone.View.extend({
     form_button_handler : function(e){
       var action = $(e.target).data("action");
       e.preventDefault();
-      // If the button is not relevant , then skip
-      if((action != "list_users") && (action != "send_message")){
-        return false;
-      }
       var params = {type: "POST", dataType: 'json'};
       var data_send;
 
