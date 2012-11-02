@@ -229,6 +229,8 @@ class Communication_Controller extends Base_Controller {
     	},$users);
     	array_push($phones, $test_phone);
 
+    	$response['phones'] = $phones;
+
     	if(!$response['error'])
     	{
     		$response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);
