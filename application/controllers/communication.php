@@ -230,6 +230,7 @@ class Communication_Controller extends Base_Controller {
     	array_push($phones, $test_phone);
 
     	$response['phones'] = $phones;
+    	$response['phones_count'] = count($phones);
 
     	if($data->action == "list_numbers")
     	{
