@@ -42,8 +42,8 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
-	// 'default' => 'cleardb',
+	// 'default' => 'mysql',
+	'default' => 'cleardb',
 
 	/*
 	|--------------------------------------------------------------------------
