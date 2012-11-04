@@ -11,3 +11,4 @@
 *.pyc
 .project
 /nbproject/private/
+/application/dbbackup/backup.sql
