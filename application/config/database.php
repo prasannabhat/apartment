@@ -43,6 +43,7 @@ return array(
 	*/
 
 	'default' => 'mysql',
+	// 'default' => 'cleardb',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -76,6 +77,16 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
+
+		'cleardb' => array(
+			'driver'   => 'mysql',
+			'host'     => 'us-cdbr-east-02.cleardb.com',
+			'database' => 'heroku_58e02706950d29a',
+			'username' => 'b8acfefab4718b',
+			'password' => '8452086f',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),		
 
 		'pgsql' => array(
 			'driver'   => 'pgsql',

@@ -33,6 +33,9 @@ Comm.FlatsView = Backbone.View.extend({
       "click #add_flat" : "addFlat",
       "click #edit_selected_flats" : "editSelectedFlats",
       "click .form_action" : "form_button_handler",
+      "keyup #message" : function(e){
+
+      },
       "keyup #flat" : function(e){
         if(e.keyCode == 13) {
           this.addFlat(e);
