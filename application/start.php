@@ -81,6 +81,7 @@ Autoloader::directories(array(
 
 Autoloader::namespaces(array(
     'Apartment' => path('app').'libraries/Apartment',
+    'Sms' => path('app').'libraries/Sms',
 ));
 
 /*
