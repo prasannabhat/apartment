@@ -183,4 +183,4 @@ Asset::add('style', 'css/apartment.css');
 //Register some IoC containers
 
 // Start the application
-Apartment\Utilities::start_app();
+\Apartment\Utilities::start_app();
