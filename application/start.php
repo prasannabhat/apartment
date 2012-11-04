@@ -77,13 +77,8 @@ Autoloader::map(array(
 Autoloader::directories(array(
 	path('app').'models',
 	path('app').'libraries',
-	path('app').'libraries/Apartment',
-	path('app').'libraries/Sms',
 ));
 
-// Autoloader::map(array(
-//     'Utilities'    => path('app').'libraries/Apartment/utilities.php'
-// ));
 Autoloader::namespaces(array(
     'Apartment' => path('app').'libraries/Apartment',
 ));
