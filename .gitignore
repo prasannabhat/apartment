@@ -9,6 +9,7 @@
 
 #Ignore all files with pyc extension
 *.pyc
+*.sql
 .project
 /nbproject/private/
 /application/dbbackup/backup.sql
