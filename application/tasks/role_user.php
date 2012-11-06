@@ -91,6 +91,28 @@ class Role_User_Task {
 		}
 		
 	}
+	
+	public function create_roles()
+	{
+		// command line arguments
+		$params = self::get_params(func_get_arg(0));
+		$role_power = Role::where('role' , '=', 'power')->first();
+		if($role_power){
+			print "Role power already exists";
+		}
+		else{
+			$role_power = Role::create(array('role' => 'power'));
+			if($role_power){
+				print "created role power";
+			}
+			else{
+				print "can not create role power";
+				
+			}
+		}
+		
+		
+	}
 
 	public function admin($arguments)
 	{
