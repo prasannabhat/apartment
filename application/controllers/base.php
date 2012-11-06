@@ -9,17 +9,19 @@ class Base_Controller extends Controller {
         switch($class) {
             case 'Flats_Controller':
             	$this->filter('before', 'auth');
-            	$this->filter('before', 'role:admin');
+            	$this->filter('before', 'role:power');
+				$this->filter('before', 'role:admin')->on(array('post','put','delete'));
                 break;
 
             case 'Members_Controller':
             	$this->filter('before', 'auth');
-            	$this->filter('before', 'role:admin');
+            	$this->filter('before', 'role:power');
+				$this->filter('before', 'role:admin')->on(array('post','put','delete'));
                 break;                
 
             case 'Communication_Controller':
             	$this->filter('before', 'auth');
-            	$this->filter('before', 'role:admin');
+            	$this->filter('before', 'role:power');
                 break;                                
             
             default:
