@@ -89,10 +89,39 @@ class User extends Eloquent {
         return $this->check_role($allowed_rules);
      }     
 
-
     public function is_guest()
      {
         return true;
-     }               
+     }
+	 
+	 public function is($role)
+	 {
+	 	switch ($role) {
+			 case 'super':
+				 return $this->is_super();
+				 break;
+				 
+			 case 'admin':
+				 return $this->is_admin();
+				 break;
+				 
+			 case 'power':
+				 return $this->is_power();
+				 break;
+				 
+			 case 'user':
+				 return $this->is_user();
+				 break;
+				 
+			 case 'guest':
+				 return $this->is_guest();
+				 break;
+
+			 default:
+				 return false;
+				 break;
+		 }
+	 	
+	 }               
 
 }

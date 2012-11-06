@@ -151,11 +151,11 @@ Route::filter('auth', function()
 	if (Auth::guest()) return Redirect::to('login');
 });
 
-Route::filter('admin', function()
+Route::filter('role', function($role)
 {
-	if(!(Auth::user()->is_admin()))
+	if(!(Auth::user()->is($role)))
 	{
-		return View::make('error.custom_error',array('error' => "Only admin has access to this page"));		
+		return View::make('error.custom_error',array('error' => "You do not have required priviledges"));		
 	}
 
 });

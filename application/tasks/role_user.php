@@ -72,7 +72,7 @@ class Role_User_Task {
 		{
 			$user = User::where('email', '=' , $params['email'])->first();
 			if($user){
-				if($user->is_power()){
+				if($user->is("power")){
 					print "user is admin";
 				}
 				else{
