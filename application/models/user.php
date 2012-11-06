@@ -53,34 +53,42 @@ class User extends Eloquent {
 		}
 	 }
 
-     private function check_role($user_role)
+     public function check_role($allowed_roles)
      {
-        $roles = $this->roles;
-        foreach ($roles as $role)
-        {
-            if($role->role == $user_role)
-            {
-                return true;
-            }
-        }
-        return false;
+        $user_roles = array_map(function($role){
+			return $role->role;
+		}, $this->roles);
+
+		$matched_roles = array_intersect($user_roles, $allowed_roles);
+
+		return count($matched_roles) > 0 ? true : false;
 
      }
 
+     public function is_super()
+     {
+        $allowed_rules = array('super');
+        return $this->check_role($allowed_rules );
+     }
+	 
      public function is_admin()
      {
-        return $this->check_role("admin");
+     	$allowed_rules = array('admin','super');
+        return $this->check_role($allowed_rules);
      }
+	 
+	public function is_power()
+     {
+     	$allowed_rules = array('admin','super','power');
+        return $this->check_role($allowed_rules);
+     }	 
 
     public function is_user()
      {
-        return $this->check_role("user");
+     	$allowed_rules = array('admin','super','power','user');
+        return $this->check_role($allowed_rules);
      }     
 
-    public function is_super()
-     {
-        return $this->check_role("super");
-     }          
 
     public function is_guest()
      {
