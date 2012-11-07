@@ -77,4 +77,10 @@
 
     </div><!--/.fluid-container-->
   </body>
+  <script type="text/javascript">
+(function(Config) {
+  Config.user_id = {{Auth::user()->id}};
+
+})(apartment.module("configs"));
+  </script>
 </html>

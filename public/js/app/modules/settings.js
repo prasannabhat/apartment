@@ -11,20 +11,37 @@ Settings.ChangePasswordView = Backbone.View.extend({
   },
 
 	form_handler : function(e){
+      var config = apartment.module("configs");
       var params = {type: "POST", dataType: 'json'};
       var data_send;
+
+      //Clear the error messages
+      this.$el.find(".help-block").text('');
+      this.$el.find(".error").removeClass('error');
 
       params.url = Settings.params.base_url + "/password";
       params.contentType = 'application/json';
       data_send = this.$el.find(".form-horizontal").serializeObject({include_disabled : true});
+      data_send.user_id = config.user_id;
       params.data = JSON.stringify(data_send);
 
       params.success = _.bind(function(data, textStatus, jqXHR){
         this.$spinner.hide();
+        if(data.error == 1){
+          _.each(data.messages,function(value,key){
+            var rule = "input[name=" + key + "]";
+            var $elem = this.$el.find(rule);
+            $elem.next().text(value[0]);
+            $elem.closest('.control-group').addClass("error");
+            console.log(rule);
+          },this);
+        }
+        else{
+          toastr.success('Password changed successfully');
+        }
 
         // Check if there is any error in the response
         console.log(data);
-        console.log(textStatus);
       },this);
       
       params.error = _.bind(function (jqXHR, textStatus, errorThrown){

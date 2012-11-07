@@ -85,6 +85,7 @@ return array(
 	'custom' => array(),
 	'flat_unique_members' => "The member is already related to flat",
 	'flat_member_relation' => "The flat can have only one owner/tenant",
+	'password_match' => "Wrong password",
 
 	/*
 	|--------------------------------------------------------------------------

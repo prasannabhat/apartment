@@ -79,8 +79,8 @@ Route::post('login', function(){
 });
 
 // Routes for settings page
-Route::get('settings', array('before' => 'auth', 'uses' => 'settings@index'));
-Route::post('settings/password', array('before' => 'auth', 'uses' => 'settings@change_password'));
+Route::get('settings', array('before' => 'auth|role:power', 'uses' => 'settings@index'));
+Route::post('settings/password', array('before' => 'auth|role:power', 'uses' => 'settings@change_password'));
 
 /*
 |--------------------------------------------------------------------------

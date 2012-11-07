@@ -29,6 +29,31 @@ class Utilities
 		);
 		return $rules;
     }
+
+	public static function get_password_validations(Array $params) {
+		\Validator::register('password_match', function($attribute, $value, $parameters)
+		{
+			$id = $parameters[0];
+			\Log::info('Id inside is ' . $id);
+			$is_valid = true;
+
+			$user = \User::find($id);
+			if( !\Hash::check($value, $user->password))
+			{
+				$is_valid = false;
+			}
+			return $is_valid; 
+		});
+
+		$id = $params['member_id'];
+		$current_password_rule = sprintf('required|password_match:%s',$id);
+		$rules = array(
+			'current' => $current_password_rule,
+			'new' => 'required|between:4,25',
+			'verify' => 'required|same:new'
+		);
+		return $rules;
+    }    
 	
 	public static function get_flat_relation_validations(Array $params) {
 		\Validator::register('flat_unique_members', function($attribute, $value, $parameters)
@@ -136,6 +161,12 @@ class Utilities
 
 		\IoC::register('member_validator', function($id = -1){
 		    $rules = Utilities::get_member_validations($id);
+		    return $rules;
+		});		
+
+		\IoC::register('password_validator', function(Array $params=array()){
+		    \Log::info('Resolve password_validator : parameters are ' . json_encode($params));
+		    $rules = Utilities::get_password_validations($params);
 		    return $rules;
 		});		
 		
