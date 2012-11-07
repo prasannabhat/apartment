@@ -218,7 +218,10 @@ class Communication_Controller extends Base_Controller {
 
 		// The number used to send message
 		// Delete this number, if it exists and add it at the end
-    	$test_phone = Config::get('application.sms_login');
+		$credentials = Config::get('apartment.sms_gateways');
+		$credentials = $credentials[$data->gateway];
+    	$test_phone = $credentials['login'];
+		
     	if (in_array($test_phone, $phones)) 
 		{
 		    unset($phones[array_search($test_phone,$phones)]);

@@ -158,6 +158,8 @@ class Utilities
 
 	public static function send_sms($gateway, Array $phones, $message, $delay=0)
 	{
+		$response['result'] = '';		
+    		
     	switch ($gateway) {
 			case 'way2sms':
 				$sms = new \Sms\Way2sms();
@@ -174,10 +176,19 @@ class Utilities
 			default:
 				$sms = new \Sms\Way2sms();
 				break;
-    		}	
+    		}
+		$credentials = \Config::get('apartment.sms_gateways');
+		$credentials = $credentials[$gateway];
+// 		Valid credentials are not found in the configuration for the chosen gateway
+		if(!is_array($credentials))
+		{
+			$response['result'] .= "No login details found for $gateway\n";
+			return $response['result'];
+			
+		}
 
-		$response['result'] = '';
-		$result = $sms->login(\Config::get('application.sms_login'),\Config::get('application.password'));
+		
+		$result = $sms->login($credentials['login'], $credentials['password']);
 		if ($result) {
 			foreach ($phones as $phone) {
 				$result = $sms->send($phone,$message);			
