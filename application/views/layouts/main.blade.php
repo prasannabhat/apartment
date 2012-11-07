@@ -10,6 +10,7 @@
     {{ Asset::container('bootstrapper')->scripts() }}    
     {{ Asset::styles() }}
     {{ Asset::scripts() }}
+    @yield('header-include')
 
 
     <style type="text/css">
@@ -50,6 +51,7 @@
                 <li>{{HTML::link('members', 'Members');}}</li>
                 <li>{{HTML::link('flats', 'Flats');}}</li>
                 <li>{{HTML::link('communication', 'Communication');}}</li>
+                <li>{{HTML::link('settings', 'Settings');}}</li>
                 <li onclick="logout_function()">{{HTML::link('logout', 'Logout');}}</li>
             </ul>
           </div><!--/.nav-collapse -->

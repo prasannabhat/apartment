@@ -78,6 +78,10 @@ Route::post('login', function(){
 	}
 });
 
+// Routes for settings page
+Route::get('settings', array('before' => 'auth', 'uses' => 'settings@index'));
+Route::post('settings/password', array('before' => 'auth', 'uses' => 'settings@change_password'));
+
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

@@ -1,5 +1,10 @@
 @layout('layouts/main')
 
+@section('header-include')
+<!-- hi -->
+ {{Asset::container('communication')->scripts()}}
+@endsection
+
 
 @section('content')
  <script>
