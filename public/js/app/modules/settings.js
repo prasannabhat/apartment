@@ -15,10 +15,6 @@ Settings.ChangePasswordView = Backbone.View.extend({
       var params = {type: "POST", dataType: 'json'};
       var data_send;
 
-      //Clear the error messages
-      this.$el.find(".help-block").text('');
-      this.$el.find(".error").removeClass('error');
-
       params.url = Settings.params.base_url + "/password";
       params.contentType = 'application/json';
       data_send = this.$el.find(".form-horizontal").serializeObject({include_disabled : true});
@@ -37,6 +33,7 @@ Settings.ChangePasswordView = Backbone.View.extend({
           },this);
         }
         else{
+        	
           toastr.success('Password changed successfully');
         }
 
@@ -46,12 +43,22 @@ Settings.ChangePasswordView = Backbone.View.extend({
       
       params.error = _.bind(function (jqXHR, textStatus, errorThrown){
         this.$spinner.hide();
+        toastr.error(errorThrown);
       },this);
 
       // Start the progress bar
+      this.clear_form();
       this.$spinner.show();
       $.ajax(params);
 
+  },
+  
+  clear_form : function(){
+      //Clear the error messages
+      this.$el.find(".help-block").text('');
+      //Clear any error blocks
+      this.$el.find(".error").removeClass('error');
+      this.$el.find("input").val('');
   },
   initialize:function () {
         this.template = _.template(tpl.get('change_password'));

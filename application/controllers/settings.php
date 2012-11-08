@@ -25,6 +25,9 @@ class Settings_Controller extends Controller {
         {
             $response = new stdClass;
             $response->error = 0;
+			$user = User::find($data->user_id)->first();
+			$user->password = $data->new;
+			$user->save();
             $response->message = 'Password changed successfully';
             return Response::json($response);
         }
