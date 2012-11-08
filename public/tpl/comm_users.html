@@ -1,3 +1,102 @@
-<div >
-    <h2>Currently not supported</h2>
-</div>
+  <div>
+    <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8">
+		
+		<div class="control-group">
+			<label class="control-label" for="sms_type">Send message to </label>
+			<div class="controls ">
+				<label class="radio inline">
+				  <input type="radio" name="sms_type" value="group" checked>
+				  Group of flats
+				</label>
+				<label class="radio inline">
+				  <input type="radio" name="sms_type" value="single">
+				  Single flat
+				</label>		
+			</div>
+		</div>
+
+		<div class="control-group hide_single">
+			<label class="control-label" for="floor">Select Floor</label>
+			<div class="controls">
+			<select name="floor" id="floor">
+					<option value="all">All Floors</option>
+					<option value="A">A Floor</option>
+					<option value="B">B Floor</option>
+					<option value="C">C Floor</option>
+					<option value="D">D Floor</option>
+					<option value="E">E Floor</option>
+			</select>
+			</div>
+		</div>
+
+	<div class="control-group hide_group" style="display:none">
+	    <label class="control-label" for="flat">Flat No</label>
+	    <div class="controls">
+	    	<div class="input-append">
+			    <input class="focused input-large " placeholder="Flat No" type="text" name="flat" id="flat">
+			    <button class="btn" type="button" id="add_flat">Add</button>	    		
+	    	</div>
+	    </div>
+	 </div>	 
+
+	<div class="control-group hide_group" style="display:none">
+	    <label class="control-label" for="selected_flats">Selected Flats</label>
+	    <div class="controls">
+	    	<div class="input-append">
+			    <input class="focused input-large" placeholder="Selected Flats" type="text" name="selected_flats" id="selected_flats" disabled>
+			    <button class="btn" type="button" id="edit_selected_flats">Edit</button>	    		
+	    	</div>
+	    </div>
+	 </div>
+
+		<div class="control-group">
+			<label class="control-label" for="group">Select User Group</label>
+			<div class="controls">
+			  <select name="group" id="group">
+			  	<option value="owner">Primary Owner</option>
+			  	<option value="owners">Owner + Family</option>
+			  	<option value="tenant">Primary Tenant</option>
+			  	<option value="tenants">Tenant + Family</option>
+			  	<option value="resident">Primary Resident</option>
+			  	<option value="residents">Resident + Family</option>
+			  	<option value="all">All</option>
+			  </select>
+			</div>
+		</div>  		
+
+		<div class="control-group">
+			<label class="control-label" for="gateway">Select sms gateway</label>
+			<div class="controls">
+			  <select name="gateway" id="gateway">
+			  	<option value="way2sms">Way2Sms</option>
+			  	<option value="160by2">160By2</option>
+			  	<option value="fullonsms">FullOnSms</option>
+			  </select>
+			</div>
+		</div>  				
+
+		<div class="control-group">
+		  <label class="control-label" for="message">Message</label>
+		  <div class="controls">
+		    <textarea rows="3" maxlength="140" placeholder="Message to send" name="message" id="message"></textarea>
+		    <span class="help-block">You can enter <span id="message_help">140</span> characters</span>
+		  </div>
+		</div>                
+
+		<div class="action_result offset1">
+		</div>
+
+		<div class="form-actions">
+			<span class="btn-primary btn form_action" data-action="send_message">Send</span>
+			<span class="btn form_action" data-action="list_users">List Users</span>
+			<span class="btn form_action" data-action="list_numbers">List Phones</span>
+		</div>
+
+
+		<div class="progress progress-striped active span4">
+		  <div class="bar" style="width: 100%;">Please wait</div>
+		</div>		
+	</form>
+
+
+  </div>
