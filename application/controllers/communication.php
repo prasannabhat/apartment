@@ -232,6 +232,13 @@ class Communication_Controller extends Base_Controller {
     	},$users);
     	array_push($phones, $test_phone);
 
+    	// Check if test phone number is provided & its not the same as the above number
+    	$another_test_phone = Config::get('apartment.test_no');
+    	if($another_test_phone && $another_test_phone != $test_phone)
+    	{
+    		array_push($phones, $another_test_phone);
+    	}
+
     	$response['phones'] = $phones;
     	$response['phones_count'] = count($phones);
 
