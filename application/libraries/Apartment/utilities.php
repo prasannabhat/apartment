@@ -237,4 +237,11 @@ class Utilities
 
 	}  
 
+	public static function get_all_users()
+	{
+		$users = \User::order_by('name','asc')->get();
+		$users = \array_pluck($users,'name');
+		return $users;
+	}
+
 }

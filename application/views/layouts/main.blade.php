@@ -80,6 +80,8 @@
   <script type="text/javascript">
 (function(Config) {
   Config.user_id = {{Auth::user()->id}};
+  Config.gateways = {{ json_encode(Config::get('apartment.allowed_gateways')) }};
+  Config.users = {{json_encode(Apartment\Utilities::get_all_users())}};
 
 })(apartment.module("configs"));
   </script>

@@ -20,5 +20,7 @@ return array(
 	),
 
 	'test_no' => '8147256460',
+
+	'allowed_gateways' => array('way2sms','160by2','fullonsms'),
 	
 );
