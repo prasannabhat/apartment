@@ -23,4 +23,10 @@ return array(
 
 	'allowed_gateways' => array('way2sms','160by2','fullonsms'),
 	
+	'floors' => array('A','B','C','D','E'),
+	
+	'flat_pattern' => "/^[ABCDE]\d{1,2}$/",
+	
+	'blocks' => array("North","South"),
+	
 );

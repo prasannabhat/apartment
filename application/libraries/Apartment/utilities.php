@@ -7,11 +7,16 @@ namespace Apartment;
 class Utilities
 {
 	public static function get_flat_validations($id) {
-		\Log::info('id is ' . $id);
-		$house_rule = sprintf('required|match:"/^[ABCDE]\d{1,2}/"|unique:houses,house_no,%s', $id);
+		$flats = \Config::get('apartment.floors');
+
+		$flat_pattern = \Config::get('apartment.flat_pattern');
+
+		$house_rule = sprintf('required|match:"%s"|unique:houses,house_no,%s', $flat_pattern,$id);
+		$floor_rule = sprintf('required|in:%s',implode(",", $flats));
+		\Log::info('floor rule is ' . $floor_rule);
 		$rules = array(
 			'house_no'  => $house_rule,
-			'floor' => 'required|in:A,B,C,D,E'
+			'floor' => $floor_rule,
 		);
 		return $rules;
     }

@@ -19,16 +19,21 @@ class check_Task {
 	public function run(){
 		// command line arguments
 		$params = self::get_params(func_get_arg(0));
+		$regex = "/^[ABCDE]\d{1,2}/";
+		$params = func_get_arg(0);
+		if($params){
+			$flat = $params[0];
+			$flats = Config::get('apartment.floors');
+			$flats = implode('', $flats );
+			print "$flats\n";
+			$pattern = "/^[$flats]\d{1,2}/i";
+			print preg_match($pattern, $flat);
+						
+		}
 		
-		$apartment = Config::get('apartment.sms_gateways');
-		$gateway = 'way2sms';
-		// print_r (Config::get('apartment.sms_gateways')[$gateway]);
-		print_r ($apartment[$gateway]['login']);
-		
+		 
 		
 
-		
-		print "Run with some methods please!!";
 	}
 
 
