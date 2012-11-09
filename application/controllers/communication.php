@@ -85,16 +85,23 @@ class Communication_Controller extends Base_Controller {
 		$users = array();
 		if($data->sms_type == "group")
 		{
-			// Select the flats to send message to
-			if($data->floor == "all")
+			// Default query
+			$query = House::where_not_null('house_no');
+			// If specific flats have to be selected, build the query
+			if($data->floor != "all")
 			{
-				$flats = House::get();
+				 $query->where('floor','=',$data->floor);
 			}
-			else
-			{
-				$flats = House::where('floor','=',$data->floor)->get();
-			}    			
 
+			// If block exists in the request and some specific blocks need to be selected
+			if(isset($data->block) && $data->block != "all")
+			{
+				$query->where('block','=',$data->block);
+
+			}
+
+			// Execute the query
+			$flats = $query->get();
 		}
 		elseif ($data->sms_type == "single") {
 			$selected_flats = $data->selected_flats;

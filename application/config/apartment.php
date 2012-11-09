@@ -23,7 +23,7 @@ return array(
 
 	'allowed_gateways' => array('way2sms','160by2','fullonsms'),
 	
-	'floors' => array('A','B','C','D','E'),
+	'floors' => array('A','B','C','D','E','F'),
 	
 	'flat_pattern' => "/^[ABCDE]\d{1,2}$/",
 	

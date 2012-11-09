@@ -82,6 +82,8 @@
   Config.user_id = {{Auth::user()->id}};
   Config.gateways = {{ json_encode(Config::get('apartment.allowed_gateways')) }};
   Config.users = {{json_encode(Apartment\Utilities::get_all_users())}};
+  Config.floors = {{ json_encode(Config::get('apartment.floors')) }};
+  Config.blocks = {{ json_encode(Config::get('apartment.blocks')) }};
 
 })(apartment.module("configs"));
   </script>

@@ -19,15 +19,27 @@
 			<label class="control-label" for="floor">Select Floor</label>
 			<div class="controls">
 			<select name="floor" id="floor">
-					<option value="all">All Floors</option>
-					<option value="A">A Floor</option>
-					<option value="B">B Floor</option>
-					<option value="C">C Floor</option>
-					<option value="D">D Floor</option>
-					<option value="E">E Floor</option>
+				<option value="all">All</option>
+				<% _.each(floors, function(floor,index) { %> 
+			    <option value="<%= floor %>"><%= floor %></option>
+			    <% }); %>			  	
 			</select>
 			</div>
 		</div>
+
+		<%	if(blocks) { %>
+		<div class="control-group hide_single">
+			<label class="control-label" for="block">Select Block</label>
+			<div class="controls">
+			<select name="block" id="block">
+				<option value="all">All</option>
+				<% _.each(blocks, function(block,index) { %> 
+			    <option value="<%= block %>"><%= block %></option>
+			    <% }); %>			  	
+			</select>
+			</div>
+		</div>
+		<%	} %>
 
 	<div class="control-group hide_group" style="display:none">
 	    <label class="control-label" for="flat">Flat No</label>

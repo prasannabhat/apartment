@@ -163,7 +163,9 @@
         render: function() {
             var config = apartment.module("configs");
             $(this.el).html(this.template({
-                gateways: config.gateways
+                gateways: config.gateways,
+                floors : config.floors,
+                blocks : config.blocks,
             }));
             this.$el.find("#flat").typeahead({
                 source: Comm.params.flats_array
