@@ -27,6 +27,6 @@ return array(
 	
 	'flat_pattern' => "/^[ABCDE]\d{1,2}$/",
 	
-	'blocks' => array("North","South"),
+	// 'blocks' => array("North","South"),
 	
 );

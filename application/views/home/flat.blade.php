@@ -33,10 +33,13 @@
       </div>
     </div>    
 
-    <div class="control-group">
+    <div class="control-group {{ $errors->has('block') ? 'error' : '' }}">
         <label class="control-label" for="block">Block</label>
         <div class="controls">
           <input class="focused input-xlarge" placeholder="Block(if applicable)" type="text" name="block" id="block" value="{{$block}}">
+        @foreach ($errors->get('block') as $message)
+            <p  class="help-block">{{ $message }}</p>
+          @endforeach             
         </div>
       </div>
   

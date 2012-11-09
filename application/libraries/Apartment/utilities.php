@@ -13,10 +13,18 @@ class Utilities
 
 		$house_rule = sprintf('required|match:"%s"|unique:houses,house_no,%s', $flat_pattern,$id);
 		$floor_rule = sprintf('required|in:%s',implode(",", $flats));
-		\Log::info('floor rule is ' . $floor_rule);
+		$block_rule = 'alpha_num';
+		// Add block validations, if block exists
+		if(\Config::get('apartment.blocks'))
+		{
+			$blocks = \Config::get('apartment.blocks');
+			$block_rule = sprintf('required|in:%s',implode(",", $blocks));			
+		}
+		\Log::info('block rule is ' . $block_rule);
 		$rules = array(
 			'house_no'  => $house_rule,
 			'floor' => $floor_rule,
+			'block' => $block_rule,
 		);
 		return $rules;
     }
