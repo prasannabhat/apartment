@@ -68,9 +68,9 @@
 			<label class="control-label" for="gateway">Select sms gateway</label>
 			<div class="controls">
 			  <select name="gateway" id="gateway">
-			  	<option value="way2sms">Way2Sms</option>
-			  	<option value="160by2">160By2</option>
-			  	<option value="fullonsms">FullOnSms</option>
+				<% _.each(gateways, function(gateway,index) { %> 
+			    <option value="<%= gateway %>"><%= gateway %></option>
+			    <% }); %>			  	
 			  </select>
 			</div>
 		</div>  				
@@ -82,9 +82,6 @@
 		    <span class="help-block">You can enter <span id="message_help">140</span> characters</span>
 		  </div>
 		</div>                
-
-		<div class="action_result offset1">
-		</div>
 
 		<div class="form-actions">
 			<span class="btn-primary btn form_action" data-action="send_message">Send</span>

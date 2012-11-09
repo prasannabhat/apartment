@@ -186,8 +186,8 @@ Asset::add('flat', 'js/app/modules/flat.js','apartment');
 Asset::add('toastr', 'js/library/toastr.js','jquery');
 
 // Asset::add('communication', 'js/app/modules/communication.js','apartment');
-Asset::add('style', 'css/toastr.css');
-Asset::add('style', 'css/apartment.css');
+Asset::add('apartment', 'css/apartment.css');
+Asset::add('toastr', 'css/toastr.css');
 // Asset::add('style', 'css/toastr-responsive.css');
 
 Asset::container('communication')->add('communication', 'js/app/modules/communication.js');

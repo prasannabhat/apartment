@@ -33,12 +33,12 @@
             "click button": function(e) {
                 var action = $(e.target).data("action");
                 switch(action) {
-                    case 'add_flat':
-                        this.addFlat(e);
+                case 'add_flat':
+                    this.addFlat(e);
                     break;
 
-                    case 'edit_selected_flats':
-                        this.editSelectedFlats(e);
+                case 'edit_selected_flats':
+                    this.editSelectedFlats(e);
                     break;
                 }
 
@@ -68,8 +68,6 @@
             };
             var data_send;
 
-            // Clear the message
-            this.$message.text('');
             params.url = Comm.params.base_url;
             params.contentType = 'application/json';
             data_send = this.$el.find(".form-horizontal").serializeObject({
@@ -92,11 +90,11 @@
                     }).render();
                     this.$el.append(this.user_list_view.el);
                 } else {
-                    this.$message.text(data.message);
+                    var message = data.message;
                     if(data.error) {
-                        this.$message.css('color', 'red');
+                        toastr.error(message);
                     } else {
-                        this.$message.css('color', 'green');
+                        toastr.success(message);
                     }
                 }
                 this.$spinner.hide();
@@ -163,13 +161,15 @@
         },
 
         render: function() {
-            $(this.el).html(this.template());
+            var config = apartment.module("configs");
+            $(this.el).html(this.template({
+                gateways: config.gateways
+            }));
             this.$el.find("#flat").typeahead({
                 source: Comm.params.flats_array
             });
             //cache the progress bar
             this.$spinner = this.$el.find(".progress");
-            this.$message = this.$el.find(".action_result");
             this.$spinner.hide();
             return this;
         }
@@ -185,7 +185,7 @@
 
         className: "tab-pane",
 
-        events : {
+        events: {
             "submit form": function(e) {
                 e.preventDefault();
                 return false;
@@ -193,12 +193,12 @@
             "click button": function(e) {
                 var action = $(e.target).data("action");
                 switch(action) {
-                    case 'add_user':
-                        this.addUser(e);
+                case 'add_user':
+                    this.addUser(e);
                     break;
 
-                    case 'edit_selected_users':
-                        this.editSelectedUsers(e);
+                case 'edit_selected_users':
+                    this.editSelectedUsers(e);
                     break;
                 }
 
@@ -209,14 +209,63 @@
                     this.addUser(e);
                 }
                 return false;
-            },            
+            },
 
             "blur #selected_users": function(e) {
                 // Back to uneditable, after the element looses focus
                 $(e.target).attr("disabled", true);
-            }            
+            },
+
+            "click .form_action": "submitHandler",
         },
 
+        submitHandler: function(e) {
+            var action = $(e.target).data("action");
+            e.preventDefault();
+            var params = {
+                type: "POST",
+                dataType: 'json'
+            };
+            var data_send;
+
+            params.url = Comm.params.base_url;
+            params.contentType = 'application/json';
+            data_send = this.$el.find(".form-horizontal").serializeObject({
+                include_disabled: true
+            });
+            // data_send = this.$el.find("form").serializeObject({include_disabled : true});
+            // Target to send the message to
+            data_send.target = "users";
+            data_send.action = action;
+            params.data = JSON.stringify(data_send);
+
+            params.success = _.bind(function(data, textStatus, jqXHR) {
+                // List the selected users, based on the action
+                if(data_send.action == "list_users") {
+                } else {
+                    var message = data.message;
+                    if(data.error) {
+                        toastr.error(message);
+                    } else {
+                        toastr.success(message);
+                    }
+                }
+                this.$spinner.hide();
+                // // Check if there is any error in the response
+                console.log(data);
+                console.log(textStatus);
+            }, this);
+
+            params.error = _.bind(function(jqXHR, textStatus, errorThrown) {
+                this.$spinner.hide();
+
+            }, this);
+
+            // Start the progress bar
+            this.$spinner.show();
+            $.ajax(params);
+
+        },
         editSelectedUsers: function(e) {
             var $selected_users = this.$el.find('[name="selected_users"]');
             // Make it editable
@@ -242,7 +291,7 @@
             $current_user.val("");
 
 
-        },        
+        },
 
         initialize: function() {
             this.template = _.template(tpl.get('comm_users'));
@@ -251,13 +300,12 @@
         render: function() {
             var config = apartment.module("configs");
             $(this.el).html(this.template({
-                gateways : config.gateways
+                gateways: config.gateways
             }));
             this.$el.find('input[name="name"]').typeahead({
                 source: config.users
             });
             this.$spinner = this.$el.find(".progress");
-            this.$message = this.$el.find(".action_result");
             this.$spinner.hide();
             return this;
         }

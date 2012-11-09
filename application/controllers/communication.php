@@ -45,20 +45,41 @@ class Communication_Controller extends Base_Controller {
 		return View::make('home.communication',$view_params);
 	}
 
-	private function get_user_array($flat, $user)
+	// Populate the user array...if flat is also given, then add some addtional info
+	private function get_user_array($user,$flat = null)
 	{
 		//Get the readable string of the relationship
-		$relation_map = Apartment\Utilities::get_member_flat_relations();
 		$custom_user = array();
 		$custom_user['name'] = $user->name;
 		$custom_user['phone'] = $user->phone;
-		$custom_user['house_no'] = $flat->house_no;
-		$custom_user['relation'] = array_search($user->pivot->relation, $relation_map);
-		$custom_user['residing'] = $user->pivot->residing ? "yes" : "no";
+		$custom_user['email'] = $user->email;
+		if($flat)
+		{
+			$relation_map = Apartment\Utilities::get_member_flat_relations();
+			$custom_user['house_no'] = $flat->house_no;
+			$custom_user['relation'] = array_search($user->pivot->relation, $relation_map);
+			$custom_user['residing'] = $user->pivot->residing ? "yes" : "no";			
+		}
 		return $custom_user;
 	}
 
 	private function get_users($data)
+	{
+		$selected_users = $data->selected_users;
+		$selected_users = explode(",", $selected_users);
+		$selected_users = User::where_in('name',$selected_users)->get();
+
+		$users = array();
+		foreach ($selected_users as $user) {
+			// Get the custom array & add it to collection
+			array_push($users, $this->get_user_array($user));
+		}
+
+		return $users;
+
+	}
+
+	private function get_flat_users($data)
 	{
 		$flats = array();
 		$users = array();
@@ -91,7 +112,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->owner){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->owner);
+	    				$user = $this->get_user_array($flat->owner,$flat);
 	    				array_push($users, $user);
 	    			}
 	    		}
@@ -105,7 +126,7 @@ class Communication_Controller extends Base_Controller {
 				 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
 						if($select){
 							// Get the custom array
-		    				$user = $this->get_user_array($flat,$user);
+		    				$user = $this->get_user_array($user,$flat);
 		    				array_push($users, $user);
 						}
 	    			}
@@ -117,7 +138,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->tenant){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->tenant);
+	    				$user = $this->get_user_array($flat->tenant,$flat);
 	    				array_push($users, $user);	    				
 	    			}
 	    		}
@@ -128,7 +149,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->tenants as $tenant) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$tenant);
+	    				$user = $this->get_user_array($tenant,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -139,7 +160,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->resident){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->resident);
+	    				$user = $this->get_user_array($flat->resident,$flat);
 	    				array_push($users, $user);	    				
 	    			}
 	    		}
@@ -150,7 +171,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->residents as $user) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$user);
+	    				$user = $this->get_user_array($user,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -161,7 +182,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->users as $user) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$user);
+	    				$user = $this->get_user_array($user,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -183,6 +204,9 @@ class Communication_Controller extends Base_Controller {
     	// Send sms for flats
     	if($data->target == "flats")
     	{
+    		$users = $this->get_flat_users($data);
+    	}
+    	elseif ($data->target == "users") {
     		$users = $this->get_users($data);
     	}
 
