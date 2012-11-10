@@ -35,10 +35,14 @@ class dbbackup_Task {
 	public function backup(){
 		// get the command line arguments and convert them to param array
 		$params = self::get_params(func_get_arg(0));
+		print_r ($params);
 
+		// Database configurations
 		$options = Config::get('database');
-		$default_connection = $options['connections'][$options['default']];
-		$mysqlDatabaseName = array_key_exists('db', $params) ? $params['db'] : $default_connection['database'];
+		// Choose the user database connection, if specified otherwise choose the default one
+		$default = array_key_exists('db', $params) ? $params['db'] : $options['default'];
+		$default_connection = $options['connections'][$default];
+		$mysqlDatabaseName = $default_connection['database'];
 		print "backip up db $mysqlDatabaseName\n";
 		$mysqlUserName = $default_connection['username'];
 		$mysqlPassword = $default_connection['password'];
@@ -67,10 +71,13 @@ class dbbackup_Task {
 	public function restore($arguments){
 		// get the command line arguments and convert them to param array
 		$params = self::get_params(func_get_arg(0));		
+		print_r ($params);
 
 		$options = Config::get('database');
-		$default_connection = $options['connections'][$options['default']];
-		$mysqlDatabaseName = array_key_exists('db', $params) ? $params['db'] : $default_connection['database'];
+		// Choose the user database connection, if specified otherwise choose the default one
+		$default = array_key_exists('db', $params) ? $params['db'] : $options['default'];
+		$default_connection = $options['connections'][$default];
+		$mysqlDatabaseName = $default_connection['database'];
 		print "restoring db $mysqlDatabaseName\n";
 		$mysqlUserName = $default_connection['username'];
 		$mysqlPassword = $default_connection['password'];
