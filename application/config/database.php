@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
+	'default' => 'mysql_syncdb',
 
 
 	/*
@@ -77,6 +77,16 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
+
+		'mysql_staging' => array(
+			'driver'   => 'mysql',
+			'host'     => 'localhost',
+			'database' => 'apartmentstage',
+			'username' => 'root',
+			'password' => '',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),		
 
 		'mysql_syncdb' => array(
 			'driver'   => 'mysql',

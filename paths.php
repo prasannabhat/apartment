@@ -26,7 +26,9 @@ $environments = array(
 	'local' => array('http://localhost*', '*.dev'),
 	'testing' => array('*test.oursociety.com*'),
 	'db' => array('*db.oursociety.com*'),
+	'staging' => array('*staging.oursociety.com*'),
 	'production' => array('*oursociety*'),
+
 
 );
 

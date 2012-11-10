@@ -26,22 +26,40 @@
     <div class="control-group {{ $errors->has('floor') ? 'error' : '' }}">
       <label class="control-label" for="floor">Floor</label>
       <div class="controls">
-        <input class="focused input-xlarge" placeholder="Floor" type="text" name="floor" id="floor" value="{{$floor}}">
+        <select name="floor" id="floor" class="focused input-xlarge">
+        @foreach(Config::get('apartment.floors') as $single_floor)
+          @if (isset($floor) && $floor == $single_floor)
+            <option value="{{$single_floor}}" SELECTED>{{$single_floor}}</option>
+          @else
+            <option value="{{$single_floor}}">{{$single_floor}}</option>
+          @endif
+        @endforeach 
+      </select>
 	@foreach ($errors->get('floor') as $message)
 		<p  class="help-block">{{ $message }}</p>
 	@endforeach		
       </div>
     </div>    
 
-    <div class="control-group {{ $errors->has('block') ? 'error' : '' }}">
+    @if (Config::get('apartment.blocks'))
+        <div class="control-group {{ $errors->has('block') ? 'error' : '' }}">
         <label class="control-label" for="block">Block</label>
         <div class="controls">
-          <input class="focused input-xlarge" placeholder="Block(if applicable)" type="text" name="block" id="block" value="{{$block}}">
+          <select name="block" id="block" class="focused input-xlarge">
+          @foreach(Config::get('apartment.blocks') as $single_block)
+            @if (isset($block) && $block == $single_block)
+              <option value="{{$single_block}}" SELECTED>{{$single_block}}</option>
+            @else
+              <option value="{{$single_block}}">{{$single_block}}</option>
+            @endif
+          @endforeach 
+        </select>
         @foreach ($errors->get('block') as $message)
             <p  class="help-block">{{ $message }}</p>
           @endforeach             
         </div>
       </div>
+    @endif
   
     <div class="control-group">
         <label class="control-label" for="notes">Notes</label>
