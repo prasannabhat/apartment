@@ -42,7 +42,7 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql_syncdb',
+	'default' => 'mysql',
 
 
 	/*
