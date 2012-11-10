@@ -78,7 +78,7 @@ return array(
 			'prefix'   => '',
 		),
 
-		'mysql_staging' => array(
+		'mysql_staging_local' => array(
 			'driver'   => 'mysql',
 			'host'     => 'localhost',
 			'database' => 'apartmentstage',
@@ -86,7 +86,17 @@ return array(
 			'password' => '',
 			'charset'  => 'utf8',
 			'prefix'   => '',
-		),		
+		),
+		
+		'mysql_staging_remote' => array(
+			'driver'   => 'mysql',
+			'host'     => 'us-cdbr-east-02.cleardb.com',
+			'database' => 'heroku_e1d2461c2b99d2e',			
+			'username' => 'b87c2221757569',
+			'password' => '1aa2a39e',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),				
 
 		'mysql_syncdb' => array(
 			'driver'   => 'mysql',
