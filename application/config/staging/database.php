@@ -2,6 +2,6 @@
 
 return array(
 
-	'default' => 'mysql_staging_local',
+	'default' => 'mysql_staging_remote',
 
 );
