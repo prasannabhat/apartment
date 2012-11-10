@@ -71,7 +71,8 @@ class Flats_Controller extends Base_Controller {
 		}
 		else
 		{
-			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor'], 'notes' => $input['notes']));
+			$house = House::create(array('house_no' => $input['house_no'], 'floor' => $input['floor'], 'notes' => $input['notes'], 
+				'block' => Input::get('block')));
 			return Redirect::to('flats');
 		}
 		
@@ -95,6 +96,7 @@ class Flats_Controller extends Base_Controller {
 			$house->house_no = $input['house_no'];
 			$house->floor = $input['floor'];
 			$house->notes = $input['notes'];
+			$house->block = Input::get('block');
 			$house->save();
 			return Redirect::to('flats');
 		}

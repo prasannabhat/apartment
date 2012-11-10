@@ -42,8 +42,8 @@ return array(
 	|
 	*/
 
-	'default' => 'mysql',
-	// 'default' => 'cleardb',
+	'default' => 'mysql_syncdb',
+
 
 	/*
 	|--------------------------------------------------------------------------
@@ -77,6 +77,36 @@ return array(
 			'charset'  => 'utf8',
 			'prefix'   => '',
 		),
+
+		'mysql_staging' => array(
+			'driver'   => 'mysql',
+			'host'     => 'localhost',
+			'database' => 'apartmentstage',
+			'username' => 'root',
+			'password' => '',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),		
+
+		'mysql_syncdb' => array(
+			'driver'   => 'mysql',
+			'host'     => 'localhost',
+			'database' => 'apartmentdb',
+			'username' => 'root',
+			'password' => '',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),		
+
+		'mysql_testdb' => array(
+			'driver'   => 'mysql',
+			'host'     => 'localhost',
+			'database' => 'apartmenttest',
+			'username' => 'root',
+			'password' => '',
+			'charset'  => 'utf8',
+			'prefix'   => '',
+		),		
 
 		'cleardb' => array(
 			'driver'   => 'mysql',

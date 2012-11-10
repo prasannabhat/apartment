@@ -10,6 +10,7 @@
     {{ Asset::container('bootstrapper')->scripts() }}    
     {{ Asset::styles() }}
     {{ Asset::scripts() }}
+    @yield('header-include')
 
 
     <style type="text/css">
@@ -50,6 +51,7 @@
                 <li>{{HTML::link('members', 'Members');}}</li>
                 <li>{{HTML::link('flats', 'Flats');}}</li>
                 <li>{{HTML::link('communication', 'Communication');}}</li>
+                <li>{{HTML::link('settings', 'Settings');}}</li>
                 <li onclick="logout_function()">{{HTML::link('logout', 'Logout');}}</li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -75,4 +77,14 @@
 
     </div><!--/.fluid-container-->
   </body>
+  <script type="text/javascript">
+(function(Config) {
+  Config.user_id = {{Auth::user()->id}};
+  Config.gateways = {{ json_encode(Config::get('apartment.allowed_gateways')) }};
+  Config.users = {{json_encode(Apartment\Utilities::get_all_users())}};
+  Config.floors = {{ json_encode(Config::get('apartment.floors')) }};
+  Config.blocks = {{ json_encode(Config::get('apartment.blocks')) }};
+
+})(apartment.module("configs"));
+  </script>
 </html>

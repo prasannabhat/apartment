@@ -7,11 +7,24 @@ namespace Apartment;
 class Utilities
 {
 	public static function get_flat_validations($id) {
-		\Log::info('id is ' . $id);
-		$house_rule = sprintf('required|match:"/^[ABCDE]\d{1,2}/"|unique:houses,house_no,%s', $id);
+		$flats = \Config::get('apartment.floors');
+
+		$flat_pattern = \Config::get('apartment.flat_pattern');
+
+		$house_rule = sprintf('required|match:"%s"|unique:houses,house_no,%s', $flat_pattern,$id);
+		$floor_rule = sprintf('required|in:%s',implode(",", $flats));
+		$block_rule = 'alpha_num';
+		// Add block validations, if block exists
+		if(\Config::get('apartment.blocks'))
+		{
+			$blocks = \Config::get('apartment.blocks');
+			$block_rule = sprintf('required|in:%s',implode(",", $blocks));			
+		}
+		\Log::info('block rule is ' . $block_rule);
 		$rules = array(
 			'house_no'  => $house_rule,
-			'floor' => 'required|in:A,B,C,D,E'
+			'floor' => $floor_rule,
+			'block' => $block_rule,
 		);
 		return $rules;
     }
@@ -29,6 +42,31 @@ class Utilities
 		);
 		return $rules;
     }
+
+	public static function get_password_validations(Array $params) {
+		\Validator::register('password_match', function($attribute, $value, $parameters)
+		{
+			$id = $parameters[0];
+			\Log::info('Id inside is ' . $id);
+			$is_valid = true;
+
+			$user = \User::find($id);
+			if( !\Hash::check($value, $user->password))
+			{
+				$is_valid = false;
+			}
+			return $is_valid; 
+		});
+
+		$id = $params['member_id'];
+		$current_password_rule = sprintf('required|password_match:%s',$id);
+		$rules = array(
+			'current' => $current_password_rule,
+			'new' => 'required|between:4,25',
+			'verify' => 'required|same:new'
+		);
+		return $rules;
+    }    
 	
 	public static function get_flat_relation_validations(Array $params) {
 		\Validator::register('flat_unique_members', function($attribute, $value, $parameters)
@@ -138,6 +176,12 @@ class Utilities
 		    $rules = Utilities::get_member_validations($id);
 		    return $rules;
 		});		
+
+		\IoC::register('password_validator', function(Array $params=array()){
+		    \Log::info('Resolve password_validator : parameters are ' . json_encode($params));
+		    $rules = Utilities::get_password_validations($params);
+		    return $rules;
+		});		
 		
 		\IoC::register('flat_relation_validator', function(Array $params=array()){
 			\Log::info('Resolve flat_relation_validator : parameters are ' . json_encode($params));
@@ -158,6 +202,8 @@ class Utilities
 
 	public static function send_sms($gateway, Array $phones, $message, $delay=0)
 	{
+		$response['result'] = '';		
+    		
     	switch ($gateway) {
 			case 'way2sms':
 				$sms = new \Sms\Way2sms();
@@ -174,10 +220,19 @@ class Utilities
 			default:
 				$sms = new \Sms\Way2sms();
 				break;
-    		}	
+    		}
+		$credentials = \Config::get('apartment.sms_gateways');
+		$credentials = $credentials[$gateway];
+// 		Valid credentials are not found in the configuration for the chosen gateway
+		if(!is_array($credentials))
+		{
+			$response['result'] .= "No login details found for $gateway\n";
+			return $response['result'];
+			
+		}
 
-		$response['result'] = '';
-		$result = $sms->login(\Config::get('application.sms_login'),\Config::get('application.password'));
+		
+		$result = $sms->login($credentials['login'], $credentials['password']);
 		if ($result) {
 			foreach ($phones as $phone) {
 				$result = $sms->send($phone,$message);			
@@ -194,5 +249,12 @@ class Utilities
 		return $response['result'];
 
 	}  
+
+	public static function get_all_users()
+	{
+		$users = \User::order_by('name','asc')->get();
+		$users = \array_pluck($users,'name');
+		return $users;
+	}
 
 }

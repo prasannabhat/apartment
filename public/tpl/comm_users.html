@@ -1,3 +1,59 @@
-<div >
-    <h2>Currently not supported</h2>
-</div>
+  <div>
+    <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8" autocomplete="off">
+		
+
+	<div class="control-group">
+	    <label class="control-label" for="user">User Name</label>
+	    <div class="controls">
+	    	<div class="input-append">
+			    <input class="focused input-large " placeholder="Name" type="text" name="name" id="name">
+			    <button class="btn" type="button" data-action="add_user">Add</button>	    		
+	    	</div>
+	    </div>
+	 </div>	 
+
+	<div class="control-group">
+	    <label class="control-label" for="selected_users">Selected Users</label>
+	    <div class="controls">
+	    	<div class="input-append">
+			    <!-- <input class="focused input-large" placeholder="Selected Users" type="text" name="selected_users" disabled > -->
+			     <textarea rows="3"  name="selected_users" disabled></textarea>
+			    <button class="btn" type="button" data-action="edit_selected_users">Edit</button>	    		
+	    	</div>
+	    </div>
+	 </div>
+
+ 		
+		<div class="control-group">
+			<label class="control-label" for="gateway">Select sms gateway</label>
+			<div class="controls">
+			  <select name="gateway" id="gateway">
+				<% _.each(gateways, function(gateway,index) { %> 
+			    <option value="<%= gateway %>"><%= gateway %></option>
+			    <% }); %>			  	
+			  </select>
+			</div>
+		</div>  				
+
+		<div class="control-group">
+		  <label class="control-label" for="message">Message</label>
+		  <div class="controls">
+		    <textarea rows="3" maxlength="140" placeholder="Message to send" name="message" id="message"></textarea>
+		    <span class="help-block">You can enter <span id="message_help">140</span> characters</span>
+		  </div>
+		</div>                
+
+		<div class="form-actions">
+			<span class="btn-primary btn form_action" data-action="send_message">Send</span>
+			<span class="btn form_action" data-action="list_users">List Users</span>
+			<span class="btn form_action" data-action="list_numbers">List Phones</span>
+		</div>
+
+
+		<div class="progress progress-striped active span4">
+		  <div class="bar" style="width: 100%;">Please wait</div>
+		</div>		
+	</form>
+
+
+  </div>

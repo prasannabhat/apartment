@@ -1,5 +1,5 @@
   <div>
-    <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8">
+    <form class="form-horizontal" method="POST" action="#" accept-charset="UTF-8 autocomplete="off"">
 		
 		<div class="control-group">
 			<label class="control-label" for="sms_type">Send message to </label>
@@ -19,22 +19,34 @@
 			<label class="control-label" for="floor">Select Floor</label>
 			<div class="controls">
 			<select name="floor" id="floor">
-					<option value="all">All Floors</option>
-					<option value="A">A Floor</option>
-					<option value="B">B Floor</option>
-					<option value="C">C Floor</option>
-					<option value="D">D Floor</option>
-					<option value="E">E Floor</option>
+				<option value="all">All</option>
+				<% _.each(floors, function(floor,index) { %> 
+			    <option value="<%= floor %>"><%= floor %></option>
+			    <% }); %>			  	
 			</select>
 			</div>
 		</div>
+
+		<%	if(blocks) { %>
+		<div class="control-group hide_single">
+			<label class="control-label" for="block">Select Block</label>
+			<div class="controls">
+			<select name="block" id="block">
+				<option value="all">All</option>
+				<% _.each(blocks, function(block,index) { %> 
+			    <option value="<%= block %>"><%= block %></option>
+			    <% }); %>			  	
+			</select>
+			</div>
+		</div>
+		<%	} %>
 
 	<div class="control-group hide_group" style="display:none">
 	    <label class="control-label" for="flat">Flat No</label>
 	    <div class="controls">
 	    	<div class="input-append">
 			    <input class="focused input-large " placeholder="Flat No" type="text" name="flat" id="flat">
-			    <button class="btn" type="button" id="add_flat">Add</button>	    		
+			    <button class="btn" type="button" data-action="add_flat">Add</button>	    		
 	    	</div>
 	    </div>
 	 </div>	 
@@ -44,7 +56,7 @@
 	    <div class="controls">
 	    	<div class="input-append">
 			    <input class="focused input-large" placeholder="Selected Flats" type="text" name="selected_flats" id="selected_flats" disabled>
-			    <button class="btn" type="button" id="edit_selected_flats">Edit</button>	    		
+			    <button class="btn" type="button" data-action="edit_selected_flats">Edit</button>	    		
 	    	</div>
 	    </div>
 	 </div>
@@ -68,9 +80,9 @@
 			<label class="control-label" for="gateway">Select sms gateway</label>
 			<div class="controls">
 			  <select name="gateway" id="gateway">
-			  	<option value="way2sms">Way2Sms</option>
-			  	<option value="160by2">160By2</option>
-			  	<option value="fullonsms">FullOnSms</option>
+				<% _.each(gateways, function(gateway,index) { %> 
+			    <option value="<%= gateway %>"><%= gateway %></option>
+			    <% }); %>			  	
 			  </select>
 			</div>
 		</div>  				
@@ -82,9 +94,6 @@
 		    <span class="help-block">You can enter <span id="message_help">140</span> characters</span>
 		  </div>
 		</div>                
-
-		<div class="action_result offset1">
-		</div>
 
 		<div class="form-actions">
 			<span class="btn-primary btn form_action" data-action="send_message">Send</span>

@@ -45,35 +45,63 @@ class Communication_Controller extends Base_Controller {
 		return View::make('home.communication',$view_params);
 	}
 
-	private function get_user_array($flat, $user)
+	// Populate the user array...if flat is also given, then add some addtional info
+	private function get_user_array($user,$flat = null)
 	{
 		//Get the readable string of the relationship
-		$relation_map = Apartment\Utilities::get_member_flat_relations();
 		$custom_user = array();
 		$custom_user['name'] = $user->name;
 		$custom_user['phone'] = $user->phone;
-		$custom_user['house_no'] = $flat->house_no;
-		$custom_user['relation'] = array_search($user->pivot->relation, $relation_map);
-		$custom_user['residing'] = $user->pivot->residing ? "yes" : "no";
+		$custom_user['email'] = $user->email;
+		if($flat)
+		{
+			$relation_map = Apartment\Utilities::get_member_flat_relations();
+			$custom_user['house_no'] = $flat->house_no;
+			$custom_user['relation'] = array_search($user->pivot->relation, $relation_map);
+			$custom_user['residing'] = $user->pivot->residing ? "yes" : "no";			
+		}
 		return $custom_user;
 	}
 
 	private function get_users($data)
 	{
+		$selected_users = $data->selected_users;
+		$selected_users = explode(",", $selected_users);
+		$selected_users = User::where_in('name',$selected_users)->get();
+
+		$users = array();
+		foreach ($selected_users as $user) {
+			// Get the custom array & add it to collection
+			array_push($users, $this->get_user_array($user));
+		}
+
+		return $users;
+
+	}
+
+	private function get_flat_users($data)
+	{
 		$flats = array();
 		$users = array();
 		if($data->sms_type == "group")
 		{
-			// Select the flats to send message to
-			if($data->floor == "all")
+			// Default query
+			$query = House::where_not_null('house_no');
+			// If specific flats have to be selected, build the query
+			if($data->floor != "all")
 			{
-				$flats = House::get();
+				 $query->where('floor','=',$data->floor);
 			}
-			else
-			{
-				$flats = House::where('floor','=',$data->floor)->get();
-			}    			
 
+			// If block exists in the request and some specific blocks need to be selected
+			if(isset($data->block) && $data->block != "all")
+			{
+				$query->where('block','=',$data->block);
+
+			}
+
+			// Execute the query
+			$flats = $query->get();
 		}
 		elseif ($data->sms_type == "single") {
 			$selected_flats = $data->selected_flats;
@@ -91,7 +119,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->owner){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->owner);
+	    				$user = $this->get_user_array($flat->owner,$flat);
 	    				array_push($users, $user);
 	    			}
 	    		}
@@ -105,7 +133,7 @@ class Communication_Controller extends Base_Controller {
 				 		$select = (($relation == 'owner') || ($relation == 'co-owner') || ($relation == 'owners-family')) ? true : false;
 						if($select){
 							// Get the custom array
-		    				$user = $this->get_user_array($flat,$user);
+		    				$user = $this->get_user_array($user,$flat);
 		    				array_push($users, $user);
 						}
 	    			}
@@ -117,7 +145,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->tenant){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->tenant);
+	    				$user = $this->get_user_array($flat->tenant,$flat);
 	    				array_push($users, $user);	    				
 	    			}
 	    		}
@@ -128,7 +156,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->tenants as $tenant) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$tenant);
+	    				$user = $this->get_user_array($tenant,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -139,7 +167,7 @@ class Communication_Controller extends Base_Controller {
 	    		{
 	    			if($flat->resident){
 	    				// Get the custom array
-	    				$user = $this->get_user_array($flat,$flat->resident);
+	    				$user = $this->get_user_array($flat->resident,$flat);
 	    				array_push($users, $user);	    				
 	    			}
 	    		}
@@ -150,7 +178,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->residents as $user) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$user);
+	    				$user = $this->get_user_array($user,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -161,7 +189,7 @@ class Communication_Controller extends Base_Controller {
 				{
 					foreach ($flat->users as $user) {
 						// Get the custom array
-	    				$user = $this->get_user_array($flat,$user);
+	    				$user = $this->get_user_array($user,$flat);
 	    				array_push($users, $user);	    				
 					}
 				}
@@ -183,6 +211,9 @@ class Communication_Controller extends Base_Controller {
     	// Send sms for flats
     	if($data->target == "flats")
     	{
+    		$users = $this->get_flat_users($data);
+    	}
+    	elseif ($data->target == "users") {
     		$users = $this->get_users($data);
     	}
 
@@ -218,7 +249,10 @@ class Communication_Controller extends Base_Controller {
 
 		// The number used to send message
 		// Delete this number, if it exists and add it at the end
-    	$test_phone = Config::get('application.sms_login');
+		$credentials = Config::get('apartment.sms_gateways');
+		$credentials = $credentials[$data->gateway];
+    	$test_phone = $credentials['login'];
+		
     	if (in_array($test_phone, $phones)) 
 		{
 		    unset($phones[array_search($test_phone,$phones)]);
@@ -228,6 +262,13 @@ class Communication_Controller extends Base_Controller {
     		return $user['name'];
     	},$users);
     	array_push($phones, $test_phone);
+
+    	// Check if test phone number is provided & its not the same as the above number
+    	$another_test_phone = Config::get('apartment.test_no');
+    	if($another_test_phone && $another_test_phone != $test_phone)
+    	{
+    		array_push($phones, $another_test_phone);
+    	}
 
     	$response['phones'] = $phones;
     	$response['phones_count'] = count($phones);
