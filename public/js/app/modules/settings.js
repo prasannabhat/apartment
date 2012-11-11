@@ -90,7 +90,6 @@
             // sync is somehow not working...change:id is triggered after callback from the server
             // I am manually triggering sync event!!
             gateway.on("sync",function(){
-                alert('sync event in GateWayListView - collection');
                 this.collection.add(gateway);
             },this);
             var modal = new Settings.GatewayEditView({model : gateway}).render();
@@ -163,7 +162,6 @@
         },
 
         syncFunction : function(){
-            alert('sync event in GateWayView - model');
             this.render();
         },
 
