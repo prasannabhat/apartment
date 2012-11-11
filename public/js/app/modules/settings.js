@@ -90,6 +90,7 @@
             // sync is somehow not working...change:id is triggered after callback from the server
             // I am manually triggering sync event!!
             gateway.on("sync",function(){
+                alert('sync event in GateWayListView - collection');
                 this.collection.add(gateway);
             },this);
             var modal = new Settings.GatewayEditView({model : gateway}).render();
@@ -158,7 +159,12 @@
                 this.close();
             },this);
             // Update the view after server sync
-            this.model.on("sync",this.render(),this); 
+            this.model.on("sync",this.syncFunction,this); 
+        },
+
+        syncFunction : function(){
+            alert('sync event in GateWayView - model');
+            this.render();
         },
 
         beforeClose : function(){
@@ -186,7 +192,9 @@
         events : {
             "click button[data-action='save']" : "save",
             // Close the view by itself, when it is hidden
-            "hidden" : function(){this.close();}
+            "hidden" : function(){
+                this.close();
+            }
 
         },
 
@@ -207,16 +215,16 @@
 
         saveConfirmed : function(model, response, options){
             toastr.success("Updated successfully");
-            this.model.trigger("sync");
             this.$el.modal('hide');
+            // this.model.trigger("sync");
 
         },
 
         initialize: function() {
             this.template = _.template(tpl.get('settings_gateway_form'));
-            this.model.on("all",function(event){
-                alert("Testing model edit events : " + event);
-            },this);                                    
+            // this.model.on("all",function(event){
+            //     alert("Testing model edit events : " + event);
+            // },this);                                    
 
         },
 

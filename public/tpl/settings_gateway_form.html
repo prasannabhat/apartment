@@ -15,7 +15,11 @@
           <!-- We are editing the existing user  -->
           <% } else { %>
             <% _.each(gateways, function(item) { %> 
-              <option value="<%= item %>"><%= item %></option>
+              <% if(gateway.name === item) { %>
+                <option value="<%= item %>" SELECTED><%= item %></option>
+              <% } else { %>
+                <option value="<%= item %>"><%= item %></option>
+              <% } %>
             <% }); %>          
           <% } %>            
 
