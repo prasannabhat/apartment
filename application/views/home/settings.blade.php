@@ -9,6 +9,7 @@
     <ul class="nav nav-pills nav-stacked">
       <li class="nav-header">Options</li>
       <li><a href="#password">Change Password</a></li>
+      <li><a href="#gateways">Sms Gateways</a></li>
     </ul>
   </div><!--/.well -->
 @endsection

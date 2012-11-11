@@ -9,6 +9,11 @@ class User extends Eloquent {
      {
           return $this->has_many('Phone');
      }
+
+	public function gateways()
+     {
+          return $this->has_many('SmsGateway');
+     }     
 	 
 	 public function houses()
 	 {

@@ -84,6 +84,7 @@
   Config.users = {{json_encode(Apartment\Utilities::get_all_users())}};
   Config.floors = {{ json_encode(Config::get('apartment.floors')) }};
   Config.blocks = {{ json_encode(Config::get('apartment.blocks')) }};
+  Config.base_url = "{{URL::current()}}";
 
 })(apartment.module("configs"));
   </script>

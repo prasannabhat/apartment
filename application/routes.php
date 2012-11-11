@@ -81,6 +81,10 @@ Route::post('login', function(){
 // Routes for settings page
 Route::get('settings', array('before' => 'auth|role:power', 'uses' => 'settings@index'));
 Route::post('settings/password', array('before' => 'auth|role:power', 'uses' => 'settings@change_password'));
+Route::post('settings/gateway', array('before' => 'auth|role:power', 'uses' => 'settings@create_gateway'));
+Route::get('settings/gateway', array('before' => 'auth|role:power', 'uses' => 'settings@gateways'));
+Route::delete('settings/gateway/(:num)', array('before' => 'auth|role:power', 'uses' => 'settings@delete_gateway'));
+Route::put('settings/gateway/(:num)', array('before' => 'auth|role:power', 'uses' => 'settings@modify_gateway'));
 
 /*
 |--------------------------------------------------------------------------
