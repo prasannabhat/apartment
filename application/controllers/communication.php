@@ -204,7 +204,6 @@ class Communication_Controller extends Base_Controller {
 		$data = Input::json();
 		$response = array(
 	        'error' => 0,
-	        'message'	=> 'sent to all people',
     	);
 
     	$users = array();
@@ -238,13 +237,13 @@ class Communication_Controller extends Base_Controller {
     	if(strlen(trim($data->message)) == 0)
     	{
     		$response['error'] = 1;
-    		$response['message'] = 'No message to send';
+    		$response['result'] = 'No message to send';
     	}
 
     	if(count($phones) == 0)
     	{
     		$response['error'] = 1;
-    		$response['message'] = 'No members to send message!';
+    		$response['result'] = 'No numbers selected to send message!';
     	}
 
 		// The number used to send message
@@ -275,13 +274,25 @@ class Communication_Controller extends Base_Controller {
 
     	if($data->action == "list_numbers")
     	{
-    		$response['message'] = "Listing numbers to send message to";
+    		$response['error'] = 0;
+    		$response['result'] = "Listing numbers to send message to";
     		return Response::json($response);
     	}
 
     	if(!$response['error'])
     	{
-    		$response['message'] = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);
+    		$messages = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);
+    		if($messages->has('error'))
+    		{
+    			$response['error'] = 1;
+    			$response['result'] = $messages->first('error');
+
+    		}
+    		else
+    		{
+    			$response['result'] = $messages->first('result');
+    			$response['details'] = $messages->get('details');
+    		}
     	}
 
 		// return Response::json($phones);

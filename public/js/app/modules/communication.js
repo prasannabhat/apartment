@@ -90,17 +90,15 @@
                     }).render();
                     this.$el.append(this.user_list_view.el);
                 } else {
-                    var message = data.message;
                     if(data.error) {
-                        toastr.error(message);
+                        toastr.error(data.result);
                     } else {
-                        toastr.success(message);
+                        toastr.success(data.result);
                     }
                 }
                 this.$spinner.hide();
                 // Check if there is any error in the response
                 console.log(data);
-                console.log(textStatus);
             }, this);
 
             params.error = _.bind(function(jqXHR, textStatus, errorThrown) {
@@ -245,17 +243,15 @@
                 // List the selected users, based on the action
                 if(data_send.action == "list_users") {
                 } else {
-                    var message = data.message;
                     if(data.error) {
-                        toastr.error(message);
+                        toastr.error(data.result);
                     } else {
-                        toastr.success(message);
+                        toastr.success(data.result);
                     }
                 }
                 this.$spinner.hide();
                 // // Check if there is any error in the response
                 console.log(data);
-                console.log(textStatus);
             }, this);
 
             params.error = _.bind(function(jqXHR, textStatus, errorThrown) {

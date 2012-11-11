@@ -202,7 +202,8 @@ class Utilities
 
 	public static function send_sms($gateway, Array $phones, $message, $delay=0)
 	{
-		$response['result'] = '';		
+		$messages = new \Laravel\Messages;
+		$success_count = 0;
     		
     	switch ($gateway) {
 			case 'way2sms':
@@ -226,27 +227,36 @@ class Utilities
 // 		Valid credentials are not found in the configuration for the chosen gateway
 		if(!is_array($credentials))
 		{
-			$response['result'] .= "No login details found for $gateway\n";
-			return $response['result'];
-			
+			$messages->add('error',"No login details found for $gateway\n");
+			return $messages;
 		}
 
 		
 		$result = $sms->login($credentials['login'], $credentials['password']);
-		if ($result) {
+		if ($result)
+		{
 			foreach ($phones as $phone) {
 				$result = $sms->send($phone,$message);			
 				if($result)
 				{
-					$response['result'] .= "SMS sent successfully\n";
+					$success_count++;
+					$messages->add('details', "SMS sent successfully to $phone\n");
+				}
+				else
+				{
+					$messages->add('details', "SMS could not be sent successfully to $phone\n");
+
 				}
 				sleep($delay);
 			}
-		} else {
-			$response['result'] .= "Login failed\n";
+			$total_count = count($phones);
+			$messages->add('result',"SMS sent to $success_count out of $total_count\n");			
+		} else 
+		{
+			$messages->add('error',"Login failed for $gateway\n");
 		}
 
-		return $response['result'];
+		return $messages;
 
 	}  
 
