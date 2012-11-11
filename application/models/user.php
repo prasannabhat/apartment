@@ -129,4 +129,23 @@ class User extends Eloquent {
 	 	
 	 }               
 
+	 public function get_credentials($gateway)
+	 {
+	 	foreach ($this->gateways as $item) {
+	 		if($item->name == $gateway)
+	 		{
+	 			$credentials['user'] = $item->user;
+	 			$credentials['code'] = $item->code;
+	 			return $credentials;
+	 		}
+	 	}
+	 	// No configuration present in the database
+	 	$credentials = Config::get('apartment.sms_gateways');
+	 	if(isset($credentials[$gateway]))
+	 	{
+	 		return $credentials[$gateway];
+	 	}
+	 	return false;
+	 }
+
 }

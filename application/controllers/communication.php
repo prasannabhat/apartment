@@ -248,18 +248,22 @@ class Communication_Controller extends Base_Controller {
 
 		// The number used to send message
 		// Delete this number, if it exists and add it at the end
-		$credentials = Config::get('apartment.sms_gateways');
-		$credentials = $credentials[$data->gateway];
-    	$test_phone = $credentials['login'];
+		$credentials = Auth::user()->get_credentials($data->gateway);
+		if(!$credentials)
+		{
+			$response['error'] = 1;
+			$gateway = $data->gateway;
+    		$response['result'] = "No login information present for $gateway..please add in settings";
+    		return Response::json($response);
+		}
+
+    	$test_phone = $credentials['user'];
 		
     	if (in_array($test_phone, $phones)) 
 		{
 		    unset($phones[array_search($test_phone,$phones)]);
 		}
 
-		$names = array_map(function ($user){
-    		return $user['name'];
-    	},$users);
     	array_push($phones, $test_phone);
 
     	// Check if test phone number is provided & its not the same as the above number
@@ -281,7 +285,7 @@ class Communication_Controller extends Base_Controller {
 
     	if(!$response['error'])
     	{
-    		$messages = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message);
+    		$messages = Apartment\Utilities::send_sms($data->gateway,$phones,$data->message,$credentials);
     		if($messages->has('error'))
     		{
     			$response['error'] = 1;
