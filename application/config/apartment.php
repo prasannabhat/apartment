@@ -3,10 +3,6 @@
 return array(
 //Custom configuration for apartment related details. 
 
-	'sms_gateways' => array(
-						
-	),
-
 	'test_no' => '8147256460',
 
 	'allowed_gateways' => array('way2sms','160by2','fullonsms'),
