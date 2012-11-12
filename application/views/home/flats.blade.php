@@ -26,7 +26,7 @@
   </thead>
   <tbody>
   	<?php $count = 0; ?>
-  	@foreach (House::all() as $house)
+  	@foreach (House::order_by('house_no')->get() as $house)
     <?php $count++ ?>
     @render('partials.flat',array( 'house' => $house, 'count' => $count))
 	  @endforeach
